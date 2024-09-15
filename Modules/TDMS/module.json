@@ -1,0 +1,11 @@
+{
+    "name": "TDMS",
+    "alias": "tdms",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\TDMS\\Providers\\TDMSServiceProvider"
+    ],
+    "files": []
+}

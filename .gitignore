@@ -1,0 +1,45 @@
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+
+# Laravel specific
+/.env
+/.env.backup
+/public/hot
+/public/mix-manifest.json
+/storage/framework/cache/data
+/storage/framework/sessions/*.php
+/storage/framework/views/*.php
+/storage/logs
+
+# IDE files
+/.idea
+/.vscode
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Builds
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Miscellaneous
+/.phpunit.result.cache
+/.phpunit.result.cache.gz
+*.log
+
+
+storage/fileManager
+storage/inspectors
+storage/Letters
+storage/TDMSBOX
+storage/app
+
+node_modules/.vite/
+public/fileManager/ipms/inspectionFiles/*
+public/fileManager/ipms/laboratory/*
+storage/outputs/*

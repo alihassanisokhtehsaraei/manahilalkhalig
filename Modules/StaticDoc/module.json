@@ -1,0 +1,11 @@
+{
+    "name": "StaticDoc",
+    "alias": "staticdoc",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\StaticDoc\\Providers\\StaticDocServiceProvider"
+    ],
+    "files": []
+}

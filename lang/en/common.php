@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'helloWorld' => 'Hello World!',
+    'home' => 'Home',
+    'next' => 'Next',
+    'previous' => 'Previous',
+    'submit' => 'Submit',
+    'done' => 'Done',
+    'create' => 'Create',
+    'fName' => 'First Name',
+    'lName' => 'Last Name',
+    'cName' => 'Company',
+    'fNameS' => 'Parsa',
+    'lNameS' => 'Khayyam',
+    'cNameS' => 'Tehran International Experts Co.',
+    'tel' => 'Tel',
+    'mobile' => 'Mobile',
+    'email' => 'Email',
+    'emailAddress' => 'Email Address',
+    'country' => 'Country',
+    'stateCity' => 'State / City',
+    'address' => 'Address',
+    'delete' => 'Delete',
+    'call' => 'Make a Call',
+    'semail' => 'Send Email',
+];

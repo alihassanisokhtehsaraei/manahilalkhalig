@@ -1,0 +1,13 @@
+{
+    "Customer": true,
+    "Inspection": true,
+    "FileManager": true,
+    "TDMS": true,
+    "Letter": true,
+    "Contract": true,
+    "UserManagement": true,
+    "Search": true,
+    "StaticDoc": true,
+    "Financial": true,
+    "Report": true
+}

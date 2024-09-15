@@ -1,0 +1,42 @@
+To add custom fonts to LibreOffice in a Laravel app running on cPanel with AlmaLinux, you'll typically need to follow these steps:
+
+Steps to Add Custom Fonts
+Upload Font Files:
+
+Use the File Manager in cPanel or an FTP client to upload your font files (e.g., .ttf or .otf) to a directory in your Laravel project. A common location might be storage/fonts or public/fonts.
+Install Fonts on the Server:
+If your LibreOffice is running on the server (not in a container), you'll need to install the fonts directly on the server. You can do this via SSH if you have access.
+
+Connect via SSH:
+Use an SSH client (like PuTTY) to connect to your server.
+
+Create Fonts Directory:
+Run these commands:
+
+bash
+mkdir -p ~/.fonts
+Copy Fonts:
+You might need to copy your uploaded font files to the .fonts directory. For example:
+
+bash
+cp /path/to/your/uploaded/fonts/* ~/.fonts/
+Update Font Cache:
+Run the following command to refresh the font cache:
+
+bash
+fc-cache -fv
+Configure LibreOffice (if needed):
+Depending on how your Laravel app is set up, you might need to configure LibreOffice to recognize the new fonts. This usually happens automatically after refreshing the cache, but it may vary based on the installation method.
+
+Restart Services:
+If you're using LibreOffice in a headless mode (like during PDF generation), ensure that any running processes are restarted to pick up the new fonts.
+
+Use Fonts in Your Laravel Application:
+Within your Laravel application, when generating documents or reports using LibreOffice, make sure to specify the custom font name as needed. Fonts should now be available in your document styling.
+
+Test the Fonts:
+Generate a document or export a PDF using the custom fonts to confirm that everything works as expected.
+
+Additional Considerations
+Access Rights: Ensure that your web server has the necessary permissions to access the font files.
+Font Licensing: Be aware of the licensing for any fonts you are using, especially if your application is distributed.

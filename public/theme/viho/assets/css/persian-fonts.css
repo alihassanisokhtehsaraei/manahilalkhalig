@@ -1,0 +1,21 @@
+@font-face {
+    font-family: iransans;
+    src: url('../fonts/persian/iransans.eot');
+    src: url('../fonts/persian/iransans.eot') format('embedded-opentype'),
+    url('../fonts/persian/iransans.woff') format('woff'),
+    url('../fonts/persian/iransans.svg') format('svg'),
+    url('../fonts/persian/iransans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.persian-fonts {
+    font-family: iransans;
+}
+
+.dir-rtl {
+    direction: rtl;
+}
+.dir-ltr {
+    direction: ltr;
+}

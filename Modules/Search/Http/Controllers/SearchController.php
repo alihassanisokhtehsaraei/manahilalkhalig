@@ -2,6 +2,7 @@
 
 namespace Modules\Search\Http\Controllers;
 
+use App\Models\Rft;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -25,27 +26,146 @@ class SearchController extends Controller
     public function result(Request $request)
     {
         $input = $request->all();
+
+        $type='other';
         switch ($input['key']) {
             case 'order':
-                $data = Order::where('tracking_no','like','%'.$input['value'].'%')->get();
+                switch (auth()->user()->sector) {
+                    case 'management':
+                        $data = Order::where('tracking_no','like','%'.$input['value'].'%')->get();
+                        break;
+                    case 'branch':
+                        $data = Order::where('tracking_no','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        break;
+                    case 'cosqc':
+                        $data = Order::where('tracking_no','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
+                        break;
+                    case 'border':
+                        $data = Order::where('tracking_no','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'customs':
+                        $data = Order::where('tracking_no','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'laboratory':
+                        $data = null;
+                        break;
+                }
                 break;
             case 'coc':
-                $data = Order::join('cocs', 'cocs.order_id','=','orders.id')->where('certNo','like','%'.$input['value'].'%')->get();
+                switch (auth()->user()->sector) {
+                    case 'management':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->where('cocs.certNo','like','%'.$input['value'].'%')->get();
+                        break;
+                    case 'branch':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->where('cocs.certNo','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        break;
+                    case 'cosqc':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->where('cocs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
+                        break;
+                    case 'border':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->where('cocs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'customs':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->where('cocs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'laboratory':
+                        $data = null;
+                        break;
+                }
                 break;
             case 'ncr':
-                $data = Order::join('ncrs', 'ncrs.order_id','=','orders.id')->where('certNo','like','%'.$input['value'].'%')->get();
+                switch (auth()->user()->sector) {
+                    case 'management':
+                        $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->get();
+                        break;
+                    case 'branch':
+                        $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        break;
+                    case 'cosqc':
+                        $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
+                        break;
+                    case 'border':
+                        $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'customs':
+                        $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'laboratory':
+                        $data = null;
+                        break;
+                }
                 break;
             case 'rd':
-                $data = Order::where('tracking_no','like','%'.$input['value'].'%')->get();
+                switch (auth()->user()->sector) {
+                    case 'management':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->get();
+                        break;
+                    case 'branch':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        break;
+                    case 'cosqc':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
+                        break;
+                    case 'border':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'customs':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'laboratory':
+                        $data = null;
+                        break;
+                }
                 break;
             case 'nrd':
-                $data = Order::where('tracking_no','like','%'.$input['value'].'%')->get();
+                switch (auth()->user()->sector) {
+                    case 'management':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('non_release_documents','cocs.id', '=', 'non_release_documents.coc_id')->where('non_release_documents.document_number','like','%'.$input['value'].'%')->get();
+                        break;
+                    case 'branch':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('non_release_documents','cocs.id', '=', 'non_release_documents.coc_id')->where('non_release_documents.document_number','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        break;
+                    case 'cosqc':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('non_release_documents','cocs.id', '=', 'non_release_documents.coc_id')->where('non_release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
+                        break;
+                    case 'border':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('non_release_documents','cocs.id', '=', 'non_release_documents.coc_id')->where('non_release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'customs':
+                        $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('non_release_documents','cocs.id', '=', 'non_release_documents.coc_id')->where('non_release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                        break;
+                    case 'laboratory':
+                        $data = null;
+                        break;
+                }
                 break;
-            case 'pi':
-                $data = Order::where('tracking_no','like','%'.$input['value'].'%')->get();
+            case 'rft':
+                switch (auth()->user()->sector) {
+                    case 'management':
+                        $data = Rft::where('id','like','%'.$input['value'].'%')->get();
+                        $type='rft';
+                        break;
+                    case 'branch':
+                        $data = Rft::where('id','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        $type='rft';
+                        break;
+                    case 'cosqc':
+                        $data = null;
+                        break;
+                    case 'border':
+                        $data = null;
+                        break;
+                    case 'customs':
+                        $data = null;
+                        break;
+                    case 'laboratory':
+                        $data = Rft::where('id','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                        $type='rft';
+                        break;
+                }
                 break;
         }
-        return view('search::search', ['data' => $data]);
+        return view('search::search', ['data' => $data, 'type' => $type]);
     }
 
     /**

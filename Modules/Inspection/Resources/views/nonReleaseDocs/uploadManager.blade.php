@@ -42,7 +42,7 @@
             </div>
         <div class="card">
             <div class="card-header">
-                <h5>Release Documents Uploads</h5>
+                <h5>Release Documents Uploads for {{ $order->tracking_no. ' - '.$order->coc->certNo }}</h5>
             </div>
 
             <div class="card-body">
@@ -62,7 +62,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Upload Certificate</h5>
+                                <h5>Release Document</h5>
                             </div>
                             <div class="card-body">
                                 @if($certificateUrl)
@@ -77,26 +77,30 @@
                                                 Download PDF
                                             </a>
                                         </div>
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('nnrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="url" value="{{$certificateUrl}}">
-                                            <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
-                                        </form>
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('nnrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="url" value="{{$certificateUrl}}">
+                                                <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
+                                            </form>
+                                        @endif
                                     @else
                                         <!-- Display Image and Download Button -->
                                         <img src="{{ asset("fileManager/".$certificateUrl) }}" alt="Certificate" class="img-fluid mb-3">
                                         <a href="{{ asset("fileManager/".$certificateUrl) }}" class="btn btn-primary" download>
                                             Download Image
                                         </a>
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="url" value="{{$certificateUrl}}">
-                                            <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
-                                        </form>
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="url" value="{{$certificateUrl}}">
+                                                <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
+                                            </form>
+                                        @endif
                                     @endif
                                 @else
                                     <!-- Upload Form -->
@@ -118,7 +122,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Upload Letter</h5>
+                                <h5>Commitment Letter</h5>
                             </div>
                             <div class="card-body">
                                 @if($letterUrl)
@@ -133,62 +137,70 @@
                                                 Download PDF
                                             </a>
                                         </div>
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="url" value="{{$letterUrl}}">
-                                            <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
-                                        </form>
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="url" value="{{$letterUrl}}">
+                                                <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
+                                            </form>
+                                        @endif
                                     @else
                                         <!-- Display Image and Download Button -->
                                         <img src="{{ asset("fileManager/".$letterUrl) }}" alt="Letter" class="img-fluid mb-3">
                                         <a href="{{ asset("fileManager/".$letterUrl) }}" class="btn btn-primary" download>
                                             Download Image
                                         </a>
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="url" value="{{$letterUrl}}">
-                                            <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
-                                        </form>
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="url" value="{{$letterUrl}}">
+                                                <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
+                                            </form>
+                                        @endif
                                     @endif
                                 @else
-                                    <!-- Upload Form -->
-                                    <form action="{{route("nrdocs.uploadLetter",['order'=>$order, 'nonReleaseDocument'=>$nonReleaseDocument])}}"
-                                          method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="mb-3">
-                                            <label for="document2" class="form-label">Choose File</label>
-                                            <input class="form-control" type="file" name="letter" id="document2" required>
-                                        </div>
-                                        <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-primary">Upload</button>
-                                    </form>
+                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        <!-- Upload Form -->
+                                        <form action="{{route("nrdocs.uploadLetter",['order'=>$order, 'nonReleaseDocument'=>$nonReleaseDocument])}}"
+                                              method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="document2" class="form-label">Choose File</label>
+                                                <input class="form-control" type="file" name="letter" id="document2" required>
+                                            </div>
+                                            <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-primary">Upload</button>
+                                        </form>
+                                    @endif
                                 @endif
                             </div>
                         </div>
                     </div>
 
-                    <!-- Form for Uploading Multiple Documents -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Upload Documents</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="{{route('nrdocs.uploadDocument',['order'=>$order, 'nonReleaseDocument'=>$nonReleaseDocument])}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label  class="form-label">Choose Files</label>
-                                        <input class="form-control" type="file" name="documents[]" multiple required>
-                                        <!-- Add the `multiple` attribute to support multiple file selection -->
-                                    </div>
-                                    <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-primary">Upload</button>
-                                </form>
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                        <!-- Form for Uploading Multiple Documents -->
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Other Documents</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{route('nrdocs.uploadDocument',['order'=>$order, 'nonReleaseDocument'=>$nonReleaseDocument])}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label  class="form-label">Choose Files</label>
+                                            <input class="form-control" type="file" name="documents[]" multiple required>
+                                            <!-- Add the `multiple` attribute to support multiple file selection -->
+                                        </div>
+                                        <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-primary">Upload</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
 
                 <!-- Loop through Document URLs -->
@@ -217,14 +229,16 @@
                                                 Download Image
                                             </a>
                                         @endif
+                                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
 
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="url" value="{{$documentUrl}}">
-                                            <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
-                                        </form>
+                                                <!-- Delete Button -->
+                                                <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="url" value="{{$documentUrl}}">
+                                                    <button {{$readOnly ==='readonly' ? 'disabled' :''}} type="submit" class="btn btn-danger mt-2">Delete</button>
+                                                </form>
+                                            @endif
                                     </div>
                                 </div>
                             </div>

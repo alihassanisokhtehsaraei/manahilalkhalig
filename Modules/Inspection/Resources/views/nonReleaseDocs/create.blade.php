@@ -47,27 +47,28 @@
                 <br>
                 <div class="form-group custom-form-group">
                     <label for="following_checks" class="custom-label"><strong>Following checks have been carried out with satisfactory results:</strong></label>
-                    <textarea class="form-control custom-textarea" rows="8" name="following_checks" id="following_checks" required>• Authentication of the certificate attached to this release document.
+                    <textarea class="form-control custom-textarea" rows="8" name="following_checks" id="following_checks" required>{{ old('following_checks', '• Authentication of the certificate attached to this release document.
 • Verification of the matching between certificate, import document and goods.
 • Integrity of seals (whenever applicable).
-• Check the condition of the shipment (no damage of overall containers,(no damage of goods and ensuring that the chilled or frozen goods are in refrigerate containers).</textarea>
+• Check the condition of the shipment (no damage of overall containers,(no damage of goods and ensuring that the chilled or frozen goods are in refrigerate containers).') }}
+                        </textarea>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group custom-form-group">
                             <label for="containers_details_not_mentioned" class="custom-label"><strong>Containers / Packages details not mentioned on certificate (if any):</strong></label>
-                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="containers_details_not_mentioned" id="containers_details_not_mentioned"></textarea>
+                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="containers_details_not_mentioned" id="containers_details_not_mentioned">{{ old('containers_details_not_mentioned') }}</textarea>
                         </div>
 
                         <div class="form-group custom-form-group">
                             <label for="import_documents_not_mentioned" class="custom-label"><strong>Import Documents not mentioned on certificate (if any):</strong></label>
-                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="import_documents_not_mentioned" id="import_documents_not_mentioned"></textarea>
+                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="import_documents_not_mentioned" id="import_documents_not_mentioned">{{ old('import_documents_not_mentioned') }}</textarea>
                         </div>
 
                         <div class="form-group custom-form-group">
                             <label for="number_of_items" class="custom-label"><strong>Number of line items:</strong></label>
-                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="number_of_items" id="number_of_items"></textarea>
+                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="number_of_items" id="number_of_items">{{ old('number_of_items') }}</textarea>
                         </div>
                     </div>
 
@@ -120,7 +121,7 @@
 
                         <div class="form-group custom-form-group">
                             <label for="comments" class="custom-label"><strong>Comments:</strong></label>
-                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="comments" id="comments"></textarea>
+                            <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." name="comments" id="comments">{{ old('comments') }}</textarea>
                         </div>
                     </div>
                 </div>

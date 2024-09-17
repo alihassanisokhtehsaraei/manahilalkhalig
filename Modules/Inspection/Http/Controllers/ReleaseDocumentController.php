@@ -55,10 +55,10 @@ class ReleaseDocumentController extends Controller
             'incoming_quantity' => $request->input('incoming_quantity'),
             'total_quantity' => $request->input('total_quantity'),
             'comments' => $request->input('comments'),
-            "status" => Auth::user()->sector === "management" ? "2" : "1",
-            'issuance_date'=>Auth::user()->sector === 'management' ? now()->format('Y-m-d') : null,
-            'issuing_office'=>Auth::user()->sector === 'management' ? $order->border : null,
-            'document_number'=>Auth::user()->sector === 'management' ? $this->getNewDocNumber() : null,
+            'issuing_office'=> $order->border,
+            "status" => Auth::user()->sector === "management" || Auth::user()->level === "technical" ? "2" : "1",
+            'issuance_date'=>Auth::user()->sector === 'management' || Auth::user()->level === "technical" ? now()->format('Y-m-d') : null,
+            'document_number'=>Auth::user()->sector === 'management' || Auth::user()->level === "technical" ? $this->getNewDocNumber() : null,
         ]);
 
         return redirect()->route('rdocs.index', ['order' => $order]);
@@ -78,7 +78,7 @@ class ReleaseDocumentController extends Controller
 
     private function readOnly($releaseDocument)
     {
-        if (Auth::user()->sector === "management")
+        if (Auth::user()->sector === "management" or Auth::user()->level === 'technical')
             return "";
         elseif ($releaseDocument->status == "2")
             return "readonly";
@@ -98,10 +98,10 @@ class ReleaseDocumentController extends Controller
             'incoming_quantity' => $request->input('incoming_quantity'),
             'total_quantity' => $request->input('total_quantity'),
             'comments' => $request->input('comments'),
-            'status' => Auth::user()->sector === "management" ? "2" : "1",
-            'issuance_date'=>Auth::user()->sector === 'management' && is_null($releaseDocument->issuance_date) ? now()->format('Y-m-d') : $releaseDocument->issuance_date,
-            'issuing_office'=>Auth::user()->sector === 'management' && is_null($releaseDocument->issuing_office) ? $order->border :$releaseDocument->issuing_office,
-            'document_number'=>Auth::user()->sector === 'management' && is_null($releaseDocument->document_number) ? $this->getNewDocNumber() :$releaseDocument->document_number,
+            'status' => Auth::user()->sector === "management" || Auth::user()->level === 'technical' ? "2" : "1",
+            'issuance_date'=>Auth::user()->sector === 'management' && is_null($releaseDocument->issuance_date) || Auth::user()->level === "technical" && is_null($releaseDocument->issuance_date) ? now()->format('Y-m-d') : $releaseDocument->issuance_date,
+            'issuing_office'=>Auth::user()->sector === 'management' && is_null($releaseDocument->issuing_office) || Auth::user()->level === "technical" && is_null($releaseDocument->issuing_office) ? $order->border :$releaseDocument->issuing_office,
+            'document_number'=>Auth::user()->sector === 'management' && is_null($releaseDocument->document_number) || Auth::user()->level === "technical" && is_null($releaseDocument->document_number) ? $this->getNewDocNumber() :$releaseDocument->document_number,
         ]);
 
         return redirect()->route('rdocs.index', ['order' => $order]);

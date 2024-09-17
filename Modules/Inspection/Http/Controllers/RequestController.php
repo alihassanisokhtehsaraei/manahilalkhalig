@@ -224,7 +224,14 @@ class RequestController extends Controller
     public function searchResult(Request $request)
     {
         $searchkey = $request->searchkey;
-        $customers = Customer::where('fullName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('cName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('email','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('mobile','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->get();
+        switch (auth()->user()->department) {
+            case 'management':
+                $customers = Customer::where('fullName','like','%'.$searchkey.'%')->orWhere('cName','like','%'.$searchkey.'%')->orWhere('email','like','%'.$searchkey.'%')->orWhere('mobile','like','%'.$searchkey.'%')->get();
+                break;
+            case 'laboratory':
+                $customers = Customer::where('fullName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('cName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('email','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('mobile','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->get();
+                break;
+        }
         return view('inspection::request.searchCustomer', ['customers' => $customers]);
     }
 

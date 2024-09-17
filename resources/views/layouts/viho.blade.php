@@ -177,7 +177,7 @@
 {{--                                    <li><a href="#">Archive</a></li>--}}
 {{--                                </ul>--}}
 {{--                            </li>--}}
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial')
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
                             <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Customers</span></a>
                                 <ul class="nav-submenu menu-content">
                                     <li><a href="/customer/create">New Customer</a></li>
@@ -195,7 +195,7 @@
                                     </ul>
                                 </li>
                             @endif
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial')
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
                                 <li class="dropdown"><a class="nav-link menu-title" href="{{ route('staticDocs.index') }}"><i data-feather="file"></i><span>Document Center</span></a>
 {{--                                    <ul class="nav-submenu menu-content">--}}
 {{--                                        @if(Auth()->user()->level == 'manager')--}}

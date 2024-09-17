@@ -56,10 +56,10 @@ class NonReleaseDocumentController extends Controller
             'incoming_quantity' => $request->input('incoming_quantity'),
             'total_quantity' => $request->input('total_quantity'),
             'comments' => $request->input('comments'),
-            "status" => Auth::user()->sector === "management" ? "2" : "1",
-            'issuance_date'=>Auth::user()->sector === 'management' ? now()->format('Y-m-d') : null,
-            'issuing_office'=>Auth::user()->sector === 'management' ? $order->border : null,
-            'document_number'=>Auth::user()->sector === 'management' ? $this->getNewDocNumber() : null,
+            'issuing_office'=> $order->border,
+            "status" => Auth::user()->sector === "management" || Auth::user()->level === "technical"  ? "2" : "1",
+            'issuance_date'=>Auth::user()->sector === 'management' || Auth::user()->level === "technical"  ? now()->format('Y-m-d') : null,
+            'document_number'=>Auth::user()->sector === 'management' || Auth::user()->level === "technical"  ? $this->getNewDocNumber() : null,
         ]);
 
         return redirect()->route('nrdocs.index', ['order' => $order]);
@@ -79,7 +79,7 @@ class NonReleaseDocumentController extends Controller
 
     private function readOnly($nonReleaseDocument)
     {
-        if (Auth::user()->sector === "management")
+        if (Auth::user()->sector === "management" || Auth::user()->level === "technical" )
             return "";
         elseif ($nonReleaseDocument->status == "2")
             return "readonly";
@@ -99,10 +99,10 @@ class NonReleaseDocumentController extends Controller
             'incoming_quantity' => $request->input('incoming_quantity'),
             'total_quantity' => $request->input('total_quantity'),
             'comments' => $request->input('comments'),
-            'status' => Auth::user()->sector === "management" ? "2" : "1",
-            'issuance_date'=>Auth::user()->sector === 'management'  && is_null($nonReleaseDocument->issuance_date) ? now()->format('Y-m-d') :$nonReleaseDocument->issuance_date,
-            'issuing_office'=>Auth::user()->sector === 'management'  && is_null($nonReleaseDocument->issuing_office)  ? $order->border : $nonReleaseDocument->issuing_office,
-            'document_number'=>Auth::user()->sector === 'management'  && is_null($nonReleaseDocument->document_number)  ?  $this->getNewDocNumber() :$nonReleaseDocument->document_number,
+            'status' => Auth::user()->sector === "management" || Auth::user()->level === "technical"  ? "2" : "1",
+            'issuance_date' => Auth::user()->sector === 'management' && is_null($nonReleaseDocument->issuance_date) || Auth::user()->level === "technical" && is_null($nonReleaseDocument->issuance_date) ? now()->format('Y-m-d') :$nonReleaseDocument->issuance_date,
+            'issuing_office' => Auth::user()->sector === 'management' && is_null($nonReleaseDocument->issuing_office) || Auth::user()->level === "technical" && is_null($nonReleaseDocument->issuing_office) ? $order->border : $nonReleaseDocument->issuing_office,
+            'document_number'=> Auth::user()->sector === 'management' && is_null($nonReleaseDocument->document_number) || Auth::user()->level === "technical" && is_null($nonReleaseDocument->document_number) ?  $this->getNewDocNumber() :$nonReleaseDocument->document_number,
         ]);
 
         return redirect()->route('nrdocs.index', ['order' => $order]);

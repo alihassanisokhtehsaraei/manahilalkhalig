@@ -26,13 +26,11 @@ class RftController extends Controller
         switch ($slug) {
             case 'Completed':
                 switch (auth()->user()->department) {
-                    case 'Management':
+                    case 'management':
+                    case 'financial':
                         $data = Rft::select('rfts.id', 'rfts.status', 'customers.fullName', 'customers.cName', 'office', 'lab', 'rfts.created_at')->join('customers', 'customers.id', '=', 'rfts.customer_id')->where('rfts.status', '=', 3)->get();
                         break;
-                    case 'Inspection':
-                        $data = Rft::select('rfts.id', 'rfts.status', 'customers.fullName', 'customers.cName', 'office', 'lab', 'rfts.created_at')->join('customers', 'customers.id', '=', 'rfts.customer_id')->where('rfts.status', '=', 3)->where('rfts.office', '=', Auth()->user()->branch)->get();
-                        break;
-                    case 'Laboratory':
+                    case 'laboratory':
                         $data = Rft::select('rfts.id', 'rfts.status', 'customers.fullName', 'customers.cName', 'office', 'lab', 'rfts.created_at')->join('customers', 'customers.id', '=', 'rfts.customer_id')->where('rfts.status', '=', 3)->where('rfts.lab', '=', Auth()->user()->branch)->get();
                         break;
                 }
@@ -40,13 +38,11 @@ class RftController extends Controller
 
             default:
                 switch (auth()->user()->department) {
-                    case 'Management':
+                    case 'management':
+                    case 'financial':
                         $data = Rft::select('rfts.id', 'rfts.status', 'customers.fullName', 'customers.cName', 'office', 'lab', 'rfts.created_at')->join('customers', 'customers.id', '=', 'rfts.customer_id')->where('rfts.status', '<>', 3)->get();
                         break;
-                    case 'Inspection':
-                        $data = Rft::select('rfts.id', 'rfts.status', 'customers.fullName', 'customers.cName', 'office', 'lab', 'rfts.created_at')->join('customers', 'customers.id', '=', 'rfts.customer_id')->where('rfts.status', '<>', 3)->where('rfts.office', '=', Auth()->user()->branch)->get();
-                        break;
-                    case 'Laboratory':
+                    case 'laboratory':
                         $data = Rft::select('rfts.id', 'rfts.status', 'customers.fullName', 'customers.cName', 'office', 'lab', 'rfts.created_at')->join('customers', 'customers.id', '=', 'rfts.customer_id')->where('rfts.status', '<>', 3)->where('rfts.lab', '=', Auth()->user()->branch)->get();
                         break;
                 }

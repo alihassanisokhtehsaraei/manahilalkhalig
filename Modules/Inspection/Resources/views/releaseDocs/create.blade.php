@@ -64,7 +64,7 @@
                                     Packages details not mentioned on certificate (if any):</strong></label>
                             <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..."
                                       name="containers_details_not_mentioned"
-                                      id="containers_details_not_mentioned"></textarea>
+                                      id="containers_details_not_mentioned">{{ old('containers_details_not_mentioned') }}</textarea>
                         </div>
 
                         <div class="form-group custom-form-group">
@@ -72,14 +72,14 @@
                                     not mentioned on certificate (if any):</strong></label>
                             <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..."
                                       name="import_documents_not_mentioned"
-                                      id="import_documents_not_mentioned"></textarea>
+                                      id="import_documents_not_mentioned">{{ old('import_documents_not_mentioned') }}</textarea>
                         </div>
 
                         <div class="form-group custom-form-group">
                             <label for="number_of_items" class="custom-label"><strong>Number of line
                                     items:</strong></label>
                             <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..."
-                                      name="number_of_items" id="number_of_items"></textarea>
+                                      name="number_of_items" id="number_of_items">{{ old('number_of_items') }}</textarea>
                         </div>
                     </div>
 
@@ -141,7 +141,7 @@
                         <div class="form-group custom-form-group">
                             <label for="comments" class="custom-label"><strong>Comments:</strong></label>
                             <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..."
-                                      name="comments" id="comments"></textarea>
+                                      name="comments" id="comments">{{ old('comments') }}</textarea>
                         </div>
                     </div>
                 </div>

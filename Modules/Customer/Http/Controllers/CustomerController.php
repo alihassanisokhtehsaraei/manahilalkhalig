@@ -25,11 +25,22 @@ class CustomerController extends Controller
     public function index()
     {
 
-    if (auth()->user()->level == 'supervisor' || auth()->user()->level == 'manager') {
-        $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->get();
-    } else {
-        $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->where('branch', '=', auth()->user()->branch)->get();
-    }
+//    if (auth()->user()->sector == 'management' || auth()->user()->level == 'manager') {
+//        $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->get();
+//    } elseif(auth()->user()->level == 'branch') {
+//        $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->where('branch', '=', auth()->user()->branch)->get();
+//    }
+
+        switch (Auth::user()->department) {
+            case 'management':
+            case 'financial':
+                $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->get();
+                break;
+            case 'laboratory':
+            case 'branch':
+                $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->where('branch', '=', auth()->user()->branch)->get();
+                break;
+        }
 
 
 
@@ -42,48 +53,7 @@ class CustomerController extends Controller
                 ->addColumn('actions', function ($row) {
                     $btn = '
                     <a href="/customer/show/' . $row->id . '" class="btn btn-primary btn-xs">OPEN</a>
-                    <a href="/customer/edit/' . $row->id . '" class="btn btn-secondary btn-xs">EDIT</a>
-
-                    <a class="btn btn-danger btn-xs" id="sweet-' . $row->id . '" type="button" onclick="_gaq.push([\'_trackEvent\', \'example\', \'try\', \'sweet-' . $row->id . '\']);">DELETE</a>
-    <script>
-        var SweetAlert_custom = {
-            init: function() {
-
-                document.querySelector("#sweet-' . $row->id . '").onclick = function(){
-                    swal({
-                        title: "Are you sure?",
-                        text: "Once deleted, you will not be able to recover this customer, all other related information will be deleted too!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                     $.ajax({
-                                         url: \'destroy/' . $row->id . '\',
-                                         type: \'get\',
-                                         dataType: \'json\'
-                                      });
-
-                                    swal("Customer Deleted!", {
-                                        icon: "success",
-                                    });
-
-                                $(\'#customers-datatable\').DataTable().ajax.reload();
-                            } else {
-                                swal("Your file is safe!");
-                            }
-                        })
-                }
-                ;
-
-            }
-        };
-        (function($) {
-            SweetAlert_custom.init()
-        })(jQuery);
-    </script>
-                    ';
+                    <a href="/customer/edit/' . $row->id . '" class="btn btn-secondary btn-xs">EDIT</a>';
 
                     return $btn;
                 })

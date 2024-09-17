@@ -62,7 +62,9 @@
                                         <option value="ncr">NCR No.</option>
                                         <option value="rd">RD No.</option>
                                         <option value="nrd">NRD No.</option>
-                                        <option value="pi">Pi No.</option>
+                                        @if(auth()->user()->sector == 'management' || auth()->user()->sector == 'laboratory')
+                                            <option value="rft">RFT No.</option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -88,9 +90,20 @@
                                         @foreach($data as $item)
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $item->tracking_no }}</td>
+                                                <td>
+                                                    @if($type == 'rft')
+                                                        {{ $item->id}}
+                                                    @else
+                                                        {{ $item->tracking_no }}
+                                                    @endif</td>
                                                 <td>{{ $item->customer->fullName.' - '.$item->customer->cName }}</td>
-                                                <td>{{ $item->branch}}</td>
+                                                <td>
+                                                    @if($type == 'rft')
+                                                        {{ $item->lab}}
+                                                    @else
+                                                        {{ $item->branch}}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @switch($item->technicalStatus)
                                                         @case(0)
@@ -114,12 +127,21 @@
                                                         @case(6)
                                                             <a class="btn btn-xs btn-warning">NCR Approved</a>
                                                             @break
+                                                        @case(7)
+                                                            <a class="btn btn-xs btn-warning">Archive</a>
+                                                            @break
                                                         @default
                                                             <span class="btn btn-xs btn-secondary">Unknown Status</span>
                                                     @endswitch
 
                                                 </td>
-                                                <td><a href="{{ route('inspection.show', $item->id) }}" class="btn btn-xs btn-primary">Select</a> </td>
+                                                <td>
+                                                    @if($type == 'rft')
+                                                        <a href="{{ route('request.showrft', $item->id) }}" class="btn btn-xs btn-primary">Select</a> </td>
+                                                    @else
+                                                        <a href="{{ route('inspection.show', $item->id) }}" class="btn btn-xs btn-primary">Select</a> </td>
+                                                    @endif
+
                                             </tr>
                                         @endforeach
                                         </tbody>

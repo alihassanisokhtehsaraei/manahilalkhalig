@@ -40,14 +40,15 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <h5>Release Documents</h5>
+                <h5>Release Documents for {{ $order->tracking_no. ' - '.$order->coc->certNo }}</h5>
             </div>
 
             <div class="card-body">
-                <div class="mb-3">
-                    <a href="{{ route('rdocs.create', ['order' => $order]) }}" class="btn btn-primary btn-sm">New Release Document</a>
-                </div>
-
+                @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                    <div class="mb-3">
+                        <a href="{{ route('rdocs.create', ['order' => $order]) }}" class="btn btn-primary btn-sm">New Release Document</a>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="thead-dark">
@@ -76,15 +77,16 @@
                                 <td>{{ $doc->issuing_office ?? "-" }}</td>
                                 <td>
                                     <!-- Actions column with Edit and Delete buttons -->
-                                    <a href="{{route('rdocs.edit',['order'=>$order,'releaseDocument'=>$doc])}}" class="btn btn-warning btn-sm">Open</a>
-                               @if($doc->status == "1")
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $doc->id }}">
-                                        Delete
-                                    </button>
+                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        <a href="{{route('rdocs.edit',['order'=>$order,'releaseDocument'=>$doc])}}" class="btn btn-warning btn-xs">Open</a>
+                                        @if($doc->status == "1")
+                                            <button type="button" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $doc->id }}">
+                                                Delete
+                                            </button>
+                                        @endif
                                     @endif
-                                    <a href="{{route('rdocs.showUpload',['order'=>$order,'releaseDocument'=>$doc])}}" class="btn btn-secondary btn-sm">Uploads</a>
-
-                                    @if($doc->status == "2") <a href="{{URL::signedRoute('words.rd',$doc->id)}}" class="btn btn-primary btn-sm">Print</a> @endif
+                                    <a href="{{route('rdocs.showUpload',['order'=>$order,'releaseDocument'=>$doc])}}" class="btn btn-secondary btn-xs">Uploads</a>
+                                    @if($doc->status == "2") <a href="{{URL::signedRoute('words.rd',$doc->id)}}" class="btn btn-primary btn-xs">Print</a> @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-sm-6">
 
-                    <h3>Tracking No.: {{ $order->tracking_no }}</h3>
+                    <h3><a href="{{ route('inspection.show', $order->id) }}">Tracking No.: {{ $order->tracking_no }}</a></h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">{{ __('common.home') }}</a></li>
                         <li class="breadcrumb-item">Inspection Department</li>

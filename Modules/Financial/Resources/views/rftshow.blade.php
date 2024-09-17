@@ -112,8 +112,9 @@
                                     <label class="col-form-label pt-0" for="labFeePlace">Laboratory Fee Paid at:</label>
                                     <select class="form-control" name="labFeePlace" id="labFeePlace" {{ $disabled }}>
                                         @if($rft->labFeePlace)<option value="{{ $rft->labFeePlace }}">{{ $rft->labFeePlace }}</option>@endif
-                                            <option value="Branch">Branch</option>
                                             <option value="Baghdad">Baghdad</option>
+                                            <option value="Branch">Branch</option>
+                                            <option value="Laboratory">Laboratory</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">

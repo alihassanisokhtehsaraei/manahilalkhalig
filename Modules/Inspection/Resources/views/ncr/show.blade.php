@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Tracking No.: {{ $order->tracking_no }}</h3>
+                    <h3><a href="{{ route('inspection.show', $order->id) }}">Tracking No.: {{ $order->tracking_no }}</a></h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">{{ __('common.home') }}</a></li>
                         <li class="breadcrumb-item">Inspection Department</li>
@@ -169,7 +169,7 @@
                                         <div class="col-sm-6">
                                             <div class="mb-3" style="margin-top: 9px">
                                                 <label class="col-form-label pt-0" for="issuingPlace">Issuing Office</label>
-                                                <input class="form-control" @if(Auth()->user()->sector != 'management') readonly @endif name="issuingPlace" id="issuingPlace" type="text" style="text-transform: uppercase" {{ $disabled }} value="{{ old('coc', optional($ncr)->issuingPlace) ? old('coc', optional($ncr)->issuingPlace) : auth()->user()->branch }}">
+                                                <input class="form-control" {{ $disabled }} name="issuingPlace" id="issuingPlace" type="text" style="text-transform: uppercase" {{ $disabled }} value="{{ old('coc', optional($ncr)->issuingPlace) ? old('coc', optional($ncr)->issuingPlace) : auth()->user()->branch }}">
                                             </div>
                                         </div>
                                     </div>

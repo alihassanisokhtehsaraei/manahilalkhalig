@@ -18,6 +18,7 @@
                     <thead>
                     <tr>
                         <th>Tracking ID</th>
+                        <th>NCR No.</th>
                         <th>Customer</th>
                         <th>Desc</th>
                         <th>Service</th>
@@ -51,6 +52,7 @@
                 ajax: "{!! route('ncr.index') !!}",
                 columns: [
                     { data: 'tracking_no', name: 'tracking_no' },
+                    { data: 'certNo', name: 'certNo' },
                     { data: 'customer', name: 'customer' },
                     { data: 'desc', name: 'desc' },
                     { data: 'service', name: 'service' },

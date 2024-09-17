@@ -20,7 +20,7 @@
                         <th>Tracking ID</th>
                         <th>Customer</th>
                         <th>Desc</th>
-                        <th>Service</th>
+                        <th>Branch</th>
                         <th>Status (T / F)</th>
                         <th>Actions</th>
 
@@ -53,7 +53,7 @@
                     { data: 'tracking_no', name: 'tracking_no' },
                     { data: 'customer', name: 'customer' },
                     { data: 'desc', name: 'desc' },
-                    { data: 'service', name: 'service' },
+                    { data: 'branch', name: 'branch' },
                     { data: 'status', name: 'status' },
                     { data: 'actions', name: 'actions' },
                 ],

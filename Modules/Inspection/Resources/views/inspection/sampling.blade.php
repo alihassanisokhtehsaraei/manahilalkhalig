@@ -64,40 +64,40 @@
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="ref">Reference No.</label>
-                                                    <input type="text" class="form-control" name="ref" id="ref" value="{{ $rft->ref ?? '' }}" {{ $disabled }}>
+                                                    <input type="text" class="form-control" name="ref" id="ref" value="{{ $order->tracking_no }}" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="date">Date</label>
-                                                    <input type="text" class="form-control" data-language="en" name="date" id="date" value="{{ $rft->date ?? '' }}" {{ $disabled }}>
+                                                    <input type="text" class="form-control" data-language="en" name="date" id="date" value="{{ date('Y-m-d') }}" readonly>
 
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="cocNoOtherCompany">COC No.</label>
-                                                    <input type="text" class="form-control" name="cocNoOtherCompany" id="cocNoOtherCompany" value="{{ $rft->cocNoOtherCompany ?? '' }}" {{ $disabled }}>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="inspectionCompany">Inspection Company</label>
-                                                    <input type="text" class="form-control" name="inspectionCompany" id="inspectionCompany" value="{{ $rft->inspectionCompany ?? '' }}" {{ $disabled }}>
-                                                </div>
+{{--                                                <div class="mb-3">--}}
+{{--                                                    <label class="col-form-label pt-0" for="cocNoOtherCompany">COC No.</label>--}}
+{{--                                                    <input type="text" class="form-control" name="cocNoOtherCompany" id="cocNoOtherCompany" value="{{ $rft->cocNoOtherCompany ?? '' }}" {{ $disabled }}>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="mb-3">--}}
+{{--                                                    <label class="col-form-label pt-0" for="inspectionCompany">Inspection Company</label>--}}
+{{--                                                    <input type="text" class="form-control" name="inspectionCompany" id="inspectionCompany" value="{{ $rft->inspectionCompany ?? '' }}" {{ $disabled }}>--}}
+{{--                                                </div>--}}
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="cosqcName">COSQC REPRESENTATIVE Name</label>
-                                                    <input type="text" class="form-control" name="cosqcName" id="cosqcName" value="{{ $rft->cosqcName ?? '' }}" {{ $disabled }}>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="insName">Inspection Company REPRESENTATIVE Name</label>
-                                                    <input type="text" class="form-control" name="insName" id="insName" value="{{ $rft->insName ?? '' }}" {{ $disabled }}>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="customsName">Customs REPRESENTATIVE Name</label>
-                                                    <input type="text" class="form-control" name="customsName" id="customsName" value="{{ $rft->customsName ?? '' }}" {{ $disabled }}>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="brokerName">Broker REPRESENTATIVE Name</label>
-                                                    <input type="text" class="form-control" name="brokerName" id="brokerName" value="{{ $rft->brokerName ?? '' }}" {{ $disabled }}>
-                                                </div>
-                                            </div>
+{{--                                            <div class="col-sm-6">--}}
+{{--                                                <div class="mb-3">--}}
+{{--                                                    <label class="col-form-label pt-0" for="cosqcName">COSQC REPRESENTATIVE Name</label>--}}
+{{--                                                    <input type="text" class="form-control" name="cosqcName" id="cosqcName" value="{{ $rft->cosqcName ?? '' }}" {{ $disabled }}>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="mb-3">--}}
+{{--                                                    <label class="col-form-label pt-0" for="insName">Inspection Company REPRESENTATIVE Name</label>--}}
+{{--                                                    <input type="text" class="form-control" name="insName" id="insName" value="{{ $rft->insName ?? '' }}" {{ $disabled }}>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="mb-3">--}}
+{{--                                                    <label class="col-form-label pt-0" for="customsName">Customs REPRESENTATIVE Name</label>--}}
+{{--                                                    <input type="text" class="form-control" name="customsName" id="customsName" value="{{ $rft->customsName ?? '' }}" {{ $disabled }}>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="mb-3">--}}
+{{--                                                    <label class="col-form-label pt-0" for="brokerName">Broker REPRESENTATIVE Name</label>--}}
+{{--                                                    <input type="text" class="form-control" name="brokerName" id="brokerName" value="{{ $rft->brokerName ?? '' }}" {{ $disabled }}>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="note">Notes</label>

@@ -76,10 +76,10 @@
                                                 <td>{{ $customer->email }}</td>
                                                 <td>{{ $customer->mobile.' - '.$customer->tel }}</td>
                                                 <td>
-                                                    @if(Auth()->user()->department == 'Management' or Auth()->user()->department == 'Inspection')
+                                                    @if(Auth()->user()->department == 'management' or Auth()->user()->department == 'technical')
                                                         <a href="{{ route('order.create', $customer->id) }}" class="btn btn-xs btn-primary">RFI</a>
                                                     @endif
-                                                    @if(Auth()->user()->department == 'Management' or Auth()->user()->department == 'Laboratory')
+                                                    @if(Auth()->user()->department == 'management' or Auth()->user()->department == 'laboratory')
                                                         <a href="{{ route('request.createrft', $customer->id) }}" class="btn btn-xs btn-danger">RFT</a>
                                                     @endif
                                                 </td>

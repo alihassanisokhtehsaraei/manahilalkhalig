@@ -139,23 +139,26 @@
                             </li>
 
                             <li class="dropdown"><a class="nav-link menu-title link-nav" href="/dashboard"><i data-feather="home"></i><span>Dashboard</span></a></li>
-
+                            @if(auth()->user()->department != 'laboratory')
                             <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>COC Services</span></a>
                                 <ul class="nav-submenu menu-content">
-                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial')
+                                    @if(auth()->user()->sector == 'management' or auth()->user()->sector == 'branch')
                                         <li><a href="{{ route('order.create') }}">New RFC</a></li>
                                         <li><a href="{{ route('order.index') }}">Drafts</a></li>
                                         <li><a href="{{ route('coc.index') }}">Approved</a></li>
                                         <li><a href="{{ route('ncr.index') }}">NCR</a></li>
                                         <li><a href="{{ route('coc.archive') }}">Archive</a></li>
+                                    @elseif(auth()->user()->sector == 'cosqc')
+                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
+                                        <li><a href="{{ route('ncr.index') }}">NCR</a></li>
                                     @else
-                                    <li><a href="{{ route('coc.archive') }}">Archive</a></li>
+                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
                                     @endif
                                 </ul>
                             </li>
+                            @endif
 
-
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial')
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
                                 <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>Laboratory Services</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="{{ route('request.create') }}">New RFT</a></li>

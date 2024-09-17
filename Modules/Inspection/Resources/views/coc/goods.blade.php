@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-sm-6">
 
-                    <h3>Tracking No.: {{ $order->tracking_no }}</h3>
+                    <h3><a href="{{ route('inspection.show', $order->id) }}">Tracking No.: {{ $order->tracking_no }}</a></h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">{{ __('common.home') }}</a></li>
                         <li class="breadcrumb-item">Inspection Department</li>
@@ -59,10 +59,10 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="file">Upload Excel File:</label>
-                                    <input @if($order->technicalStatus > 4 && auth()->user()->level != 'technical') disabled @endif type="file" class="form-control" id="file" name="file" accept=".xlsx, .xls" required>
+                                    <input {{ $disabled }} type="file" class="form-control" id="file" name="file" accept=".xlsx, .xls" required>
                                 </div>
                                 <div class="card-footer text-end">
-                                    <button type="submit" class="btn btn-primary" @if($order->technicalStatus > 4 && auth()->user()->level != 'technical') disabled @endif>Upload Excel</button>
+                                    <button type="submit" class="btn btn-primary" @if($order->technicalStatus > 4 && auth()->user()->level != 'technical' &&auth()->user()->level != 'manager') disabled @endif>Upload Excel</button>
                                 </div>
                             </form>
                         </div>
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                @if($order->technicalStatus < 5 or auth()->user()->sector == 'management')
+                                @if($disabled == null)
                                     <input type="submit" class="btn btn-primary m-r-15" value="Add Item">
                                 @endif
                             </div>
@@ -160,10 +160,10 @@
                                                     <td>{{ $goods->standard }}</td>
                                                     <td>{{ $goods->type }}</td>
                                                     <td>
-                                                        @if($order->technicalStatus > 4 && auth()->user()->sector != 'management')
-                                                            Locked !
-                                                        @else
+                                                        @if($disabled == null)
                                                             <a style="margin: 1px" href="{{ route('coc.editGoods', $goods->id) }}" class="btn btn-xs btn-success">Edit</a> <a style="margin: 1px" href="{{ route('coc.destroyGoods', $goods->id) }}" class="btn btn-xs btn-danger">Delete</a>
+                                                        @else
+                                                            Locked !
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -178,7 +178,7 @@
                             </div>
                         </div>
 
-                        @if($order->technicalStatus < 5 or auth()->user()->level == 'technical' or auth()->user()->sector == 'management')
+                        @if($disabled == null)
                         <div class="card">
                             <div class="card-header pb-0">
                                 <p class="sub-title">Change Status</p>
@@ -221,8 +221,8 @@
 
                                                     @endswitch
                                                     )</label>
-                                                <select class="form-control" name="status"  @if($coc->technicalStatus > 4 && auth()->user()->sector != 'management') disabled @endif>
-                                                    @if(Auth()->user()->level == 'technical')
+                                                <select class="form-control" name="status">
+                                                    @if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager' )
                                                         <option value="1">Draft</option>
                                                         <option value="3">Reject</option>
                                                         <option value="5">Approve</option>
@@ -233,8 +233,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="submit"> </label>
-                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 && auth()->user()->level != 'technical') disabled @endif>Submit</button>
-                                                @if($order->technicalStatus == 5 && $order->financialStatus == 3)<a href="{{ URL::signedRoute('words.coc',$coc->id) }}" class="btn btn-warning m-r-15">Print Certificate</a>@elseif($order->technicalStatus == 5 && $order->financialStatus != 3) Financial Confirmation Pending. @endif
+                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 && auth()->user()->level != 'technical' &&auth()->user()->level != 'manager') disabled @endif>Submit</button>
+                                                @if($order->technicalStatus == 5 && $order->financialStatus == 3 or $order->technicalStatus == 7 && $order->financialStatus == 3)<a href="{{ URL::signedRoute('words.coc',$coc->id) }}" class="btn btn-warning m-r-15">Print Certificate</a>@elseif($order->technicalStatus == 5 && $order->financialStatus != 3 or $order->technicalStatus == 7 && $order->financialStatus != 3) Financial Confirmation Pending. @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-6">

@@ -293,7 +293,12 @@ use Illuminate\Support\Str;
                                     <div class="row">
                                         <div class="media">
                                             <div class="media-body text-end">
-                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload  </button>
+                                                @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector != 'cosqc')
+
+
+                                                @else
+                                                    <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -329,7 +334,7 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                <p> <b>created at: </b> {{ $doc->created_at }}</p>
+                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
@@ -402,7 +407,11 @@ use Illuminate\Support\Str;
                                 <div class="row">
                                     <div class="media">
                                         <div class="media-body text-end">
-                                            <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload  </button>
+                                            @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector != 'cosqc')
+
+                                            @else
+                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -438,7 +447,7 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                <p> <b>created at: </b> {{ $doc->created_at }}</p>
+                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
@@ -493,7 +502,11 @@ use Illuminate\Support\Str;
                                 <div class="row">
                                     <div class="media">
                                         <div class="media-body text-end">
-                                            <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload  </button>
+                                            @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector != 'cosqc')
+
+                                            @else
+                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -529,7 +542,7 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                <p> <b>created at: </b> {{ $doc->created_at }}</p>
+                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
@@ -595,7 +608,7 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                <p> <b>created at: </b> {{ $doc->created_at }}</p>
+                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
@@ -746,10 +759,10 @@ use Illuminate\Support\Str;
                                     </li>
 
                                     <li class="file-box">
-                                        <h6>COI Req. letter</h6>
+                                        <h6>Commitment letter</h6>
                                         <sub class="mb-1">JPG|PNG|PDF</sub>
                                         <br><br>
-                                        <input class="form-control"  name="pi[]" type="file" multiple="">
+                                        <input class="form-control"  name="rl[]" type="file" multiple="">
 
                                         <div class="file-bottom">
 
@@ -761,8 +774,11 @@ use Illuminate\Support\Str;
 
                                     <div class="media">
                                         <div class="media-body text-end">
-                                            <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload  </button>
-                                        </div>
+                                            @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector == 'cosqc')
+
+                                            @else
+                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                            @endif</div>
                                     </div>
                                 </div>
                                 </form>
@@ -797,7 +813,7 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                <p> <b>created at: </b> {{ $doc->created_at }}</p>
+                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>

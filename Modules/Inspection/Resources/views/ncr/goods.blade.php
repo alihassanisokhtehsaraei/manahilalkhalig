@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-sm-6">
 
-                    <h3>Tracking No.: {{ $order->tracking_no }}</h3>
+                    <h3><a href="{{ route('inspection.show', $order->id) }}">Tracking No.: {{ $order->tracking_no }}</a></h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">{{ __('common.home') }}</a></li>
                         <li class="breadcrumb-item">Inspection Department</li>
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="type">Category:</label>
-                                            <select class="form-control" id="type" name="type" {{ $disabled }}  required >
+                                            <select class="form-control" id="type" name="type" @if($order->technicalStatus > 4 and auth()->user()->sector != 'management' and auth()->user()->level != 'technical') disabled @endif  required >
                                                 <option value="Food">Food</option>
                                                 <option value="Chemical">Chemical</option>
                                                 <option value="Construction">Construction</option>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                @if($order->technicalStatus < 5 or auth()->user()->sector == 'management')
+                                @if($order->technicalStatus < 5 or auth()->user()->sector == 'management' or auth()->user()->level == 'technical')
                                     <input type="submit" class="btn btn-primary m-r-15"  value="Add Item">
                                 @endif
                             </div>
@@ -127,7 +127,7 @@
                                                     <td>{{ $goods->standard }}</td>
                                                     <td>{{ $goods->type }}</td>
                                                     <td>
-                                                        @if($order->technicalStatus > 4 && auth()->user()->sector != 'management')
+                                                        @if($order->technicalStatus > 4 and auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
                                                             Locked !
                                                         @else
                                                             <a style="margin: 1px" href="{{ route('ncr.editGoods', $goods->id) }}" class="btn btn-xs btn-success">Edit</a> <a style="margin: 1px" href="{{ route('ncr.destroyGoods', $goods->id) }}" class="btn btn-xs btn-danger">Delete</a>
@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        @if($order->technicalStatus < 5 or auth()->user()->sector == 'management')
+                        @if($disabled == null)
                         <div class="card">
                             <div class="card-header pb-0">
                                 <p class="sub-title">Change Status</p>
@@ -188,8 +188,8 @@
 
                                                     @endswitch
                                                     )</label>
-                                                <select class="form-control" name="status"  @if($ncr->technicalStatus > 4 && auth()->user()->sector != 'management') disabled @endif>
-                                                    @if(Auth()->user()->sector == 'management')
+                                                <select class="form-control" name="status">
+                                                    @if(Auth()->user()->sector == 'management' or Auth()->user()->level == 'technical')
                                                         <option value="2">Draft</option>
                                                         <option value="4">Reject</option>
                                                         <option value="6">Approve</option>
@@ -200,8 +200,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="submit"> </label>
-                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 && auth()->user()->sector != 'management') disabled @endif>Submit</button>
-                                                @if($order->technicalStatus == 6)<a href="{{ URL::signedRoute('words.ncr',$ncr->id) }}" class="btn btn-warning m-r-15">Print Certificate</a>@endif
+                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 and auth()->user()->sector != 'management' and auth()->user()->level != 'technical') disabled @endif>Submit</button>
+                                                @if($order->technicalStatus == 6)<a href="{{ URL::signedRoute('words.ncr',$ncr->id) }}" class="btn btn-warning m-r-15" target="_blank">Print Certificate</a>@endif
                                             </div>
                                         </div>
                                         <div class="col-sm-6">

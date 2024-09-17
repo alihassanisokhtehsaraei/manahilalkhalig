@@ -108,7 +108,7 @@
 </table>
 
 <div class="payment-info">
-    <p><strong>Place of Payment:</strong> {{ $rft->labFeePlace }} - @if($rft->labFeePlace == 'Branch') {{ $rft->lab }}@endif</p>
+    <p><strong>Place of Payment:</strong> {{ $rft->labFeePlace }} - @if($rft->labFeePlace == 'Branch') {{ $rft->office }} @elseif ($rft->labFeePlace == 'Laboratory') {{ $rft->lab }}@endif</p>
     <p><strong>Method of Payment:</strong> {{ $rft->labPaymentMethod }}</p>
     <p><strong>Transaction No.:</strong> {{ $rft->transactionNo }}</p>
 </div>

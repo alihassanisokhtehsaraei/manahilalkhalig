@@ -20,18 +20,12 @@ class CocController extends Controller
      */
     public function index()
     {
-        switch (auth()->user()->level) {
-            case 'super administrator':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',5)->get();
+        switch (auth()->user()->sector) {
+            case 'management':
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',5)->get();
                 break;
-            case 'manager':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',5)->get();
-                break;
-            case 'supervisor':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',5)->get();
-                break;
-            case 'expert':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',5)->where('branch',auth()->user()->branch)->get();
+            case 'branch':
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',5)->where('orders.branch',auth()->user()->branch)->get();
                 break;
         }
         //print_r($data);
@@ -87,48 +81,8 @@ class CocController extends Controller
                     $btn = '
                     <a href="/inspection/show/' . $row->id . '" class="btn btn-primary btn-xs">OPEN</a>';
 
-                    if(Auth()->user()->sector == 'management' or $row->technicalStatus < 5) {
-                        $btn = $btn . ' <a href="/order/edit/' . $row->id . '" class="btn btn-secondary btn-xs">EDIT</a>
-                    <a class="btn btn-danger btn-xs" id="sweet-' . $row->id . '" type="button" onclick="_gaq.push([\'_trackEvent\', \'example\', \'try\', \'sweet-' . $row->id . '\']);">DELETE</a>
-    <script>
-        var SweetAlert_custom = {
-            init: function() {
-
-                document.querySelector("#sweet-' . $row->id . '").onclick = function(){
-                    swal({
-                        title: "Are you sure?",
-                        text: "Once deleted, you will not be able to recover this customer, all other related information will be deleted too!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                     $.ajax({
-                                         url: \'destroy/' . $row->id . '\',
-                                         type: \'get\',
-                                         dataType: \'json\'
-                                      });
-
-                                    swal("Customer Deleted!", {
-                                        icon: "success",
-                                    });
-
-                                $(\'#customers-datatable\').DataTable().ajax.reload();
-                            } else {
-                                swal("Your file is safe!");
-                            }
-                        })
-                }
-                ;
-
-            }
-        };
-        (function($) {
-            SweetAlert_custom.init()
-        })(jQuery);
-    </script>
-                    '; }
+                    if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager' or $row->technicalStatus < 5) {
+                        $btn = $btn . ' <a href="/order/edit/' . $row->id . '" class="btn btn-secondary btn-xs">EDIT</a>'; }
 
                     return $btn;
                 })
@@ -140,18 +94,17 @@ class CocController extends Controller
 
     public function archive()
     {
-        switch (auth()->user()->level) {
-            case 'super administrator':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',7)->get();
+        switch (auth()->user()->sector) {
+            case 'management':
+            case 'cosqc':
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->get();
                 break;
-            case 'manager':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',7)->get();
+            case 'border':
+            case 'customs':
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->where('orders.border',auth()->user()->branch)->get();
                 break;
-            case 'supervisor':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',7)->get();
-                break;
-            case 'expert':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','=',7)->where('branch',auth()->user()->branch)->get();
+            case 'branch':
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->where('orders.branch',auth()->user()->branch)->get();
                 break;
         }
         //print_r($data);

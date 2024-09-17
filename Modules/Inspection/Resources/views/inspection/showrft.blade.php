@@ -19,20 +19,16 @@
                 </div>
                 <div class="col-sm-6">
                     <!-- Bookmark Start-->
-                    <div class="bookmark">
-                        <ul>
-                            <li><a href="{{ route('rft.edit', $rft->id) }}" data-container="body"
-                                   data-bs-toggle="popover" data-placement="top" title="Edit Inspection Order"
-                                   data-original-title="Edit"><i data-feather="edit"></i></a></li>
-                            {{--                            <li><a href="{{ route('inspection.insdoc', $rft->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="File Manager" data-original-title="file"><i data-feather="file"></i></a></li>--}}
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                   data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i
-                                            data-feather="phone-call"></i></a></li>
-                            <li><a href="" data-container="body" data-bs-toggle="popover" data-placement="top"
-                                   title="{{ __('common.semail') }}" data-original-title="Send Email"><i
-                                            data-feather="mail"></i></a></li>
-                        </ul>
-                    </div>
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'laboratory')
+                        <div class="bookmark">
+                            <ul>
+                                <li><a href="{{ route('rft.edit', $rft->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="Edit Inspection Order" data-original-title="Edit"><i data-feather="edit"></i></a></li>
+                                {{--                            <li><a href="{{ route('inspection.insdoc', $rft->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="File Manager" data-original-title="file"><i data-feather="file"></i></a></li>--}}
+                                <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>
+                                <li><a href="" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.semail') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>
+                            </ul>
+                        </div>
+                    @endif
                     <!-- Bookmark Ends-->
                 </div>
             </div>
@@ -69,6 +65,8 @@
                                 <h6 class="form-label">Email:</h6>
                                 {{ $rft->customer->email }}
                             </div>
+
+                            @if(auth()->user()->department == 'laboratory' or auth()->user()->department == 'management')
                             <div class="success-color">
                                 <ul class="m-b-30">
                                     <a href="{{ route('customer.edit', ['slug' => $rft->customer->id]) }}">
@@ -77,7 +75,7 @@
                                     </a>
                                 </ul>
                             </div>
-                            @if(auth()->user()->department == 'laboratory' or auth()->user()->department == 'management')
+
                             <div class="mb-3">
                                 <h6 class="sub-title text-uppercase">Technical Status</h6>
                                 <div class="form-group">
@@ -150,23 +148,27 @@
                         {{--                                        <a href="{{ route('inspection.insdoc', $rft->id) }}" class="btn btn-light btn-lg">File Manager</a>--}}
                         {{--                                    </div>--}}
                         {{--                                </div>--}}
-                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
-                            <div class="card income-card card-secondary">
-                                <a href="{{ route('rft.edit', $rft->id) }}" class="btn btn-success btn-lg">Edit RFT</a>
+
+                        @if(auth()->user()->department == 'laboratory' or auth()->user()->department == 'management')
+                            <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                <div class="card income-card card-secondary">
+                                    <a href="{{ route('rft.edit', $rft->id) }}" class="btn btn-success btn-lg">Edit RFT</a>
+                                </div>
                             </div>
-                        </div>
+
+                            @if($rft->order)
+                                <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                    <div class="card income-card card-secondary">
+                                        <a href="{{ URL::signedRoute('words.sample', $rft->order->id) }}" class="btn btn-danger btn-lg text-white">Print Sampling</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                         <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
                             <div class="card income-card card-secondary">
                                 <a href="{{ route('financial.rftshow', $rft->id) }}" class="btn btn-warning btn-lg">Financial Profile</a>
                             </div>
                         </div>
-                        @if($rft->order)
-                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
-                            <div class="card income-card card-secondary">
-                                <a href="{{ URL::signedRoute('words.sample', $rft->order->id) }}" class="btn btn-danger btn-lg text-white">Print Sampling</a>
-                            </div>
-                        </div>
-                        @endif
                     </div>
 
                     <div class="row">
@@ -202,26 +204,34 @@
                                         <td>{{ $sample->seal }}</td>
                                         <td>{{ $sample->standard }}</td>
                                         <td>
-                                            @if ($url)
-                                                <!-- Show download button if URL exists --> <a href="{{ asset('fileManager/'.$url) }}" class="btn btn-success btn-xs" download>Download</a> <form style="display:inline;" method="POST" action="{{ route('rft.destroyTestReport', ['rft' => $rft]) }}"> @csrf @method('DELETE') <input type="hidden" name="url" value="{{ $url }}"> <button class="btn btn-danger btn-xs" type="submit">Delete</button></form>
 
+                                            @if(auth()->user()->department == 'laboratory' or auth()->user()->department == 'management')
+                                                @if ($url)
+                                                    <!-- Show download button if URL exists --> <a href="{{ asset('fileManager/'.$url) }}" class="btn btn-success btn-xs" download>Download</a> <form style="display:inline;" method="POST" action="{{ route('rft.destroyTestReport', ['rft' => $rft]) }}"> @csrf @method('DELETE') <input type="hidden" name="url" value="{{ $url }}"> <button class="btn btn-danger btn-xs" type="submit">Delete</button></form>
+
+                                                @else
+                                                    <!-- Show upload form if URL does not exist -->
+                                                    <form method="POST" action="{{ route('rft.uploadTestReport', $rft) }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="d-flex align-items-center">
+                                                            <input type="file" name="{{ 'file-' . $sample->id }}" class="form-control form-control-sm me-2" style="width: 100px;">
+                                                            <input type="hidden" name="sample_id" value="{{ $sample->id }}">
+                                                            <button class="btn btn-primary btn-xs" type="submit" style="width: 100px;">Upload</button>
+                                                        </div>
+                                                        @error('file-' . $sample->id)
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </form>
+                                               @endif
                                             @else
-                                                <!-- Show upload form if URL does not exist -->
-                                                <form method="POST" action="{{ route('rft.uploadTestReport', $rft) }}" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="d-flex align-items-center">
-                                                        <input type="file" name="{{ 'file-' . $sample->id }}" class="form-control form-control-sm me-2" style="width: 100px;">
-                                                        <input type="hidden" name="sample_id" value="{{ $sample->id }}">
-                                                        <button class="btn btn-primary btn-xs" type="submit" style="width: 100px;">Upload</button>
-                                                    </div>
-                                                    @error('file-' . $sample->id)
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </form>
+                                                @if ($url)
+                                                    <!-- Show download button if URL exists --> <a href="{{ asset('fileManager/'.$url) }}" class="btn btn-success btn-xs" download>Download</a>
+                                                @else
+                                                   TR is not ready!
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
-
                                 @endforeach
                                 </tbody>
                             </table>

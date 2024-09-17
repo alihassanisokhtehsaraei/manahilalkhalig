@@ -22,14 +22,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        switch (auth()->user()->department) {
+        switch (auth()->user()->sector) {
             case 'management':
-            case 'financial':
-            case 'technical':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->get();
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->get();
                 break;
             case 'branch':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->where('orders.branch',auth()->user()->branch)->get();
+                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->where('orders.branch',auth()->user()->branch)->get();
                 break;
         }
         //print_r($data);
@@ -214,7 +212,7 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::find($id);
-        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management')
+        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical')
         {
             $disabled = 'readonly';
         } else {
@@ -289,7 +287,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $rft = Rft::where('order_id', $id)->first();
-        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management')
+        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical')
         {
             $disabled = 'readonly';
         } else {
@@ -320,7 +318,7 @@ class OrderController extends Controller
             $rft->save();
         }
 
-        return redirect()->route('rft.edit', $id);
+        return redirect()->route('rft.edit', $rft->id);
     }
 
     public function destroy($id)
@@ -331,7 +329,14 @@ class OrderController extends Controller
     public function searchResult(Request $request)
     {
         $searchkey = $request->searchkey;
-        $customers = Customer::where('fullName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('cName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('email','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('mobile','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->get();
+        switch (Auth()->user()->sector) {
+            case 'management':
+                $customers = Customer::where('fullName','like','%'.$searchkey.'%')->orWhere('cName','like','%'.$searchkey.'%')->orWhere('email','like','%'.$searchkey.'%')->orWhere('mobile','like','%'.$searchkey.'%')->get();
+                break;
+            case 'branch':
+                $customers = Customer::where('fullName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('cName','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('email','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->orWhere('mobile','like','%'.$searchkey.'%')->where('branch',Auth()->user()->branch)->get();
+                break;
+        }
         return view('inspection::order.searchCustomer', ['customers' => $customers]);
     }
 }

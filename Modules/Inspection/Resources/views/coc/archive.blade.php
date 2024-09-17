@@ -10,7 +10,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>COC List</h5>
+                <h5>Archive List</h5>
             </div>
 
             <div class="card-body table-responsive">
@@ -18,9 +18,10 @@
                     <thead>
                     <tr>
                         <th>Tracking ID</th>
+                        <th>Cert No.</th>
                         <th>Customer</th>
                         <th>Desc</th>
-                        <th>Service</th>
+                        <th>Branch</th>
                         <th>Status (T / F)</th>
                         <th>Actions</th>
 
@@ -51,9 +52,10 @@
                 ajax: "{!! route('coc.archive') !!}",
                 columns: [
                     { data: 'tracking_no', name: 'tracking_no' },
+                    { data: 'certNo', name: 'certNo' },
                     { data: 'customer', name: 'customer' },
                     { data: 'desc', name: 'desc' },
-                    { data: 'service', name: 'service' },
+                    { data: 'branch', name: 'branch' },
                     { data: 'status', name: 'status' },
                     { data: 'actions', name: 'actions' },
                 ],

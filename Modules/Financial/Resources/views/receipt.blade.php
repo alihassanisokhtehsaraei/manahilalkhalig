@@ -88,15 +88,15 @@
         <td>{{ $order->insFeePlace }} - @if($order->insFeePlace == 'Branch') {{ $order->branch }} @endif</td>
     </tr>
     <tr>
-        <td><strong>Total Border Fee:</strong></td>
+        <td><strong>Total Release Document Fee:</strong></td>
         <td>{{ $order->borderFeeTotal }}</td>
     </tr>
     <tr>
-        <td><strong>Border Fee Payment Method:</strong></td>
+        <td><strong>Release Document Fee Payment Method:</strong></td>
         <td>{{ $order->borderPaymentMethod }}</td>
     </tr>
     <tr>
-        <td><strong>Border Fee Payment Place:</strong></td>
+        <td><strong>Release Document Fee Payment Place:</strong></td>
         <td>{{ $order->borderFeePlace }} - @if($order->borderFeePlace == 'Branch') {{ $order->branch }} @endif</td>
     </tr>
     <tr>

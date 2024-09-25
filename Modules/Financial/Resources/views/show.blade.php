@@ -110,8 +110,9 @@
                                 <input class="form-control" type="text" value="{{ $cf }} USD" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label class="col-form-label pt-0" for="" style="color:white">Estimated Border Fee</label>
-                                <input class="form-control" type="text" value="Total Border Fee: {{ $bf }}, Each Part: {{ $x }}" disabled>
+                                <label class="col-form-label pt-0" for="" style="color:white">Estimated Release Document Fee</label>
+                                <input class="form-control" type="text" value="Total: {{ $bf }}, Each Part: {{ $x }}" disabled>
+                                <input class="form-control" type="text" value="Total: {{ $bf }}, Each Part: {{ $x }}" disabled>
                             </div>
                         </div>
 
@@ -127,7 +128,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="col-form-label pt-0" for="borderFeePlace">Border Fee Paid at:</label>
+                                    <label class="col-form-label pt-0" for="borderFeePlace">Release Document Fee Paid at:</label>
                                     <select class="form-control" name="borderFeePlace" id="borderFeePlace" {{ $disabled }}>
                                         @if($order->borderFeePlace)<option value="{{ $order->borderFeePlace }}">{{ $order->borderFeePlace }}</option>@endif
                                             <option value="Branch">Branch</option>
@@ -145,7 +146,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="col-form-label pt-0" for="borderPaymentMethod">Border Fee Payment Method:</label>
+                                    <label class="col-form-label pt-0" for="borderPaymentMethod">Release Document Fee Payment Method:</label>
                                     <select class="form-control" name="borderPaymentMethod" id="borderPaymentMethod" {{ $disabled }}>
                                         @if($order->borderPaymentMethod)<option value="{{ $order->borderPaymentMethod }}">{{ $order->borderPaymentMethod }}</option>@endif
                                         <option value="Credit Card">Credit Card</option>

@@ -84,7 +84,7 @@
                                     @csrf
                                     <select class="form-control" name="status" >
                                         <option value="1" {{$rft->status == "1" ? "selected": ""}}>New</option>
-                                        <option value="2" {{$rft->status == "2" ? "selected": ""}}>In Progress</option>
+                                        <option value="2" {{$rft->status == "2" ? "selected": ""}}>Samples Received</option>
                                         @if($rft->financialStatus == 3)
                                             <option value="3" {{$rft->status == "3" ? "selected": ""}}>Completed</option>
                                         @endif

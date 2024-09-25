@@ -190,9 +190,9 @@
                                                 <div class="mb-3">
                                                     <select class="form-control" name="status">
                                                         @if(Auth()->user()->department == 'Laboratory')
-                                                            <option value="2">Send to Lab</option>
+                                                            <option value="1">Send to Lab</option>
                                                         @else
-                                                            <option value="2">Send to Lab</option>
+                                                            <option value="1">Send to Lab</option>
                                                         @endif
                                                     </select>
                                                 </div>

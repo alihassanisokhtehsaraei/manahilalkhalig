@@ -58,9 +58,9 @@ class RftController extends Controller
                 ->addColumn('status', function ($row) {
                     switch ($row->status) {
                         case 1:
-                            return '<a style="direction: ltr;text-align: center" class="btn btn-success btn-xs">New</a>';
+                            return '<a style="direction: ltr;text-align: center" class="btn btn-success btn-xs">New - Sent to Lab</a>';
                         case 2:
-                            return '<a style="direction: ltr;text-align: center" class="btn btn-success btn-xs">In Progress</a>';
+                            return '<a style="direction: ltr;text-align: center" class="btn btn-success btn-xs">Samples Received</a>';
                         case 3:
                             return '<a style="direction: ltr;text-align: center" class="btn btn-success btn-xs">Completed</a>';
                         default:

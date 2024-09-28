@@ -62,7 +62,7 @@
             <td>{{ $item->issuing_office}}</td>
             <td>{{ $item->coc->invUSD }}</td>
             <td>{{ $item->coc->order->category }}</td>
-            <td>{{ $item->coc->containerDetails }}</td>
+            <td>{{ $item->total_quantity }}</td>
             <td>{{ $item->incoming_quantity }}</td>
         </tr>
     @endforeach

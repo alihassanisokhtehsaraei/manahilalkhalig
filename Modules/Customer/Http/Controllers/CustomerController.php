@@ -139,9 +139,9 @@ class CustomerController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit(customer $slug, Request $request)
+    public function edit($id, Request $request)
     {
-        $customer = customer::find($slug);
+        $customer = customer::find($id);
         return view('customer::edit', ['request' => $request, 'customer' => $customer]);
     }
 

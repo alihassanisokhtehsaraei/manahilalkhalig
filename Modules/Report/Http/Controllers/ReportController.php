@@ -25,23 +25,47 @@ class ReportController extends Controller
         $startDate = $request['start'];
         $endDate = $request['end'];
 
-        if($request['reportType'] == 1) {
-            $data = Order::join('cocs', 'orders.id', '=', 'cocs.order_id')
-                ->whereBetween('cocs.issuingDate', [$startDate, $endDate])
-                ->whereNotNull('cocs.certNo')
-                ->get();
-            return view('report::cocFeeReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
-        } elseif($request['reportType'] == 2) {
-            $data = Order::join('cocs', 'orders.id', '=', 'cocs.order_id')
-                ->whereBetween('cocs.issuingDate', [$startDate, $endDate])
-                ->whereNotNull('cocs.certNo')
-                ->get();
-            return view('report::borderFeeReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
-        } elseif($request['reportType'] == 3) {
-            $data = ReleaseDocument::whereBetween('issuance_date', [$startDate, $endDate])
-                ->whereNotNull('document_number')
-                ->get();
-            return view('report::releaseDocReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+        if ($request['office'] == 'all') {
+            if($request['reportType'] == 1) {
+                $data = Order::join('cocs', 'orders.id', '=', 'cocs.order_id')
+                    ->whereBetween('cocs.issuingDate', [$startDate, $endDate])
+                    ->whereNotNull('cocs.certNo')
+                    ->get();
+                return view('report::cocFeeReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+            } elseif($request['reportType'] == 2) {
+                $data = Order::join('cocs', 'orders.id', '=', 'cocs.order_id')
+                    ->whereBetween('cocs.issuingDate', [$startDate, $endDate])
+                    ->whereNotNull('cocs.certNo')
+                    ->get();
+                return view('report::borderFeeReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+            } elseif($request['reportType'] == 3) {
+                $data = ReleaseDocument::whereBetween('issuance_date', [$startDate, $endDate])
+                    ->whereNotNull('document_number')
+                    ->where('issuing_office', '=', $request['office'])
+                    ->get();
+                return view('report::releaseDocReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+            }
+        } else {
+            if($request['reportType'] == 1) {
+                $data = Order::join('cocs', 'orders.id', '=', 'cocs.order_id')
+                    ->whereBetween('cocs.issuingDate', [$startDate, $endDate])
+                    ->where('orders.branch', '=', $request['office'])
+                    ->whereNotNull('cocs.certNo')
+                    ->get();
+                return view('report::cocFeeReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+            } elseif($request['reportType'] == 2) {
+                $data = Order::join('cocs', 'orders.id', '=', 'cocs.order_id')
+                    ->whereBetween('cocs.issuingDate', [$startDate, $endDate])
+                    ->where('orders.branch', '=', $request['office'])
+                    ->whereNotNull('cocs.certNo')
+                    ->get();
+                return view('report::borderFeeReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+            } elseif($request['reportType'] == 3) {
+                $data = ReleaseDocument::whereBetween('issuance_date', [$startDate, $endDate])
+                    ->whereNotNull('document_number')
+                    ->get();
+                return view('report::releaseDocReport', ['data' => $data, 'startDate' => $startDate, 'endDate' => $endDate]);
+            }
         }
     }
 }

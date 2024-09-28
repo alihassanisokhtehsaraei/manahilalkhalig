@@ -43,3 +43,4 @@ node_modules/.vite/
 public/fileManager/ipms/inspectionFiles/*
 public/fileManager/ipms/laboratory/*
 storage/outputs/*
+storage/words/*

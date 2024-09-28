@@ -95,7 +95,13 @@
                                     <a href="{{ route('staticDocs.download', 'List-of-imported-textile-goods-subject-to-inspection.pdf') }}" class="btn btn-primary btn-sm">Download</a>
                                 </td>
                             </tr>
-
+                            <tr >
+                                <td>10</td>
+                                <td class="persian-fonts">Testing Methods</td>
+                                <td>
+                                    <a href="{{ route('staticDocs.download', 'methods.pdf') }}" class="btn btn-primary btn-sm">Download</a>
+                                </td>
+                            </tr>
 
                         </tbody>
                     </table>

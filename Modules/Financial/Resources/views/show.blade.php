@@ -112,7 +112,6 @@
                             <div class="col-md-6">
                                 <label class="col-form-label pt-0" for="" style="color:white">Estimated Release Document Fee</label>
                                 <input class="form-control" type="text" value="Total: {{ $bf }}, Each Part: {{ $x }}" disabled>
-                                <input class="form-control" type="text" value="Total: {{ $bf }}, Each Part: {{ $x }}" disabled>
                             </div>
                         </div>
 

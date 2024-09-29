@@ -3,14 +3,17 @@
 namespace Modules\UserManagement\Http\Controllers;
 
 use App\Models\User;
+use App\Policies\MenuPolicy;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
 class UserManagementController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -103,7 +106,7 @@ class UserManagementController extends Controller
         $user->name = $data['name'];
         $user->lastname = $data['lastName'];
         $user->department = $data['department'];
-        $user->sector = $data['department'];
+        $user->sector = $data['sector'];
         $user->level = $data['level'];
         $user->branch = $data['branch'];
         $user->email = $data['email'];
@@ -148,7 +151,7 @@ class UserManagementController extends Controller
         $user->name = $data['name'];
         $user->lastname = $data['lastName'];
         $user->department = $data['department'];
-        $user->sector = $data['department'];
+        $user->sector = $data['sector'];
         $user->level = $data['level'];
         $user->branch = $data['branch'];
         $user->email = $data['email'];

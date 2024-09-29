@@ -93,7 +93,7 @@ class OrderController extends Controller
                 document.querySelector("#sweet-' . $row->id . '").onclick = function(){
                     swal({
                         title: "Are you sure?",
-                        text: "Once deleted, you will not be able to recover this customer, all other related information will be deleted too!",
+                        text: "Once deleted, you will not be able to recover this file, all other related information will be deleted too!",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,

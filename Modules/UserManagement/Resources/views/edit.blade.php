@@ -111,6 +111,17 @@
 
                             <div class="row col-md-12">
                                 <div class="col-md-6">
+                                    <label class="col-form-label pt-0" for="sector">Sector</label>
+                                    <select class="form-control" id="sector" name="sector">
+                                        <option value="{{ $user->sector }}">{{ $user->sector }}</option>
+                                        <option value="management">Management</option>
+                                        <option value="branch">Branch</option>
+                                        <option value="cosqc">Cosqc</option>
+                                        <option value="border">Border</option>
+                                        <option value="customs">Customs</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
                                     <label class="col-form-label pt-0" for="branch">Location</label>
                                     <select class="form-control" name="branch" id="branch">
                                         <option value="{{ $user->branch }}">{{ $user->branch }}</option>
@@ -389,12 +400,14 @@
                                         </optgroup>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="col-form-label pt-0" for="email">Status</label>
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="1">Active</option>
-                                        <option value="0">Disable</option>
-                                    </select>
+                                <div class="row col-md-12">
+                                    <div class="col-md-6">
+                                        <label class="col-form-label pt-0" for="email">Status</label>
+                                        <select class="form-control" id="status" name="status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Disable</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 

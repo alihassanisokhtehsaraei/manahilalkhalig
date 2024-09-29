@@ -34,7 +34,7 @@
                     </div>
                     <form class="theme-form" method="post" action="{{ route('user.store') }}"  enctype="multipart/form-data">
                         @csrf
-                    <div class="card-body">
+                        <div class="card-body">
                             <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <label class="col-form-label pt-0" for="name">Name</label>
@@ -48,46 +48,55 @@
 
                             <br>
 
-                        <div class="row col-md-12">
-                            <div class="col-md-6">
-                                <label class="col-form-label pt-0" for="email">Email</label>
-                                <input class="form-control" id="email" name="email" type="email" placeholder="">
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <label class="col-form-label pt-0" for="email">Email</label>
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label pt-0" for="password">Password</label>
+                                    <input class="form-control" id="password" name="password" type="password" />
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label class="col-form-label pt-0" for="password">Password</label>
-                                <input class="form-control" id="password" name="password" type="password" />
+
+
+                            <br>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <label class="col-form-label pt-0" for="department">Department</label>
+                                    <select class="form-control" id="department" name="department">
+                                        <option value="management">Management</option>
+                                        <option value="financial">Financial</option>
+                                        <option value="technical">Technical</option>
+                                        <option value="branch">Branch</option>
+                                        <option value="cosqc">Cosqc</option>
+                                        <option value="border">Border</option>
+                                        <option value="customs">Customs</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label pt-0" for="level">Access Level</label>
+                                    <select class="form-control" id="level" name="level">
+                                        <option value="manager">Manager</option>
+                                        <option value="expert">Expert</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
+                            <br>
 
-                        <br>
-
-                        <div class="row col-md-12">
-                            <div class="col-md-6">
-                                <label class="col-form-label pt-0" for="department">Department</label>
-                                <select class="form-control" id="department" name="department">
-                                    <option value="inspection">inspection</option>
-                                    <option value="laboratory">laboratory</option>
-                                    <option value="financial">financial</option>
-                                    <option value="management">management</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="col-form-label pt-0" for="level">Access Level</label>
-                                <select class="form-control" id="level" name="level">
-                                    <option value="brn">Branches</option>
-                                    <option value="br">Border Points</option>
-                                    <option value="brr">Border Points - Read Access</option>
-                                    <option value="ococ">ONLY COC Read Access</option>
-                                    <option value="read">All Reports Read Access (COSQC)</option>
-                                    <option value="coc">Technical Office</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <div class="row col-md-12">
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <label class="col-form-label pt-0" for="sector">Sector</label>
+                                    <select class="form-control" id="sector" name="sector">
+                                        <option value="management">Management</option>
+                                        <option value="branch">Branch</option>
+                                        <option value="cosqc">Cosqc</option>
+                                        <option value="border">Border</option>
+                                        <option value="customs">Customs</option>
+                                    </select>
+                                </div>
                                 <div class="col-md-6">
                                     <label class="col-form-label pt-0" for="branch">Location</label>
                                     <select class="form-control" name="branch" id="branch">
@@ -367,6 +376,12 @@
                                         </optgroup>
                                     </select>
                                 </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row col-md-12">
+
                                 <div class="col-md-6">
                                     <label class="col-form-label pt-0" for="email">Status</label>
                                     <select class="form-control" id="status" name="status">
@@ -377,10 +392,10 @@
                             </div>
 
                             <br>
-                    </div>
-                    <div class="card-footer">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                    </div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -392,248 +407,6 @@
 @section('moreJs')
     <!-- Plugins JS start-->
     <script src="{{ asset('theme/viho/assets/js/form-wizard/form-wizard.js')}}"></script>
-    <script>
-        document.getElementById('level').addEventListener('change', function() {
-            var sector = document.getElementById('sector');
-            var levelValue = this.value;
 
-            // Clear existing options
-            sector.innerHTML = '';
-
-            // Determine options for the second select based on the first select value
-            if (levelValue === 'br' || levelValue === 'brr') {
-                appendOptgroups(sector, [
-                    { label: 'Air Ports', options: ['Baghdad International Airport', 'Basrah International Airport', 'Najaf International Airport'] },
-                    { label: 'Sea Ports', options: ['North Umm Al-Qasr Port', 'Middle Umm Al-Qasr Port', 'South Umm Al-Qasr Port', 'Abu Flous Port', 'Al-Maqal Port', 'Khor Al-Zubair Port'] },
-                    { label: 'LAND', options: ['Rabia', 'Trebil', 'Zurbatiyah', 'Mandali', 'Arar', 'Shalamcheh', 'Muntheria', 'Sheep', 'Safwan', 'Ibrahim Al-Khaleel', 'Haj Imran', 'Bashmakh', 'Parviz Khan', 'Al Qaim'] }
-                ]);
-            } else if (levelValue === 'brn') {
-                // Populate the list of all countries in the second select
-                populateCountries(sector);
-            }
-        });
-
-        function appendOptgroups(select, optgroups) {
-            optgroups.forEach(optgroup => {
-                var optgroupElem = document.createElement('optgroup');
-                optgroupElem.label = optgroup.label;
-                optgroup.options.forEach(optionValue => {
-                    var optionElem = document.createElement('option');
-                    optionElem.value = optionValue;
-                    optionElem.text = optionValue;
-                    optgroupElem.appendChild(optionElem);
-                });
-                select.appendChild(optgroupElem);
-            });
-        }
-
-        function populateCountries(select) {
-            // Here you can populate the list of all countries
-            // For the purpose of this example, let's just add a few countries
-            var countries = [
-                "Afghanistan",
-                "Albania",
-                "Algeria",
-                "Andorra",
-                "Angola",
-                "Antigua and Barbuda",
-                "Argentina",
-                "Armenia",
-                "Australia",
-                "Austria",
-                "Azerbaijan",
-                "Bahamas",
-                "Bahrain",
-                "Bangladesh",
-                "Barbados",
-                "Belarus",
-                "Belgium",
-                "Belize",
-                "Benin",
-                "Bhutan",
-                "Bolivia",
-                "Bosnia and Herzegovina",
-                "Botswana",
-                "Brazil",
-                "Brunei",
-                "Bulgaria",
-                "Burkina Faso",
-                "Burundi",
-                "Côte d'Ivoire",
-                "Cabo Verde",
-                "Cambodia",
-                "Cameroon",
-                "Canada",
-                "Central African Republic",
-                "Chad",
-                "Chile",
-                "China",
-                "Colombia",
-                "Comoros",
-                "Congo (Congo-Brazzaville)",
-                "Costa Rica",
-                "Croatia",
-                "Cuba",
-                "Cyprus",
-                "Czechia (Czech Republic)",
-                "Democratic Republic of the Congo",
-                "Denmark",
-                "Djibouti",
-                "Dominica",
-                "Dominican Republic",
-                "Ecuador",
-                "Egypt",
-                "El Salvador",
-                "Equatorial Guinea",
-                "Eritrea",
-                "Estonia",
-                "Eswatini",
-                "Ethiopia",
-                "Fiji",
-                "Finland",
-                "France",
-                "Gabon",
-                "Gambia",
-                "Georgia",
-                "Germany",
-                "Ghana",
-                "Greece",
-                "Grenada",
-                "Guatemala",
-                "Guinea",
-                "Guinea-Bissau",
-                "Guyana",
-                "Haiti",
-                "Holy See",
-                "Honduras",
-                "Hungary",
-                "Iceland",
-                "India",
-                "Indonesia",
-                "Iran",
-                "Iraq",
-                "Ireland",
-                "Israel",
-                "Italy",
-                "Jamaica",
-                "Japan",
-                "Jordan",
-                "Kazakhstan",
-                "Kenya",
-                "Kiribati",
-                "Kuwait",
-                "Kyrgyzstan",
-                "Laos",
-                "Latvia",
-                "Lebanon",
-                "Lesotho",
-                "Liberia",
-                "Libya",
-                "Liechtenstein",
-                "Lithuania",
-                "Luxembourg",
-                "Madagascar",
-                "Malawi",
-                "Malaysia",
-                "Maldives",
-                "Mali",
-                "Malta",
-                "Marshall Islands",
-                "Mauritania",
-                "Mauritius",
-                "Mexico",
-                "Micronesia",
-                "Moldova",
-                "Monaco",
-                "Mongolia",
-                "Montenegro",
-                "Morocco",
-                "Mozambique",
-                "Myanmar (formerly Burma)",
-                "Namibia",
-                "Nauru",
-                "Nepal",
-                "Netherlands",
-                "New Zealand",
-                "Nicaragua",
-                "Niger",
-                "Nigeria",
-                "North Korea",
-                "North Macedonia",
-                "Norway",
-                "Oman",
-                "Pakistan",
-                "Palau",
-                "Palestine State",
-                "Panama",
-                "Papua New Guinea",
-                "Paraguay",
-                "Peru",
-                "Philippines",
-                "Poland",
-                "Portugal",
-                "Qatar",
-                "Romania",
-                "Russia",
-                "Rwanda",
-                "Saint Kitts and Nevis",
-                "Saint Lucia",
-                "Saint Vincent and the Grenadines",
-                "Samoa",
-                "San Marino",
-                "Sao Tome and Principe",
-                "Saudi Arabia",
-                "Senegal",
-                "Serbia",
-                "Seychelles",
-                "Sierra Leone",
-                "Singapore",
-                "Slovakia",
-                "Slovenia",
-                "Solomon Islands",
-                "Somalia",
-                "South Africa",
-                "South Korea",
-                "South Sudan",
-                "Spain",
-                "Sri Lanka",
-                "Sudan",
-                "Suriname",
-                "Sweden",
-                "Switzerland",
-                "Syria",
-                "Tajikistan",
-                "Tanzania",
-                "Thailand",
-                "Timor-Leste",
-                "Togo",
-                "Tonga",
-                "Trinidad and Tobago",
-                "Tunisia",
-                "Turkey",
-                "Turkmenistan",
-                "Tuvalu",
-                "Uganda",
-                "Ukraine",
-                "United Arab Emirates",
-                "United Kingdom",
-                "United States of America",
-                "Uruguay",
-                "Uzbekistan",
-                "Vanuatu",
-                "Venezuela",
-                "Vietnam",
-                "Yemen",
-                "Zambia",
-                "Zimbabwe"
-            ];
-            countries.forEach(country => {
-                var optionElem = document.createElement('option');
-                optionElem.value = country;
-                optionElem.text = country;
-                select.appendChild(optionElem);
-            });
-        }
-    </script>
     <!-- Plugins JS Ends-->
 @endsection

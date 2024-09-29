@@ -180,6 +180,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">English Name</th>
                                     <th scope="col">Arabic Name</th>
+                                    <th scope="col">Sample Unique Code</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Seal</th>
@@ -199,6 +200,7 @@
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $sample?->labFee->english_name }}</td>
                                         <td>{{ $sample?->labFee->arabic_name }}</td>
+                                        <td>{{ $sample->id }}</td>
                                         <td>{{ $sample->desc }}</td>
                                         <td>{{ $sample->quantity }}</td>
                                         <td>{{ $sample->seal }}</td>

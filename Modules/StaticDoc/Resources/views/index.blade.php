@@ -75,8 +75,7 @@
                             </tr>
                             <tr >
                                 <td>7</td>
-                                <td class="persian-fonts">برنامج الفحص والتفتيش قبل التوريد
-                                    تعهد المستورد/المصدر</td>
+                                <td class="persian-fonts"> تعهد المستورد/المصدر</td>
                                 <td>
                                     <a href="{{ route('staticDocs.download', 'Pre-Import-Inspection-Program.pdf') }}" class="btn btn-primary btn-sm">Download</a>
                                 </td>

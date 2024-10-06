@@ -54,7 +54,7 @@
                             <ul class="nav nav-tabs nav-right" id="right-tab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="right-home-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-home" role="tab" aria-controls="right-home" aria-selected="true"><i class="icofont icofont-ui-home"></i>General</a></li>
 
-{{--                                <li class="nav-item"><a class="nav-link" id="profile-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-profile" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Contacts & Inspection Day</a></li>--}}
+                                <li class="nav-item"><a class="nav-link" id="profile-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-profile" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Exporter / Importer</a></li>
 {{--                                <li class="nav-item"><a class="nav-link" id="labs-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-labs" role="tab" aria-controls="contact-icon" aria-selected="false"><i class="icofont icofont-contacts"></i>Standards & Laboratory</a></li>--}}
 {{--                                <li class="nav-item"><a class="nav-link" id="contact-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-contact" role="tab" aria-controls="contact-icon" aria-selected="false"><i class="icofont icofont-contacts"></i>Scope of Inspection</a></li>--}}
 
@@ -65,37 +65,35 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="exporter">Exporter</label>
-                                                <input type="text"  class="form-control" name="exporter" id="exporter" >
-                                            </div>
-                                            <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="service">Inspection Service</label>
                                                 <select class="form-control" name="service" id="service">
-                                                    <option value="COC">COC</option>
-{{--                                                    <option value="COI">COI</option>--}}
+                                                    <option value="COC" {{ old('service') == 'COC' ? 'selected' : '' }}>COC</option>
+                                                    {{-- <option value="COI" {{ old('service') == 'COI' ? 'selected' : '' }}>COI</option> --}}
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="piNo">PI No.</label>
-                                                <input type="text"  class="form-control" name="piNo" id="piNo" >
+                                                <input type="text" class="form-control" name="piNo" id="piNo" value="{{ old('piNo') }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="country_origin">Country of Origin</label>
-                                                <select type="text"  class="form-control" name="country_origin" id="country_origin" >
+                                                <select class="form-control" name="country_origin" id="country_origin">
                                                     @foreach ($countries as $country)
-                                                        <option value="{{ $country->name }}">{{ $country->name }}</option>
+                                                        <option value="{{ $country->name }}" {{ old('country_origin') == $country->name ? 'selected' : '' }}>
+                                                            {{ $country->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" class="col-form-label pt-0" for="category">Goods Category</label>
+                                                <label class="col-form-label pt-0" for="category">Goods Category</label>
                                                 <select class="form-control" name="category" id="category">
-                                                    <option value="chemical">chemical</option>
-                                                    <option value="construction">construction</option>
-                                                    <option value="engineering">engineering</option>
-                                                    <option value="food">food</option>
-                                                    <option value="safety">safety</option>
-                                                    <option value="textile">textile</option>
+                                                    <option value="chemical" {{ old('category') == 'chemical' ? 'selected' : '' }}>chemical</option>
+                                                    <option value="construction" {{ old('category') == 'construction' ? 'selected' : '' }}>construction</option>
+                                                    <option value="engineering" {{ old('category') == 'engineering' ? 'selected' : '' }}>engineering</option>
+                                                    <option value="food" {{ old('category') == 'food' ? 'selected' : '' }}>food</option>
+                                                    <option value="safety" {{ old('category') == 'safety' ? 'selected' : '' }}>safety</option>
+                                                    <option value="textile" {{ old('category') == 'textile' ? 'selected' : '' }}>textile</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -103,109 +101,105 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="shipmentMethod">Shipment Method</label>
                                                 <select class="form-control" name="shipmentMethod" id="shipmentMethod">
-                                                    <option value="Road">Road</option>
-                                                    <option value="Sea">Sea</option>
-                                                    <option value="Air">Air</option>
+                                                    <option value="Road" {{ old('shipmentMethod') == 'Road' ? 'selected' : '' }}>Road</option>
+                                                    <option value="Sea" {{ old('shipmentMethod') == 'Sea' ? 'selected' : '' }}>Sea</option>
+                                                    <option value="Air" {{ old('shipmentMethod') == 'Air' ? 'selected' : '' }}>Air</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="shipmentType">Shipment Type</label>
                                                 <select class="form-control" name="shipmentType" id="shipmentType">
-                                                    <option value="Full Container">Full Container</option>
-                                                    <option value="Partial Container">Partial Container</option>
-                                                    <option value="Truck">Truck</option>
-                                                    <option value="Bulk">Bulk</option>
-                                                    <option value="Package">Package</option>
+                                                    <option value="Full Container" {{ old('shipmentType') == 'Full Container' ? 'selected' : '' }}>Full Container</option>
+                                                    <option value="Partial Container" {{ old('shipmentType') == 'Partial Container' ? 'selected' : '' }}>Partial Container</option>
+                                                    <option value="Truck" {{ old('shipmentType') == 'Truck' ? 'selected' : '' }}>Truck</option>
+                                                    <option value="Bulk" {{ old('shipmentType') == 'Bulk' ? 'selected' : '' }}>Bulk</option>
+                                                    <option value="Package" {{ old('shipmentType') == 'Package' ? 'selected' : '' }}>Package</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="border">Entry Point</label>
                                                 <select class="form-control" name="border" id="border">
-                                                    <optgroup label="Air Ports" style="font-weight:bold;">Air Ports
-                                                        <option value="Basrah International Airport">Basrah International Airport</option>
+                                                    <optgroup label="Air Ports" style="font-weight:bold;">
+                                                        <option value="Basrah International Airport" {{ old('border') == 'Basrah International Airport' ? 'selected' : '' }}>Basrah International Airport</option>
                                                     </optgroup>
-                                                    <optgroup label="Sea Ports" style="font-weight:bold;">Sea Ports
-                                                        <option value="North Umm Al-Qasr Port">North Umm Al-Qasr Port</option>
-                                                        <option value="Middle Umm Al-Qasr Port">Middle Umm Al-Qasr Port</option>
-                                                        <option value="South Umm Al-Qasr Port">South Umm Al-Qasr Port</option>
-                                                        <option value="Abu Flous Port">Abu Flous Port</option>
-                                                        <option value="Al-Maqal Port">Al-Maqal Port</option>
-                                                        <option value="Khor Al-Zubair Port">Khor Al-Zubair Port</option>
+                                                    <optgroup label="Sea Ports" style="font-weight:bold;">
+                                                        <option value="North Umm Al-Qasr Port" {{ old('border') == 'North Umm Al-Qasr Port' ? 'selected' : '' }}>North Umm Al-Qasr Port</option>
+                                                        <option value="Middle Umm Al-Qasr Port" {{ old('border') == 'Middle Umm Al-Qasr Port' ? 'selected' : '' }}>Middle Umm Al-Qasr Port</option>
                                                     </optgroup>
                                                     <optgroup label="LAND" style="font-weight:bold;">
-                                                        <option value="Rabia">Rabia</option>
-                                                        <option value="Trebil">Trebil</option>
-                                                        <option value="Zurbatiyah">Zurbatiyah</option>
-                                                        <option value="Mandali">Mandali</option>
-                                                        <option value="Arar">Arar</option>
-                                                        <option value="Shalamcheh">Shalamcheh</option>
-                                                        <option value="Muntheria">Muntheria</option>
-                                                        <option value="Sheep">Sheep</option>
-                                                        <option value="Safwan">Safwan</option>
+                                                        <option value="Rabia" {{ old('border') == 'Rabia' ? 'selected' : '' }}>Rabia</option>
+                                                        <option value="Trebil" {{ old('border') == 'Trebil' ? 'selected' : '' }}>Trebil</option>
                                                     </optgroup>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="container">Total Shipments / Containers</label>
-                                                <input class="form-control" name="container" id="container" type="number" >
+                                                <input class="form-control" name="container" id="container" type="number" value="{{ old('container') }}">
                                             </div>
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="col-form-label pt-0" for="desc">Description of Goods</label>
-                                            <textarea class="form-control" name="desc" id="desc" rows="5" ></textarea>
+                                            <textarea class="form-control" name="desc" id="desc" rows="5">{{ old('desc') }}</textarea>
                                         </div>
                                     </div>
-
                                 </div>
+
                                 <div class="tab-pane fade" id="right-profile" role="tabpanel" aria-labelledby="profile-right-tab">
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="client">Client's Name and Address</label>
-                                                <textarea disabled class="form-control" style="white-space: pre-wrap" name="client" id="client" rows="5">{{ $customer->fullName }}
-{{ $customer->cName }}
-{{ $customer->address }}
-{{ $customer-> tel }}@if($customer->mobile != null){{ ', '.$customer->mobile }}@endif
-                                                </textarea>
+                                                <label class="col-form-label pt-0" for="exporter">Exporter Company</label>
+                                                <input type="text" class="form-control" name="exporter" id="exporter" value="{{ old('exporter', $customer->cName) }}">
                                             </div>
-
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="supplier">Supplier</label>
-                                                <textarea disabled  class="form-control" name="supplier" id="supplier"  ></textarea>
+                                                <label class="col-form-label pt-0" for="exporter_contact_person_name">Contact Person</label>
+                                                <input type="text" class="form-control" name="exporter_contact_person_name" id="exporter_contact_person_name" value="{{ old('exporter_contact_person_name', $customer->fullName) }}">
                                             </div>
-
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="manufacturer">Manufacturer</label>
-                                                <textarea disabled  class="form-control" name="manufacturer" id="manufacturer"  ></textarea>
+                                                <label class="col-form-label pt-0" for="exporter_city_country">City - Country</label>
+                                                <input type="text" class="form-control" name="exporter_city_country" id="exporter_city_country" value="{{ old('exporter_city_country', $customer->stateCity.' - '.$customer->country) }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label pt-0" for="exporter_address">Address</label>
+                                                <textarea class="form-control" name="exporter_address" id="exporter_address">{{ old('exporter_address', $customer->address) }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label pt-0" for="exporter_phone">Phone</label>
+                                                <input type="text" class="form-control" name="exporter_phone" id="exporter_phone" value="{{ old('exporter_phone', $customer->tel) }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="insPlace">Inspection Place</label>
-                                                <input disabled  class="form-control" name="insPlace" id="insPlace" type="text">
+                                                <label class="col-form-label pt-0" for="importer_company_name">Importer Company</label>
+                                                <input type="text" class="form-control" name="importer_company_name" id="importer_company_name" value="{{ old('importer_company_name') }}">
                                             </div>
-
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="eid">Estimated Inspection Date</label>
-                                                <input disabled  class="form-control" name="eid" id="eid" type="text">
+                                                <label class="col-form-label pt-0" for="importer_contact_person_name">Contact Person</label>
+                                                <input type="text" class="form-control" name="importer_contact_person_name" id="importer_contact_person_name" value="{{ old('importer_contact_person_name') }}">
                                             </div>
-
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="eta">Estimated Arrival Time of the Vessel (ETA)</label>
-                                                <input disabled  class="form-control" name="eta" id="eta" type="text">
+                                                <label class="col-form-label pt-0" for="importer_city_country">City - Country</label>
+                                                <input type="text" class="form-control" name="importer_city_country" id="importer_city_country" value="{{ old('importer_city_country') }}">
                                             </div>
-
                                             <div class="mb-3">
-                                                <label class="col-form-label pt-0" for="contactPerson">Contact Person</label>
-                                                <input disabled  class="form-control" name="contactPerson" id="contactPerson" type="text" value="{{ $customer->fullName }}">
+                                                <label class="col-form-label pt-0" for="importer_address">Address</label>
+                                                <textarea class="form-control" name="importer_address" id="importer_address">{{ old('importer_address') }}</textarea>
                                             </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label pt-0" for="importer_phone">Phone</label>
+                                                <input type="text" class="form-control" name="importer_phone" id="importer_phone" value="{{ old('importer_phone') }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <button class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
                                 </div>
 
-{{--                                <div class="tab-pane fade" id="right-labs" role="tabpanel" aria-labelledby="labs-right-tab">--}}
+                                {{--                                <div class="tab-pane fade" id="right-labs" role="tabpanel" aria-labelledby="labs-right-tab">--}}
 {{--                                    <br>--}}
 {{--                                    <div class="row">--}}
 {{--                                        <div class="col-sm-6">--}}
@@ -438,9 +432,6 @@
 {{--                                </div>--}}
                             </div>
                         <div class="card-footer">
-                            <div class="mb-3">
-                                <button class="btn btn-primary">Submit</button>
-                            </div>
                         </div>
                         </form>
 

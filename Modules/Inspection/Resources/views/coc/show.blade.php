@@ -92,11 +92,11 @@
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="importerName">Buyer Name</label>
-                                                <input class="form-control" name="importerName" id="importerName" type="text" {{ $disabled }} value="{{ old('importerName', optional($coc)->importerName) }}">
+                                                <input class="form-control" name="importerName" id="importerName" type="text" readonly value="{{ $order->importer_company_name }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="importerCityCountry">City - Country</label>
-                                                <input class="form-control" name="importerCityCountry" id="importerCityCountry" type="text" {{ $disabled }} value="{{ old('importerCityCountry', optional($coc)->importerCityCountry) }}">
+                                                <input class="form-control" name="importerCityCountry" id="importerCityCountry" type="text" readonly value="{{ $order->importer_city_country }}">
                                             </div>
 
                                             <div class="mb-3">
@@ -114,7 +114,7 @@
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="importerAdd">Buyer Address</label>
-                                                <textarea class="form-control" name="importerAdd" id="importerAdd" rows="4" {{ $disabled }}>{{ old('importerAdd', optional($coc)->importerAdd) }}</textarea>
+                                                <textarea class="form-control" name="importerAdd" id="importerAdd" rows="4" readonly>{{ $order->importer_address }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -128,17 +128,17 @@
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="exporterName">Seller Name</label>
-                                                <input class="form-control" name="exporterName" id="exporterName" type="text" {{ $disabled }} value="{{ old('exporterName', optional($coc)->exporterName) }}">
+                                                <input class="form-control" name="exporterName" id="exporterName" type="text" readonly value="{{ $order->exporter }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="exporterCityCountry">City - Country</label>
-                                                <input class="form-control" name="exporterCityCountry" id="exporterCityCountry" type="text" {{ $disabled }}  value="{{ old('exporterCityCountry', optional($coc)->exporterCityCountry) }}">
+                                                <input class="form-control" name="exporterCityCountry" id="exporterCityCountry" type="text" readonly  value="{{ $order->exporter_city_country }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="exporterAdd">Seller Address</label>
-                                                <textarea class="form-control" name="exporterAdd" id="exporterAdd" rows="4" {{ $disabled }}>{{ old('exporterAdd', optional($coc)->exporterAdd) }}</textarea>
+                                                <textarea class="form-control" name="exporterAdd" id="exporterAdd" rows="4" readonly>{{ $order->exporter_address }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -160,13 +160,13 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="invUSD">Invoice Amount (USD)</label>
-                                                <input class="form-control" name="invUSD" id="invUSD" type="text" {{ $disabled }} value="{{ old('invUSD', optional($coc)->invUSD) }}">
+                                                <input class="form-control" name="invUSD" id="invUSD" type="text" readonly value="{{ $order->invoiceValue }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="invNo">Invoice No.</label>
-                                                <input class="form-control" type="text" name="invNo" id="invNo" {{ $disabled }} value="{{ old('invNo', optional($coc)->invNo) }}">
+                                                <input class="form-control" type="text" name="invNo" id="invNo" readonly value="{{ $order->piNo }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="invDate">Invoice Date</label>
@@ -174,7 +174,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="invValPerTruck">Declared Value Per Container / Truck (USD)</label>
-                                                <input class="form-control" name="invValPerTruck" id="invValPerTruck" type="text" {{ $disabled }} value="{{ old('invValPerTruck', optional($coc)->invValPerTruck) }}">
+                                                <input class="form-control" name="invValPerTruck" id="invValPerTruck" type="text" readonly value="{{ $order->invoiceValue / $order->container }}">
                                             </div>
                                         </div>
                                     </div>
@@ -188,11 +188,11 @@
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="shipmentMethod">Shipment Method</label>
-                                                <input class="form-control" name="shipmentMethod" id="shipmentMethod" type="text" {{ $disabled }}  value="{{ old('shipmentMethod', optional($order)->shipmentMethod) ? old('shipmentMethod', optional($order)->shipmentMethod) : $order->shipmentMethod }}">
+                                                <input class="form-control" name="shipmentMethod" id="shipmentMethod" type="text" readonly value="{{ old('shipmentMethod', optional($order)->shipmentMethod) ? old('shipmentMethod', optional($order)->shipmentMethod) : $order->shipmentMethod }}">
                                             </div>
                                             <div class="mb-3" style="margin-top: 8px;">
                                                 <label class="col-form-label pt-0" for="shipmentCountry">Country of Shipment</label>
-                                                <input class="form-control" name="shipmentCountry" id="shipmentCountry" type="text" {{ $disabled }}  value="{{ old('shipmentCountry', optional($coc)->shipmentCountry) }}">
+                                                <input type="text" readonly value="{{$order?->country_origin}}" class="form-control" name="shipmentCountry" id="shipmentCountry">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="blNo">BL No. & Date</label>
@@ -207,7 +207,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="border">Declared Point of Entry</label>
-                                                <input class="form-control" name="border" id="border" type="text" {{ $disabled }}  value="{{ old('border', optional($order)->border) ? old('border', optional($order)->border) : $order->border }}">
+                                                <input class="form-control" name="border" id="border" readonly type="text"  value="{{ old('border', optional($order)->border) ? old('border', optional($order)->border) : $order->border }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -221,7 +221,7 @@
                                             </div>
                                             <div class="mb-3" style="margin-top:24px;">
                                                 <label class="col-form-label pt-0" for="containerDetails">Number of Containers / Trucks</label>
-                                                <input class="form-control" name="containerDetails" id="containerDetails" type="text" {{ $disabled }}  value="{{ old('containerDetails', optional($coc)->containerDetails) }}">
+                                                <input class="form-control" name="containerDetails" id="containerDetails" type="text" readonly value="{{ old('containerDetails', $order?->container . " " . ( str_contains( $order?->shipmentType ,'Container') ? "Containers" : $order?-> shipmentType  . "s")) }}">
                                             </div>
                                             <div class="mb-3" style="margin-top:24px;">
                                                 <label class="col-form-label pt-0" for="sealNo">Seal Numbers</label>

@@ -189,6 +189,18 @@ class OrderController extends Controller
         $order->ip = request()->ip();
         $order->save();
         $order->tracking_no = 'RFI/'.date('Y').'/000'.$order->id;
+
+
+        // New fields to be added
+        $order->exporter_contact_person_name = $input['exporter_contact_person_name'] ?? null;
+        $order->exporter_address = $input['exporter_address'] ?? null;
+        $order->exporter_city_country = $input['exporter_city_country'] ?? null;
+        $order->exporter_phone = $input['exporter_phone'] ?? null;
+        $order->importer_company_name = $input['importer_company_name'] ?? null;
+        $order->importer_contact_person_name = $input['importer_contact_person_name'] ?? null;
+        $order->importer_address = $input['importer_address'] ?? null;
+        $order->importer_city_country = $input['importer_city_country'] ?? null;
+        $order->importer_phone = $input['importer_phone'] ?? null;
         $order->save();
 
         return redirect(route('inspection.show', $order->id));
@@ -250,6 +262,18 @@ class OrderController extends Controller
         $order->border = $input['border'];
         $order->category = $input['category'];
         $order->ip = request()->ip();
+
+        // New fields to be added
+        $order->exporter_contact_person_name = $input['exporter_contact_person_name'] ?? null;
+        $order->exporter_address = $input['exporter_address'] ?? null;
+        $order->exporter_city_country = $input['exporter_city_country'] ?? null;
+        $order->exporter_phone = $input['exporter_phone'] ?? null;
+        $order->importer_company_name = $input['importer_company_name'] ?? null;
+        $order->importer_contact_person_name = $input['importer_contact_person_name'] ?? null;
+        $order->importer_address = $input['importer_address'] ?? null;
+        $order->importer_city_country = $input['importer_city_country'] ?? null;
+        $order->importer_phone = $input['importer_phone'] ?? null;
+
         $order->save();
 
         return redirect(route('inspection.show', $order->id));

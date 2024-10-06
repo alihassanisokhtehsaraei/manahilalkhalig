@@ -53,7 +53,7 @@
                             <div class="card-body">
                                 <ul class="nav nav-tabs nav-right" id="right-tab" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="right-home-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-home" role="tab" aria-controls="right-home" aria-selected="true"><i class="icofont icofont-ui-home"></i>General</a></li>
-{{--                                    <li class="nav-item"><a class="nav-link" id="profile-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-profile" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Contacts & Inspection Day</a></li>--}}
+                                    <li class="nav-item"><a class="nav-link" id="profile-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-profile" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Expoter / Importer</a></li>
 {{--                                    <li class="nav-item"><a class="nav-link" id="labs-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-labs" role="tab" aria-controls="contact-icon" aria-selected="false"><i class="icofont icofont-contacts"></i>Standards & Laboratory</a></li>--}}
 {{--                                    <li class="nav-item"><a class="nav-link" id="contact-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-contact" role="tab" aria-controls="contact-icon" aria-selected="false"><i class="icofont icofont-contacts"></i>Scope of Inspection</a></li>--}}
                                 </ul>
@@ -62,10 +62,6 @@
                                         <br>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="col-form-label pt-0" for="exporter">Exporter</label>
-                                                    <input type="text"  class="form-control" name="exporter" id="exporter" value="{{ $order->exporter }}" {{ $disabled }}>
-                                                </div>
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="service">Inspection Service</label>
                                                     <select class="form-control" name="service" id="service"  @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical') disabled @endif>
@@ -159,48 +155,63 @@
                                             </div>
                                         </div>
                                     </div>
-{{--                                    <div class="tab-pane fade" id="right-profile" role="tabpanel" aria-labelledby="profile-right-tab">--}}
-{{--                                        <br>--}}
-{{--                                        <div class="row">--}}
-{{--                                            <div class="col-sm-6">--}}
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="client">Client's Name and Address</label>--}}
-{{--                                                    <textarea disabled  class="form-control" style="white-space: pre-wrap" name="client" id="client" rows="5">{{ $order->client  }}</textarea>--}}
-{{--                                                </div>--}}
+                                    <div class="tab-pane fade" id="right-profile" role="tabpanel" aria-labelledby="profile-right-tab">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="exporter">Exporter Company</label>
+                                                    <input type="text"  class="form-control" name="exporter" id="exporter" {{ $disabled }} value="{{ $order->exporter }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="exporter_contact_person_name">Contact Person</label>
+                                                    <input type="text"  class="form-control" name="exporter_contact_person_name" id="exporter_contact_person_name"  {{ $disabled }} value="{{ $order->exporter_contact_person_name }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="exporter_city_country">City - Country</label>
+                                                    <input type="text"  class="form-control" name="exporter_city_country" id="exporter_city_country"  {{ $disabled }} value="{{ $order->exporter_city_country }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="exporter_address">Address</label>
+                                                    <textarea  class="form-control" name="exporter_address" id="exporter_address"  {{ $disabled }}>{{ $order->exporter_address }}</textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="exporter_phone">Phone</label>
+                                                    <input type="text"  class="form-control" name="exporter_phone" id="exporter_phone" {{ $disabled }} value="{{ $order->exporter_phone }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="importer_company_name">Importer Company</label>
+                                                    <input type="text"  class="form-control" name="importer_company_name" id="importer_company_name" {{ $disabled }} value="{{ $order->importer_company_name }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="importer_contact_person_name">Contact Person</label>
+                                                    <input type="text"  class="form-control" name="importer_contact_person_name" id="importer_contact_person_name" {{ $disabled }} value="{{ $order->importer_contact_person_name }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="importer_city_country">City - Country</label>
+                                                    <input type="text"  class="form-control" name="importer_city_country" id="importer_city_country" {{ $disabled }} value="{{ $order->importer_city_country }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="importer_address">Address</label>
+                                                    <textarea  class="form-control" name="importer_address" id="importer_address"  {{ $disabled }}>{{ $order->importer_address }}</textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="col-form-label pt-0" for="importer_phone">Phone</label>
+                                                    <input type="text"  class="form-control" name="importer_phone" id="importer_phone" {{ $disabled }} value="{{ $order->importer_phone }}">
+                                                </div>
+                                            </div>
 
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="supplier">Supplier</label>--}}
-{{--                                                    <textarea disabled  class="form-control" name="supplier" id="supplier"  >{{ $order->supplier }}</textarea>--}}
-{{--                                                </div>--}}
-
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="manufacturer">Manufacturer</label>--}}
-{{--                                                    <textarea disabled  class="form-control" name="manufacturer" id="manufacturer"  >{{ $order->manufacturer }}</textarea>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-sm-6">--}}
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="insPlace">Inspection Place</label>--}}
-{{--                                                    <input disabled  class="form-control" name="insPlace" id="insPlace" type="text" value="{{ $order->insPlace }}">--}}
-{{--                                                </div>--}}
-
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="eid">Estimated Inspection Date</label>--}}
-{{--                                                    <input disabled  class="form-control" name="eid" id="eid" type="text" value="{{ $order->eid }}">--}}
-{{--                                                </div>--}}
-
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="eta">Estimated Arrival Time of the Vessel (ETA)</label>--}}
-{{--                                                    <input disabled  class="form-control" name="eta" id="eta" type="text" value="{{ $order->eta }}">--}}
-{{--                                                </div>--}}
-
-{{--                                                <div class="mb-3">--}}
-{{--                                                    <label class="col-form-label pt-0" for="contactPerson">Contact Person</label>--}}
-{{--                                                    <input disabled  class="form-control" name="contactPerson" id="contactPerson" type="text" value="{{ $order->contactPerson }}">--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                            <div class="mb-3">
+                                                @if($disabled == null)
+                                                    <button class="btn btn-primary">Submit</button>
+                                                @else
+                                                    <a href="{{ route('coc.show', $order->id) }}" class="btn btn-warning btn-xs">Back</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
 
 {{--                                    <div class="tab-pane fade" id="right-labs" role="tabpanel" aria-labelledby="labs-right-tab">--}}
 {{--                                        <br>--}}
@@ -435,14 +446,6 @@
 {{--                                    </div>--}}
                                 </div>
                                 <div class="card-footer">
-
-                                    <div class="mb-3">
-                                        @if($disabled == null)
-                                            <button class="btn btn-primary">Submit</button>
-                                        @else
-                                            <a href="{{ route('coc.show', $order->id) }}" class="btn btn-warning btn-xs">Back</a>
-                                        @endif
-                                    </div>
 
                                 </div>
                             </div>

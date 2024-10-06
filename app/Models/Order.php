@@ -51,7 +51,18 @@ class Order extends Model
         'cocPaymentMethod',
         'borderPaymentMethod',
         'transactionNo',
-        'category'
+        'category',
+
+        // New fields
+        'exporter_contact_person_name',
+        'exporter_address',
+        'exporter_city_country',
+        'exporter_phone',
+        'importer_company_name',
+        'importer_contact_person_name',
+        'importer_address',
+        'importer_city_country',
+        'importer_phone',
     ];
 
     public function Customer()

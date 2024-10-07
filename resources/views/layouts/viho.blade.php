@@ -215,6 +215,14 @@
                                 <li><a class="nav-link menu-title" href="{{ route('report.create') }}"><i data-feather="database"></i><span>Reports</span></a></li>
                             @endif
                             <li><a class="nav-link menu-title link-nav" href="{{ route('search.index') }}"><i data-feather="search"></i><span>Search</span></a></li>
+                            @if(strtolower(Auth()->user()->department) == 'management')
+                            <li >
+                                <a class="nav-link menu-title link-nav" href="{{ route('labfees.index') }}">
+                                    <i data-feather="dollar-sign"></i> <!-- Use an appropriate icon -->
+                                    <span>Lab Fee Management</span>
+                                </a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                     <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

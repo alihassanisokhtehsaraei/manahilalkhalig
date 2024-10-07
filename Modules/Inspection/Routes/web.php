@@ -214,7 +214,7 @@ Route::middleware([
     });
 
 
-    Route::prefix('request')->group(function() {
+    Route::prefix('request')->group(function () {
         Route::get('/create/{slug?}', [RequestController::class, 'create'])->name('request.create');
         Route::get('/createrft/{slug?}', [RequestController::class, 'createrft'])->name('request.createrft');
         Route::post('/searchResult', [RequestController::class, 'searchResult'])->name('request.searchResult');
@@ -229,7 +229,7 @@ Route::middleware([
     });
 
 
-    Route::prefix('rft')->group(function() {
+    Route::prefix('rft')->group(function () {
         Route::get('/create/{slug?}', [RftController::class, 'create'])->name('rft.create');
         Route::get('/createrft/{slug?}', [RftController::class, 'createrft'])->name('rft.createrft');
         Route::post('/searchResult', [RftController::class, 'searchResult'])->name('rft.searchResult');
@@ -249,8 +249,16 @@ Route::middleware([
         Route::post('/upload/{rft}', [RftController::class, 'uploadTestReport'])->name('rft.uploadTestReport');
         Route::delete('/destroy/{rft}', [RftController::class, 'destroyTestReport'])->name('rft.destroyTestReport');
     });
+    Route::prefix('labfees')->name('labfees.')->controller(LabFeeController::class)->group(function () {
+        Route::get('/search', 'search')->name('search');
+        Route::get('/','index')->name('index');
+        Route::get('/create',  'create')->name('create');
+        Route::post('/',  'store')->name('store');
+        Route::get('/{labFee}/edit', 'edit')->name('edit');
+        Route::put('/{labFee}',  'update')->name('update');
+        Route::delete('/{labFee}',  'destroy')->name('destroy');
+    });
 
-    Route::get('/labfees/search', [LabFeeController::class, 'search'])->name('labfees.search');
 
 });
 

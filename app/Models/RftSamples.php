@@ -19,7 +19,10 @@ class RftSamples extends Model
         'standard',
         'user_id',
         'rft_id',
-        'lab_fee_id',
+        'arabic_name',
+        'english_name',
+        'category',
+        'fee',
         'ip'
     ];
 
@@ -34,8 +37,5 @@ class RftSamples extends Model
         return $this->belongsTo(Rft::class);
     }
 
-    public function labFee()
-    {
-        return $this->belongsTo(LabFee::class);
-    }
+
 }

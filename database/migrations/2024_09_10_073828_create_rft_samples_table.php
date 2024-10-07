@@ -18,12 +18,16 @@ return new class extends Migration
             $table->string('quantity')->nullable();
             $table->string('seal')->nullable();
             $table->string('standard')->nullable();
+            $table->string('arabic_name')->nullable();
+            $table->string('english_name')->nullable();
+            $table->string('category')->nullable();
+            $table->string('fee')->nullable();
             $table->string('ip')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('rft_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('rft_id')->references('id')->on('rfts')->onDelete('set null');
-            $table->foreignIdFor(LabFee::class)->constrained()->cascadeOnDelete();
+
             $table->softDeletes(); // Adds created_at and updated_at columns
             $table->timestamps();
         });

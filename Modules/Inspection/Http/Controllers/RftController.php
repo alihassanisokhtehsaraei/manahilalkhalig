@@ -5,6 +5,7 @@ namespace Modules\Inspection\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\InsDoc;
+use App\Models\LabFee;
 use App\Models\Order;
 use App\Models\Rft;
 use App\Models\RftSamples;
@@ -171,12 +172,21 @@ class RftController extends Controller
             'lab_fee_id.required' => 'There is no record for this search...',
             'lab_fee_id.exists' => 'There is no record for this search...',
         ]);
-        $rft = new RftSamples();
-        $rft->fill($request->all());
-        $rft->rft_id = $slug;
-        $rft->user_id = Auth()->user()->id;
-        $rft->ip = $request->ip();
-        $rft->save();
+        $labFee=LabFee::find($request->lab_fee_id);
+
+        RftSamples::create([
+            'desc' => $request->desc,
+            'quantity' => $request->quantity,
+            'seal' => $request->seal,
+            'standard' => $request->standard,
+            'arabic_name' => $labFee->arabic_name,
+            'english_name' => $labFee->english_name,
+            'category' => $labFee->category,
+            'fee' => $labFee->fee,
+            'ip' => $request->ip(),
+            'user_id' => auth()->id(),
+            'rft_id' => $slug,
+        ]);
 
         return back();
     }
@@ -204,7 +214,17 @@ class RftController extends Controller
             'lab_fee_id.exists' => 'There is no record for this search...',
         ]);
         $sample = RftSamples::find($slug);
-        $sample->update($request->all());
+        $labFee = LabFee::find($request->lab_fee_id);
+        $sample->update([
+            'desc' => $request->desc,
+            'quantity' => $request->quantity,
+            'seal' => $request->seal,
+            'standard' => $request->standard,
+            'arabic_name' => $labFee->arabic_name,
+            'english_name' => $labFee->english_name,
+            'category' => $labFee->category,
+            'fee' => $labFee->fee,
+        ]);
 
         return redirect(route('rft.samples', $sample->rft_id));
     }
@@ -231,7 +251,7 @@ class RftController extends Controller
             'userID' => Auth::user()->id,
             'ip' => $request->ip()
         ]);
-        return redirect()->route('request.showrft', ['id' => $rft->id])->with('success', 'File deleted successfully.');
+        return redirect()->route('request.showrft', ['id' => $rft->id]);
     }
 
     public function destroyTestReport(Rft $rft)

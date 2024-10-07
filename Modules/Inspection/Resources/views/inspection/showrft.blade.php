@@ -198,8 +198,8 @@
 
                                     <tr>
                                         <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $sample?->labFee->english_name }}</td>
-                                        <td>{{ $sample?->labFee->arabic_name }}</td>
+                                        <td>{{ $sample->english_name }}</td>
+                                        <td>{{ $sample->arabic_name }}</td>
                                         <td>{{ $sample->id }}</td>
                                         <td>{{ $sample->desc }}</td>
                                         <td>{{ $sample->quantity }}</td>

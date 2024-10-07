@@ -86,10 +86,10 @@
     @foreach($samples as $sample)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $sample->labfee->arabic_name.' - '.$sample->labfee->english_name }}<br>{{ $sample->desc }}</td>
+            <td>{{ $sample->arabic_name.' - '.$sample->english_name }}<br>{{ $sample->desc }}</td>
             <td>{{ $sample->quantity }}</td>
-            <td>{{ $sample->labfee->fee }}</td>
-            <td>{{ $sample->labfee->fee * $sample->quantity }}</td>
+            <td>{{ $sample->fee }}</td>
+            <td>{{ $sample->fee * $sample->quantity }}</td>
         </tr>
     @endforeach
     <tr>

@@ -334,11 +334,11 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
+                                                @if(auth()->user()->department != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
-                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'head' or Auth()->user()->level == 'manager')
                                                         <a href="{{ route('insdoc.destroy', $doc->id) }}" class="btn btn-xs btn-danger" >Delete</a>
                                                     @endif
                                                 </p>
@@ -448,11 +448,11 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
+                                                @if(auth()->user()->department != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
-                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'head' or Auth()->user()->level == 'manager')
                                                         <a href="{{ route('insdoc.destroy', $doc->id) }}" class="btn btn-xs btn-danger" >Delete</a>
                                                     @endif
                                                 </p>
@@ -544,11 +544,11 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
+                                                @if(auth()->user()->department != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
-                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'head' or Auth()->user()->level == 'manager')
                                                         <a href="{{ route('insdoc.destroy', $doc->id) }}" class="btn btn-xs btn-danger" >Delete</a>
                                                     @endif
                                                 </p>
@@ -610,11 +610,11 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
+                                                @if(auth()->user()->department != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
-                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'head' or Auth()->user()->level == 'manager')
                                                         <a href="{{ route('insdoc.destroy', $doc->id) }}" class="btn btn-xs btn-danger" >Delete</a>
                                                     @endif
                                                 </p>
@@ -818,11 +818,11 @@ use Illuminate\Support\Str;
                                                 <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" target="_blank"><h6>{{(strlen($doc->title) > 15 ? substr($doc->title, 0, 15).'...' : $doc->title) }}</h6></a>
                                                 <p class="mb-1"><b>Creator:</b> {{ $doc->uploader->name." ".$doc->uploader->lastname }}</p>
                                                 <p class="mb-1"><b>Reviewer:</b> @if($doc->reviewerID != null){{ $doc->reviewer->name." ".$doc->reviewer->lastname }} @else ---- @endif</p>
-                                                @if(auth()->user()->sector != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
+                                                @if(auth()->user()->department != 'cosqc') <p> <b>created at: </b> {{ $doc->created_at }}</p>@endif
                                                 <p> <b>Actions: </b>
                                                     <br>
                                                     <a href="{{ Storage::disk('fileManager')->url($doc->url) }}" class="btn btn-xs btn-primary" target="_blank">Download</a>
-                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                    @if($doc->status == 0 or $doc->status == 1 or Auth()->user()->level == 'head' or Auth()->user()->level == 'manager')
                                                         <a href="{{ route('insdoc.destroy', $doc->id) }}" class="btn btn-xs btn-danger" >Delete</a>
                                                     @endif
                                                 </p>

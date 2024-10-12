@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Inspection\Http\Requests\Rd;
+namespace Modules\Inspection\Http\Requests\RD;
 
 use Illuminate\Foundation\Http\FormRequest;
 

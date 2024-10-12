@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Inspection\Http\Requests\Rd;
+namespace Modules\Inspection\Http\Requests\RD;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UploadDocRequest extends FormRequest
+class UploadLetterRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,7 @@ class UploadDocRequest extends FormRequest
     public function rules()
     {
         return [
-            'documents.*' => ['required', 'mimes:jpeg,png,pdf'],
+            'letter' => ['required','mimes:jpeg,png,pdf'],
         ];
     }
 

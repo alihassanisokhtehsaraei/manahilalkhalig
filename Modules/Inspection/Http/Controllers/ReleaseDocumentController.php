@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Modules\Inspection\Http\Requests\RD\StoreReleaseDocumentRequest;
 use Modules\Inspection\Http\Requests\RD\UpdateReleaseDocumentRequest;
-use Modules\Inspection\Http\Requests\Rd\UploadCertificateRequest;
-use Modules\Inspection\Http\Requests\Rd\UploadDocRequest;
-use Modules\Inspection\Http\Requests\Rd\UploadLetterRequest;
+use Modules\Inspection\Http\Requests\RD\UploadCertificateRequest;
+use Modules\Inspection\Http\Requests\RD\UploadDocRequest;
+use Modules\Inspection\Http\Requests\RD\UploadLetterRequest;
 
 class ReleaseDocumentController extends Controller
 {

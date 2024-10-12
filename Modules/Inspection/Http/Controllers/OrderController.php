@@ -23,7 +23,13 @@ class OrderController extends Controller
     public function index()
     {
         switch (auth()->user()->sector) {
-            case 'management':
+//            case 'management':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->get();
+//                break;
+//            case 'branch':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->where('orders.branch',auth()->user()->branch)->get();
+//                break;
+            case 'universal':
                 $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch')->join('customers','customers.id','=','orders.customer_id')->where('technicalStatus','<',5)->get();
                 break;
             case 'branch':
@@ -224,12 +230,20 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::find($id);
-        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical')
+//        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical')
+//        {
+//            $disabled = 'readonly';
+//        } else {
+//            $disabled = null;
+//        }
+
+        if($order->technicalStatus > 4 and (Auth()->user()->department == 'management' or auth()->user()->department == "inspection" ) and Auth()->user()->level == 'manager')
         {
-            $disabled = 'readonly';
-        } else {
             $disabled = null;
+        } else {
+            $disabled = 'readonly';
         }
+
 
         if(Auth()->user()->branch == 'tehran') {
             $coordinators = User::where('level','=','expert')->get();
@@ -311,11 +325,17 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $rft = Rft::where('order_id', $id)->first();
-        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical')
+//        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical')
+//        {
+//            $disabled = 'readonly';
+//        } else {
+//            $disabled = null;
+//        }
+        if($order->technicalStatus > 4 and (Auth()->user()->department == 'management' or auth()->user()->department == "inspection" ) and Auth()->user()->level == 'manager')
         {
-            $disabled = 'readonly';
-        } else {
             $disabled = null;
+        } else {
+            $disabled = 'readonly';
         }
         return view('inspection::inspection.sampling', ['rft' => $rft, 'order' => $order, 'disabled' => $disabled]);
     }
@@ -354,7 +374,7 @@ class OrderController extends Controller
     {
         $searchkey = $request->searchkey;
         switch (Auth()->user()->sector) {
-            case 'management':
+            case 'universal':
                 $customers = Customer::where('fullName','like','%'.$searchkey.'%')->orWhere('cName','like','%'.$searchkey.'%')->orWhere('email','like','%'.$searchkey.'%')->orWhere('mobile','like','%'.$searchkey.'%')->get();
                 break;
             case 'branch':

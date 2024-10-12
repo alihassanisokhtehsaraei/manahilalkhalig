@@ -233,7 +233,7 @@ class CocController extends Controller
         $customer = Customer::find($order->customer_id);
         $coc = Coc::where('order_id', '=', $id)->first();
 // ($order->technicalStatus > 4 and Auth()->user()->level != 'technical' and Auth()->user()->sector != 'management')
-        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->departmant == 'management') and auth()->user()->level=='manager')
+        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
         {
             $disabled = null;
         } else {
@@ -290,7 +290,7 @@ class CocController extends Controller
 //            $disabled = null;
 //        }
 
-        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->departmant == 'management') and auth()->user()->level=='manager')
+        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
         {
             $disabled = null;
         } else {

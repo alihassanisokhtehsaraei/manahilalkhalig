@@ -19,8 +19,16 @@ class NCRController extends Controller
     public function index()
     {
         switch (auth()->user()->sector) {
-            case 'management':
-            case 'cosqc':
+//            case 'management':
+//            case 'cosqc':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','ncrs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('ncrs','ncrs.order_id','=','orders.id')->where('technicalStatus','=',6)->get();
+//                break;
+//            case 'branch':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','ncrs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('ncrs','ncrs.order_id','=','orders.id')->where('technicalStatus','=',6)->where('orders.branch',auth()->user()->branch)->get();
+//                break;
+
+
+            case 'universal':
                 $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','ncrs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('ncrs','ncrs.order_id','=','orders.id')->where('technicalStatus','=',6)->get();
                 break;
             case 'branch':
@@ -184,12 +192,12 @@ class NCRController extends Controller
         $order = Order::find($id);
         $customer = Customer::find($order->customer_id);
         $ncr = Ncr::where('order_id', '=', $id)->first();
-
-        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
+//        ($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
+        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->departmant == 'management') and auth()->user()->level=='manager')
         {
-            $disabled = 'readonly';
-        } else {
             $disabled = null;
+        } else {
+            $disabled = 'readonly';
         }
 
         $goods = NcrGood::where('ncr_id', '=', $ncr->id)->get();
@@ -235,11 +243,17 @@ class NCRController extends Controller
         $customer = Customer::find($order->customerID);
         $ncr = Ncr::where('order_id', '=', $id)->first();
 
-        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
+//        if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
+//        {
+//            $disabled = 'readonly';
+//        } else {
+//            $disabled = null;
+//        }
+        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->departmant == 'management') and auth()->user()->level=='manager')
         {
-            $disabled = 'readonly';
-        } else {
             $disabled = null;
+        } else {
+            $disabled = 'readonly';
         }
 
         // @if(isset($order->technicalStatus) && $order->technicalStatus > 2 && auth()->user()->level != 'supervisor' && auth()->user()->level != 'manager') disabled @endif

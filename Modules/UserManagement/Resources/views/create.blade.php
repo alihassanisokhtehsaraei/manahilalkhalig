@@ -41,7 +41,7 @@
                                     <input class="form-control" id="name" name="name" type="text" placeholder="">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="col-form-label pt-0" for="lastName">Surname</label>
+                                    <label class="col-form-label pt-0" for="lastName">Username</label>
                                     <input class="form-control" id="lastName" name="lastName" type="text" placeholder="">
                                 </div>
                             </div>
@@ -68,10 +68,9 @@
                                     <select class="form-control" id="department" name="department">
                                         <option value="management">Management</option>
                                         <option value="financial">Financial</option>
-                                        <option value="technical">Technical</option>
-                                        <option value="branch">Branch</option>
+                                        <option value="technical">Inspection</option>
+                                        <option value="branch">Laboratory</option>
                                         <option value="cosqc">Cosqc</option>
-                                        <option value="border">Border</option>
                                         <option value="customs">Customs</option>
                                     </select>
                                 </div>
@@ -79,7 +78,9 @@
                                     <label class="col-form-label pt-0" for="level">Access Level</label>
                                     <select class="form-control" id="level" name="level">
                                         <option value="manager">Manager</option>
+                                        <option value="head">Head</option>
                                         <option value="expert">Expert</option>
+                                        <option value="auditor">Auditor</option>
                                     </select>
                                 </div>
                             </div>
@@ -90,11 +91,8 @@
                                 <div class="col-md-6">
                                     <label class="col-form-label pt-0" for="sector">Sector</label>
                                     <select class="form-control" id="sector" name="sector">
-                                        <option value="management">Management</option>
+                                        <option value="universal">Universal</option>
                                         <option value="branch">Branch</option>
-                                        <option value="cosqc">Cosqc</option>
-                                        <option value="border">Border</option>
-                                        <option value="customs">Customs</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">

@@ -83,8 +83,8 @@ class FinancialController extends Controller
         $order->borderFeePlace = $request['borderFeePlace'];
         $order->finNote = $request['note'];
         $order->financialStatus = 1;
-
-        if(auth()->user()->department == 'financial' or auth()->user()->sector == 'management' or auth()->user()->department == 'technical' ) {
+//(auth()->user()->department == 'financial' or auth()->user()->sector == 'management' or auth()->user()->department == 'technical' )
+        if(auth()->user()->department == 'financial' or (auth()->user()->department == 'management' and auth()->user()->level == 'manager' )) {
             $order->finAppUser = Auth::user()->id;
             $order->finAppDate = date('Y-m-d H:i:s');
             $order->financialStatus = 3;
@@ -111,12 +111,13 @@ class FinancialController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
-        if($order->financialStatus == 3 and Auth()->user()->level != 'manager' and Auth()->user()->sector != 'financial') {
+        //$order->financialStatus == 3 and Auth()->user()->level != 'manager' and Auth()->user()->sector != 'financial'
+        if($order->financialStatus == 3 and Auth()->user()->level != 'manager') {
             $readonly = 'readonly';
         } else {
             $readonly = null;
         }
-        if($order->financialStatus == 3 and Auth()->user()->level != 'manager' and Auth()->user()->sector != 'financial') {
+        if($order->financialStatus == 3 and Auth()->user()->level != 'manager' ) {
             $disabled = 'disabled';
         } else {
             $disabled = null;
@@ -142,7 +143,8 @@ class FinancialController extends Controller
         $rft->tax = $request['tax'];
         $rft->totalFee = $request['totalFee'];
         $rft->financialStatus = 1;
-        if(auth()->user()->department == 'financial' or auth()->user()->sector == 'management') {
+        //auth()->user()->department == 'financial' or auth()->user()->sector == 'management'
+        if(auth()->user()->department == 'financial' or( auth()->user()->department == 'management' and \auth()->user->level == 'manager' ) ) {
             $rft->finAppUser = Auth::user()->id;
             $rft->finAppDate = date('Y-m-d H:i:s');
             $rft->financialStatus = 3;
@@ -177,12 +179,13 @@ private function getNewCertNo() {
     {
         $rft = Rft::find($id);
         $samples = RftSamples::where('rft_id',$id)->get();
-        if($rft->financialStatus == 3 and Auth()->user()->level != 'manager' and Auth()->user()->sector != 'financial') {
+        // $rft->financialStatus == 3 and Auth()->user()->level != 'manager' and Auth()->user()->sector != 'financial')
+        if($rft->financialStatus == 3 and Auth()->user()->level != 'manager') {
             $readonly = 'readonly';
         } else {
             $readonly = null;
         }
-        if($rft->financialStatus == 3 and Auth()->user()->level != 'manager' and Auth()->user()->sector != 'financial') {
+        if($rft->financialStatus == 3 and Auth()->user()->level != 'manager') {
             $disabled = 'disabled';
         } else {
             $disabled = null;

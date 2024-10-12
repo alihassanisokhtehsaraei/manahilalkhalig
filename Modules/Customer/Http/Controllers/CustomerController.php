@@ -31,12 +31,10 @@ class CustomerController extends Controller
 //        $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->where('branch', '=', auth()->user()->branch)->get();
 //    }
 
-        switch (Auth::user()->department) {
-            case 'management':
-            case 'financial':
+        switch (Auth::user()->sector) {
+            case 'universal':
                 $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->get();
                 break;
-            case 'laboratory':
             case 'branch':
                 $query = Customer::select('id', 'fullName', 'cName', 'tel', 'email')->where('branch', '=', auth()->user()->branch)->get();
                 break;

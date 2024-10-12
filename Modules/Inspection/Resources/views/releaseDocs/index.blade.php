@@ -44,7 +44,7 @@
             </div>
 
             <div class="card-body">
-                @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                     <div class="mb-3">
                         <a href="{{ route('rdocs.create', ['order' => $order]) }}" class="btn btn-primary btn-sm">New Release Document</a>
                     </div>
@@ -77,7 +77,7 @@
                                 <td>{{ $doc->issuing_office ?? "-" }}</td>
                                 <td>
                                     <!-- Actions column with Edit and Delete buttons -->
-                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                         <a href="{{route('rdocs.edit',['order'=>$order,'releaseDocument'=>$doc])}}" class="btn btn-warning btn-xs">Open</a>
                                         @if($doc->status == "1")
                                             <button type="button" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $doc->id }}">

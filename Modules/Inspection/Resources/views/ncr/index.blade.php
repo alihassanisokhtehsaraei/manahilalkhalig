@@ -1,4 +1,5 @@
 @extends('layouts.viho')
+@extends('layouts.viho')
 @section('moreCSS')
     <!-- Plugins css start-->
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/datatables.css')}}">

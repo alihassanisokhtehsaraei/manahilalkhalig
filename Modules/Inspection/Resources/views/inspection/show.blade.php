@@ -265,11 +265,11 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label class="col-form-label pt-0" for="invoiceValue">Invoice Value (USD)</label>
-                                        <input type="text"  class="form-control" name="invoiceValue" id="invoiceValue" value="{{ $order->invoiceValue }}"  @if($order->technicalStatus > 4 and auth()->user()->sector != 'management') disabled @endif>
+                                        <input type="text"  class="form-control" name="invoiceValue" id="invoiceValue" value="{{ $order->invoiceValue }}"  @if($order->technicalStatus > 4 and auth()->user()->level != 'manager') disabled @endif>
                                     </div>
                                     <div class="mb-3">
                                         <label class="col-form-label pt-0" for="status">Continue</label>
-                                        <select class="form-control" name="status" id="status" @if($order->technicalStatus > 4 and auth()->user()->sector != 'management') disabled @endif>
+                                        <select class="form-control" name="status" id="status" @if($order->technicalStatus > 4 and auth()->user()->level != 'manager') disabled @endif>
                                                 <option value="COC">COC</option>
                                                 <option value="NCR">NCR</option>
                                         </select>

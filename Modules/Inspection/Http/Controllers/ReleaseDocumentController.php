@@ -79,7 +79,7 @@ class ReleaseDocumentController extends Controller
     private function readOnly($releaseDocument)
     {
 //        if (Auth::user()->sector === "management" or Auth::user()->level === 'technical')
-        if ( (Auth::user()->department === "management" || Auth::user()->department === "inspection") and Auth::user()->level==="manager")
+        if ( (Auth::user()->department === "management" || Auth::user()->department === "inspection") and (Auth::user()->level==="manager" || Auth::user()->level === 'head' ))
             return "";
         elseif ($releaseDocument->status == "2")
             return "readonly";

@@ -62,7 +62,7 @@
                                         <option value="ncr">NCR No.</option>
                                         <option value="rd">RD No.</option>
                                         <option value="nrd">NRD No.</option>
-                                        @if(auth()->user()->sector == 'management' || auth()->user()->sector == 'laboratory')
+                                        @if(auth()->user()->department == 'management' || auth()->user()->sector == 'laboratory')
                                             <option value="rft">RFT No.</option>
                                         @endif
                                     </select>

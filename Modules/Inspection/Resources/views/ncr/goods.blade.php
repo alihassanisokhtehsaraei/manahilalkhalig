@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="type">Category:</label>
-                                            <select class="form-control" id="type" name="type" @if($order->technicalStatus > 4 and auth()->user()->sector != 'management' and auth()->user()->level != 'technical') disabled @endif  required >
+                                            <select class="form-control" id="type" name="type" @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif  required >
                                                 <option value="Food">Food</option>
                                                 <option value="Chemical">Chemical</option>
                                                 <option value="Construction">Construction</option>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                @if($order->technicalStatus < 5 or auth()->user()->sector == 'management' or auth()->user()->level == 'technical')
+                                @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
                                     <input type="submit" class="btn btn-primary m-r-15"  value="Add Item">
                                 @endif
                             </div>
@@ -127,7 +127,7 @@
                                                     <td>{{ $goods->standard }}</td>
                                                     <td>{{ $goods->type }}</td>
                                                     <td>
-                                                        @if($order->technicalStatus > 4 and auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
+                                                        @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
                                                             Locked !
                                                         @else
                                                             <a style="margin: 1px" href="{{ route('ncr.editGoods', $goods->id) }}" class="btn btn-xs btn-success">Edit</a> <a style="margin: 1px" href="{{ route('ncr.destroyGoods', $goods->id) }}" class="btn btn-xs btn-danger">Delete</a>
@@ -189,7 +189,7 @@
                                                     @endswitch
                                                     )</label>
                                                 <select class="form-control" name="status">
-                                                    @if(Auth()->user()->sector == 'management' or Auth()->user()->level == 'technical')
+                                                    @if(Auth()->user()->level == 'manager' or Auth()->user()->level == 'head')
                                                         <option value="2">Draft</option>
                                                         <option value="4">Reject</option>
                                                         <option value="6">Approve</option>
@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="submit"> </label>
-                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 and auth()->user()->sector != 'management' and auth()->user()->level != 'technical') disabled @endif>Submit</button>
+                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>Submit</button>
                                                 @if($order->technicalStatus == 6)<a href="{{ URL::signedRoute('words.ncr',$ncr->id) }}" class="btn btn-warning m-r-15" target="_blank">Print Certificate</a>@endif
                                             </div>
                                         </div>

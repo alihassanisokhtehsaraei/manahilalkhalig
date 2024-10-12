@@ -105,7 +105,7 @@
                                                             <option value="Sheep">Sheep</option>
                                                             <option value="Safwan">Safwan</option>
                                                         </optgroup>
-                                                    @else()
+                                                    @else
                                                         <option value="{{ auth()->user()->branch }}">{{ auth()->user()->branch }}</option>
                                                     @endif
                                                 </select>

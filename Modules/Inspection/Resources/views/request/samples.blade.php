@@ -155,7 +155,7 @@
                                                     <td>{{ $goods->seal }}</td>
                                                     <td>{{ $goods->standard }}</td>
                                                     <td>
-                                                        @if($rft->status > 2 && auth()->user()->level != 'supervisor' && auth()->user()->level != 'manager')
+                                                        @if($rft->status > 2 && auth()->user()->level != 'head' && auth()->user()->level != 'manager')
                                                             <a style="margin: 1px" href="{{ route('rft.editSample', $goods->id) }}" class="btn btn-xs btn-success">Edit</a> <a style="margin: 1px" href="{{ route('rft.destroySample', $goods->id) }}" class="btn btn-xs btn-danger">Delete</a>
                                                         @else
                                                             <a style="margin: 1px" href="{{ route('rft.editSample', $goods->id) }}" class="btn btn-xs btn-success">Edit</a> <a style="margin: 1px" href="{{ route('rft.destroySample', $goods->id) }}" class="btn btn-xs btn-danger">Delete</a>
@@ -189,7 +189,7 @@
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <select class="form-control" name="status">
-                                                        @if(Auth()->user()->department == 'Laboratory')
+                                                        @if(Auth()->user()->department == 'laboratory')
                                                             <option value="1">Send to Lab</option>
                                                         @else
                                                             <option value="1">Send to Lab</option>

@@ -80,7 +80,7 @@ class NonReleaseDocumentController extends Controller
     private function readOnly($nonReleaseDocument)
     {
 //        if (Auth::user()->sector === "management" || Auth::user()->level === "technical" )
-        if ( (Auth::user()->department === "management" || Auth::user()->department === "inspection") and Auth::user()->level==="manager")
+        if ( (Auth::user()->department === "management" || Auth::user()->department === "inspection") and (Auth::user()->level==="manager" || Auth::user()->level === 'head' ))
             return "";
         elseif ($nonReleaseDocument->status == "2")
             return "readonly";

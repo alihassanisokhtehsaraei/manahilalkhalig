@@ -76,7 +76,7 @@
                                                 <td>{{ $customer->email }}</td>
                                                 <td>{{ $customer->mobile.' - '.$customer->tel }}</td>
                                                 <td>
-                                                    @if(Auth()->user()->department == 'management' or Auth()->user()->department == 'technical')
+                                                    @if(Auth()->user()->department == 'management' or Auth()->user()->department == 'inspection')
                                                         <a href="{{ route('order.create', $customer->id) }}" class="btn btn-xs btn-primary">RFI</a>
                                                     @endif
                                                     @if(Auth()->user()->department == 'management' or Auth()->user()->department == 'laboratory')

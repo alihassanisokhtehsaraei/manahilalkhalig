@@ -77,7 +77,7 @@
                                                 Download PDF
                                             </a>
                                         </div>
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('nnrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -92,7 +92,7 @@
                                         <a href="{{ asset("fileManager/".$certificateUrl) }}" class="btn btn-primary" download>
                                             Download Image
                                         </a>
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -137,7 +137,7 @@
                                                 Download PDF
                                             </a>
                                         </div>
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -152,7 +152,7 @@
                                         <a href="{{ asset("fileManager/".$letterUrl) }}" class="btn btn-primary" download>
                                             Download Image
                                         </a>
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -163,7 +163,7 @@
                                         @endif
                                     @endif
                                 @else
-                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                         <!-- Upload Form -->
                                         <form action="{{route("nrdocs.uploadLetter",['order'=>$order, 'nonReleaseDocument'=>$nonReleaseDocument])}}"
                                               method="POST" enctype="multipart/form-data">
@@ -180,7 +180,7 @@
                         </div>
                     </div>
 
-                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                         <!-- Form for Uploading Multiple Documents -->
                         <div class="col-md-4">
                             <div class="card">
@@ -229,7 +229,7 @@
                                                 Download Image
                                             </a>
                                         @endif
-                                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
 
                                                 <!-- Delete Button -->
                                                 <form action="{{ route('nrdocs.deleteFile', ['order' => $order, 'nonReleaseDocument' => $nonReleaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">

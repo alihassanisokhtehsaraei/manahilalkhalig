@@ -286,9 +286,6 @@ $user=auth()->user();
 //                }
                 break;
         }
-        if ($user->department=='cosqc') {
-            return view('search::cosqc', ['data' => $data, 'type' => $type]);
-        }
         return view('search::search', ['data' => $data, 'type' => $type]);
     }
 

@@ -64,7 +64,7 @@
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="service">Inspection Service</label>
-                                                    <select class="form-control" name="service" id="service"  @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical') disabled @endif>
+                                                    <select class="form-control" name="service" id="service"  @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>
                                                         <option value="{{ $order->service }}">{{ $order->service }}</option>
 {{--                                                        <option value="COI">COI</option>--}}
                                                     </select>
@@ -79,7 +79,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="category">Goods Category</label>
-                                                    <select class="form-control" name="category" id="category"  @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical') disabled @endif>
+                                                    <select class="form-control" name="category" id="category"  @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>
                                                         <option value="{{ $order->category }}">{{ $order->category }}</option>
                                                         <option value="chemical">chemical</option>
                                                         <option value="construction">construction</option>
@@ -93,7 +93,7 @@
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="shipmentMethod">Shipment Method</label>
-                                                    <select class="form-control" name="shipmentMethod" id="shipmentMethod"  @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical') disabled @endif>
+                                                    <select class="form-control" name="shipmentMethod" id="shipmentMethod"  @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>
                                                         <option value="{{ $order->shipmentMethod }}">{{ $order->shipmentMethod }}</option>
                                                         <optgroup label="Air Ports" style="font-weight:bold;">Select
                                                             <option value="Road">Road</option>
@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="shipmentType">Shipment Type</label>
-                                                    <select class="form-control" name="shipmentType" id="shipmentType"  @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical') disabled @endif>
+                                                    <select class="form-control" name="shipmentType" id="shipmentType"  @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>
                                                         <option value="{{ $order->shipmentType }}">{{ $order->shipmentType }}</option>
                                                         <optgroup label="Air Ports" style="font-weight:bold;">Select
                                                             <option value="Full Container">Full Container</option>
@@ -117,7 +117,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="col-form-label pt-0" for="border">Entry Point</label>
-                                                    <select class="form-control" name="border" id="border"  @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and Auth()->user()->level != 'technical') disabled @endif>
+                                                    <select class="form-control" name="border" id="border"  @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>
                                                         <option value="{{ $order->border }}">{{ $order->border }}</option>
                                                         <optgroup label="Air Ports" style="font-weight:bold;">Air Ports
                                                             <option value="Basrah International Airport">Basrah International Airport</option>

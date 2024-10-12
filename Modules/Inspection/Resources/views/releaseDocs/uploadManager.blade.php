@@ -77,7 +77,7 @@
                                                 Download PDF
                                             </a>
                                         </div>
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('rdocs.deleteFile', ['order' => $order, 'releaseDocument' => $releaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -94,7 +94,7 @@
                                             Download Image
                                         </a>
 
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('rdocs.deleteFile', ['order' => $order, 'releaseDocument' => $releaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -106,7 +106,7 @@
                                     @endif
                                 @else
 
-                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                         <!-- Upload Form -->
                                         <form action="{{route("rdocs.uploadCertificate",['order'=>$order, 'releaseDocument'=>$releaseDocument])}}"
                                               method="POST" enctype="multipart/form-data">
@@ -143,7 +143,7 @@
                                             </a>
                                         </div>
 
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('rdocs.deleteFile', ['order' => $order, 'releaseDocument' => $releaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -159,7 +159,7 @@
                                             Download Image
                                         </a>
 
-                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                        @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                             <!-- Delete Button -->
                                             <form action="{{ route('rdocs.deleteFile', ['order' => $order, 'releaseDocument' => $releaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                 @csrf
@@ -171,7 +171,7 @@
                                     @endif
                                 @else
 
-                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                         <!-- Upload Form -->
                                         <form action="{{route("rdocs.uploadLetter",['order'=>$order, 'releaseDocument'=>$releaseDocument])}}"
                                               method="POST" enctype="multipart/form-data">
@@ -190,7 +190,7 @@
                         </div>
                     </div>
 
-                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                         <!-- Form for Uploading Multiple Documents -->
                         <div class="col-md-4">
                             <div class="card">
@@ -240,7 +240,7 @@
                                             </a>
                                         @endif
 
-                                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'border')
+                                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'border')
                                                 <!-- Delete Button -->
                                                 <form action="{{ route('rdocs.deleteFile', ['order' => $order, 'releaseDocument' => $releaseDocument]) }}" method="POST" style="display: inline-block;" class="delete-form">
                                                     @csrf

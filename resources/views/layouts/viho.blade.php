@@ -142,10 +142,10 @@
                             @if(auth()->user()->department != 'laboratory')
                             <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>COC Services</span></a>
                                 <ul class="nav-submenu menu-content">
-                                    @if(auth()->user()->sector == 'cosqc')
+                                    @if(auth()->user()->department == 'cosqc')
                                         <li><a href="{{ route('coc.archive') }}">Archive</a></li>
                                         <li><a href="{{ route('ncr.index') }}">NCR</a></li>
-                                    @elseif(auth()->user()->sector == 'customs')
+                                    @elseif(auth()->user()->department == 'customs')
                                         <li><a href="{{ route('coc.archive') }}">Archive</a></li>
                                     @else
                                         <li><a href="{{ route('order.create') }}">New RFC</a></li>

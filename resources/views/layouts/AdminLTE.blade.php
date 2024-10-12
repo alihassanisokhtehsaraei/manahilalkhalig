@@ -197,7 +197,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="nav-icon fas fa-copy"></i><p>COC Services</p></a>
                             <ul class="nav nav-treeview">
-                                @if(auth()->user()->sector == 'cosqc')
+                                @if(auth()->user()->department == 'cosqc')
                                     <li  class="nav-item">
                                         <a class="nav-link" href="{{ route('coc.archive') }}">
                                             <i class="far fa-circle nav-icon"></i><p>Archive</p>
@@ -208,7 +208,7 @@
                                             <i class="far fa-circle nav-icon"></i><p>NCR</p>
                                         </a>
                                 </li>
-                                @elseif(auth()->user()->sector == 'customs')
+                                @elseif(auth()->user()->department == 'customs')
                                     <li  class="nav-item">
                                         <a class="nav-link" href="{{ route('coc.archive') }}">
                                             <i class="far fa-circle nav-icon"></i><p>Archive</p>

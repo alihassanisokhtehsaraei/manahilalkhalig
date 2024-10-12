@@ -162,11 +162,11 @@ $user=auth()->user();
                     break;
                 }
                 elseif($user->department=='cosqc'){
-                    $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
+                    $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->get();
                     break;
                 }
                 elseif ($user->department=='customs'){
-                    $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
+                    $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('technicalStatus','=',7)->where('border',auth()->user->branch)->get();
                     break;
                 }
                 elseif ($user->department=='laboratory'){
@@ -174,7 +174,7 @@ $user=auth()->user();
                     break;
                 }
                 elseif ($user->branch != 'head office'){
-                    $data = Order::join('ncrs','ncrs.order_id', '=', 'orders.id')->where('ncrs.certNo','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
+                    $data = Order::join('cocs','cocs.order_id', '=', 'orders.id')->join('release_documents','cocs.id', '=', 'release_documents.coc_id')->where('release_documents.document_number','like','%'.$input['value'].'%')->where('branch',auth()->user->branch)->get();
                     break;
                 }
 //                switch (auth()->user()->sector) {

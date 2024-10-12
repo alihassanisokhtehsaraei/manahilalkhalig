@@ -193,11 +193,11 @@ class NCRController extends Controller
         $customer = Customer::find($order->customer_id);
         $ncr = Ncr::where('order_id', '=', $id)->first();
 //        ($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical')
-        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
+        if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
         {
-            $disabled = null;
+            $disabled ='readonly';
         } else {
-            $disabled = 'readonly';
+            $disabled = null;
         }
 
         $goods = NcrGood::where('ncr_id', '=', $ncr->id)->get();
@@ -249,11 +249,11 @@ class NCRController extends Controller
 //        } else {
 //            $disabled = null;
 //        }
-        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
+        if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
         {
-            $disabled = null;
+            $disabled ='readonly';
         } else {
-            $disabled = 'readonly';
+            $disabled = null;
         }
 
         // @if(isset($order->technicalStatus) && $order->technicalStatus > 2 && auth()->user()->level != 'supervisor' && auth()->user()->level != 'manager') disabled @endif

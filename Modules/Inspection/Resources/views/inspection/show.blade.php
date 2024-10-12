@@ -21,7 +21,7 @@
                     <!-- Bookmark Start-->
                     <div class="bookmark">
                         <ul>
-                            @if(auth()->user()->sector == 'management' or auth()->user()->sector == 'branch')
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection')
                                 <li><a href="{{ route('order.edit', $order->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="Edit Inspection Order" data-original-title="Edit"><i data-feather="edit"></i></a></li>
                                 <li><a href="{{ route('inspection.insdoc', $order->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="File Manager" data-original-title="file"><i data-feather="file"></i></a></li>
                                 <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>
@@ -62,7 +62,7 @@
                                     <h6 class="form-label">Client:</h6>
                                     {{ $order->customer->fullName.' - '.$order->customer->cName }}
                                 </div>
-                                @if(auth()->user()->sector == 'management' or auth()->user()->sector == 'branch')
+                                @if(auth()->user()->department == 'management' or auth()->user()->sector == 'inspection')
                                     <div class="mb-3">
                                         <h6 class="form-label">Email:</h6>
                                         {{ $order->customer->email }}
@@ -72,27 +72,27 @@
                                             <a href="{{ route('customer.edit', ['slug' => $order->customer->id]) }}"> <li style="text-align: center;color: white;background: #7951aa;">Modify Client</li></a>
                                         </ul>
                                     </div>
-                            @if($order->technicalStatus < 5 or auth()->user()->level == 'technical' or auth()->user()->sector == 'management')
-                                <div class="mb-3">
-                                    <h6 class="sub-title text-uppercase">Technical Status</h6>
-                                    <div class="form-group">
-                                        <form action="{{route('order.updateStatus',$order->id)}}" method="POST">
-                                            @method("PATCH")
-                                            @csrf
-                                            <select class="form-control" name="status" >
-                                                <option value="1" {{$order->technicalStatus == "1" ? "selected": ""}}>COC Draft</option>
-                                                <option value="2" {{$order->technicalStatus == "2" ? "selected": ""}}>NCR Draft</option>
-                                                @if(auth()->user()->level == 'technical' and $order->technicalStatus == 5 and $order->financialStatus == 3)
-                                                    <option value="7" {{$order->technicalStatus == "7" ? "selected": ""}}>Archive</option>
-                                                @endif
-                                            </select>
-                                            <br>
-                                            <input type="submit" class="form-control btn btn-primary btn-sm text-white" value="Update">
-                                        </form>
-                                    </div>
-                                </div>
-                                @endif
-                            @endif
+                                    @if($order->technicalStatus < 5 or auth()->user()->level == 'head' or auth()->user()->level == 'manager')
+                                        <div class="mb-3">
+                                            <h6 class="sub-title text-uppercase">Technical Status</h6>
+                                            <div class="form-group">
+                                                <form action="{{route('order.updateStatus',$order->id)}}" method="POST">
+                                                    @method("PATCH")
+                                                    @csrf
+                                                    <select class="form-control" name="status" >
+                                                        <option value="1" {{$order->technicalStatus == "1" ? "selected": ""}}>COC Draft</option>
+                                                        <option value="2" {{$order->technicalStatus == "2" ? "selected": ""}}>NCR Draft</option>
+                                                        @if((auth()->user()->level == 'head' or auth()->user()->level == 'manager') and $order->technicalStatus == 5 and $order->financialStatus == 3)
+                                                            <option value="7" {{$order->technicalStatus == "7" ? "selected": ""}}>Archive</option>
+                                                        @endif
+                                                    </select>
+                                                    <br>
+                                                    <input type="submit" class="form-control btn btn-primary btn-sm text-white" value="Update">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endif
+                               @endif
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
 
                     <div class="row">
                         @if($order->service == 'COC')
-                            @if(auth()->user()->sector == 'branch' or auth()->user()->sector == 'management')
+                            @if(auth()->user()->department == 'inspection' or auth()->user()->department == 'management')
                                 @if($order->technicalStatus == 1 or $order->technicalStatus == 3 or $order->technicalStatus == 5 or $order->technicalStatus == 7)
                                     <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
                                         <div class="card income-card card-secondary">
@@ -176,32 +176,43 @@
                                             <a href="{{ route('order.sampling', $order->id) }}" class="btn btn-info btn-lg">Sampling Form</a>
                                         </div>
                                     </div>
+
+                            @elseif(Auth()->user()->department == 'financial')
+
+                                <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                    <div class="card income-card card-secondary">
+                                        <a href="{{ route('financial.show', $order->id) }}" class="btn btn-warning btn-lg">Financial Profile</a>
+                                    </div>
+                                </div>
+
                             @endif
-                                @if(auth()->user()->sector == 'branch' or auth()->user()->sector == 'management' or auth()->user()->sector == 'cosqc')
+                                @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'cosqc')
                                     <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
                                         <div class="card income-card card-secondary">
                                             <a href="{{ route('inspection.insdoc', $order->id) }}" class="btn btn-light btn-lg">File Manager</a>
                                         </div>
                                     </div>
                                 @endif
-                                @if($order->technicalStatus ==5 && $order->financialStatus == 3 or $order->technicalStatus == 7 && $order->financialStatus == 3)
-                                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
-                                            <div class="card income-card card-secondary">
-                                                <a href="{{ URL::signedRoute('words.coc', $order->coc->id) }}" class="btn btn-primary btn-lg">Print COC</a>
+                                @if(auth()->user()->department != 'financial' or auth()->user()->department != 'laboratory')
+                                    @if($order->technicalStatus ==5 && $order->financialStatus == 3 or $order->technicalStatus == 7 && $order->financialStatus == 3)
+                                            <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                                <div class="card income-card card-secondary">
+                                                    <a href="{{ URL::signedRoute('words.coc', $order->coc->id) }}" class="btn btn-primary btn-lg">Print COC</a>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
-                                            <div class="card income-card card-secondary">
-                                                <a href="{{ route('rdocs.index', ['order' => $order]) }}" class="btn btn-warning btn-lg">Release Documents</a>
+                                            <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                                <div class="card income-card card-secondary">
+                                                    <a href="{{ route('rdocs.index', ['order' => $order]) }}" class="btn btn-warning btn-lg">Release Documents</a>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
-                                            <div class="card income-card card-secondary">
-                                                <a href="{{ route('nrdocs.index', ['order' => $order]) }}" class="btn btn-danger btn-lg">Non-Release Documents</a>
+                                            <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                                <div class="card income-card card-secondary">
+                                                    <a href="{{ route('nrdocs.index', ['order' => $order]) }}" class="btn btn-danger btn-lg">Non-Release Documents</a>
+                                                </div>
                                             </div>
-                                        </div>
+                                    @endif
                                 @endif
                                 @if($order->technicalStatus ==6)
                                     <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
@@ -243,7 +254,7 @@
                             </div>
                         @endif
                     </div>
-                    @if($order->technicalStatus == 0 or auth()->user()->sector == 'management')
+                    @if($order->technicalStatus == 0 or auth()->user()->department == 'management')
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">

@@ -293,10 +293,10 @@ use Illuminate\Support\Str;
                                     <div class="row">
                                         <div class="media">
                                             <div class="media-body text-end">
-                                                @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector != 'cosqc')
-
-
-                                                @else
+                                                @if(Auth()->user()->department == 'cosqc' or Auth()->user()->department == 'customs')
+                                                @elseif($order->technicalStatus <= 4)
+                                                    <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                                @elseif($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
                                                     <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
                                                 @endif
                                             </div>
@@ -356,7 +356,7 @@ use Illuminate\Support\Str;
                                                     @endswitch
                                                 </p>
 
-                                                @if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                @if((auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and (auth()->user()->level=='manager' or auth()->user()->level=='head'))
                                                     <div class="btn-group" style="text-align: center" role="group" aria-label="Basic example">
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 2]) }}" class="btn btn-xs btn-primary" type="button">Accept</a>
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 1]) }}" class="btn btn-xs btn-danger" type="button">Reject</a>
@@ -407,9 +407,10 @@ use Illuminate\Support\Str;
                                 <div class="row">
                                     <div class="media">
                                         <div class="media-body text-end">
-                                            @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector != 'cosqc')
-
-                                            @else
+                                            @if(Auth()->user()->department == 'cosqc' or Auth()->user()->department == 'customs')
+                                            @elseif($order->technicalStatus <= 4)
+                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                            @elseif($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
                                                 <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
                                             @endif
                                         </div>
@@ -469,7 +470,7 @@ use Illuminate\Support\Str;
                                                     @endswitch
                                                 </p>
 
-                                                @if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                @if((auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and (auth()->user()->level=='manager' or auth()->user()->level=='head'))
                                                     <div class="btn-group" style="text-align: center" role="group" aria-label="Basic example">
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 2]) }}" class="btn btn-xs btn-primary" type="button">Accept</a>
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 1]) }}" class="btn btn-xs btn-danger" type="button">Reject</a>
@@ -502,9 +503,10 @@ use Illuminate\Support\Str;
                                 <div class="row">
                                     <div class="media">
                                         <div class="media-body text-end">
-                                            @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector != 'cosqc')
-
-                                            @else
+                                            @if(Auth()->user()->department == 'cosqc' or Auth()->user()->department == 'customs')
+                                            @elseif($order->technicalStatus <= 4)
+                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                            @elseif($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
                                                 <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
                                             @endif
                                         </div>
@@ -564,7 +566,7 @@ use Illuminate\Support\Str;
                                                     @endswitch
                                                 </p>
 
-                                                @if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                @if((auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and (auth()->user()->level=='manager' or auth()->user()->level=='head'))
                                                     <div class="btn-group" style="text-align: center" role="group" aria-label="Basic example">
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 2]) }}" class="btn btn-xs btn-primary" type="button">Accept</a>
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 1]) }}" class="btn btn-xs btn-danger" type="button">Reject</a>
@@ -630,7 +632,7 @@ use Illuminate\Support\Str;
                                                     @endswitch
                                                 </p>
 
-                                                @if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                @if((auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and (auth()->user()->level=='manager' or auth()->user()->level=='head'))
                                                     <div class="btn-group" style="text-align: center" role="group" aria-label="Basic example">
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 2]) }}" class="btn btn-xs btn-primary" type="button">Accept</a>
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 1]) }}" class="btn btn-xs btn-danger" type="button">Reject</a>
@@ -774,14 +776,17 @@ use Illuminate\Support\Str;
 
                                     <div class="media">
                                         <div class="media-body text-end">
-                                            @if($order->technicalStatus > 4 and Auth()->user()->sector != 'management' and auth()->user()->level != 'technical' or Auth()->user()->sector == 'cosqc')
-
-                                            @else
+                                            @if(Auth()->user()->department == 'cosqc' or Auth()->user()->department == 'customs')
+                                            @elseif($order->technicalStatus <= 4)
                                                 <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
-                                            @endif</div>
+                                            @elseif($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
+                                                <button type="submit" class="btn btn-outline-primary ms-2" style="float: left"><i data-feather="upload">   </i>Upload</button>
+                                            @endif
                                     </div>
                                 </div>
+                                </div>
                                 </form>
+
                                 <h5 class="mt-4">Uploaded Files</h5>
                                 <ul class="files">
                                     @foreach($docs as $doc)
@@ -834,8 +839,7 @@ use Illuminate\Support\Str;
                                                             @break
                                                     @endswitch
                                                 </p>
-
-                                                @if(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager')
+                                                @if((auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and (auth()->user()->level=='manager' or auth()->user()->level=='head'))
                                                     <div class="btn-group" style="text-align: center" role="group" aria-label="Basic example">
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 2]) }}" class="btn btn-xs btn-primary" type="button">Accept</a>
                                                         <a href="{{ route('insdoc.changeStatus', [$doc->id, 1]) }}" class="btn btn-xs btn-danger" type="button">Reject</a>

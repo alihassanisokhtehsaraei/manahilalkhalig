@@ -290,11 +290,11 @@ class CocController extends Controller
 //            $disabled = null;
 //        }
 
-        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->department == 'management') and auth()->user()->level=='manager')
+        if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
         {
-            $disabled = null;
-        } else {
             $disabled ='readonly';
+        } else {
+            $disabled = null;
         }
 
         // @if(isset($order->technicalStatus) && $order->technicalStatus > 2 && auth()->user()->level != 'supervisor' && auth()->user()->level != 'manager') disabled @endif

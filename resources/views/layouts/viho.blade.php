@@ -142,23 +142,23 @@
                             @if(auth()->user()->department != 'laboratory')
                             <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>COC Services</span></a>
                                 <ul class="nav-submenu menu-content">
-                                    @if(auth()->user()->sector == 'management' or auth()->user()->sector == 'branch')
+                                    @if(auth()->user()->sector == 'cosqc')
+                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
+                                        <li><a href="{{ route('ncr.index') }}">NCR</a></li>
+                                    @elseif(auth()->user()->sector == 'customs')
+                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
+                                    @else
                                         <li><a href="{{ route('order.create') }}">New RFC</a></li>
                                         <li><a href="{{ route('order.index') }}">Drafts</a></li>
                                         <li><a href="{{ route('coc.index') }}">Approved</a></li>
                                         <li><a href="{{ route('ncr.index') }}">NCR</a></li>
-                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
-                                    @elseif(auth()->user()->sector == 'cosqc')
-                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
-                                        <li><a href="{{ route('ncr.index') }}">NCR</a></li>
-                                    @else
                                         <li><a href="{{ route('coc.archive') }}">Archive</a></li>
                                     @endif
                                 </ul>
                             </li>
                             @endif
 
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' or auth()->user()->department == 'laboratory')
                                 <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>Laboratory Services</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="{{ route('request.create') }}">New RFT</a></li>
@@ -177,7 +177,7 @@
 {{--                                    <li><a href="#">Archive</a></li>--}}
 {{--                                </ul>--}}
 {{--                            </li>--}}
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
                             <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Customers</span></a>
                                 <ul class="nav-submenu menu-content">
                                     <li><a href="/customer/create">New Customer</a></li>
@@ -186,7 +186,7 @@
                             </li>
                             @endif
 
-                            @if(strtolower(Auth()->user()->department) == 'management')
+                            @if(strtolower(Auth()->user()->department) == 'management' or Auth()->user()->department == 'it')
 
                                 <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Users</span></a>
                                     <ul class="nav-submenu menu-content">
@@ -195,27 +195,13 @@
                                     </ul>
                                 </li>
                             @endif
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
-                                <li class="dropdown"><a class="nav-link menu-title" href="{{ route('staticDocs.index') }}"><i data-feather="file"></i><span>Document Center</span></a>
-{{--                                    <ul class="nav-submenu menu-content">--}}
-{{--                                        @if(Auth()->user()->level == 'manager')--}}
-{{--                                            <li><a href="{{ route('tdms.index') }}">Master List</a></li>--}}
-{{--                                            <li><a href="{{ route('tdms.indexExternalDocument') }}">External Documents</a></li>--}}
-{{--                                            <li><a href="{{ route('tdms.create') }}">New Document</a></li>--}}
-{{--                                            <li><a href="{{ route('tdms.createExternalDocument') }}">New External Doc</a></li>--}}
-{{--                                            <li><a href="{{ route('tdms.withdraw') }}">Withdraw Documents</a></li>--}}
-{{--                                        @elseif(Auth()->user()->level == 'expert')--}}
-{{--                                            <li><a href="{{ route('tdms.index') }}">Master List</a></li>--}}
-{{--                                            <li><a href="{{ route('tdms.indexExternalDocument') }}">External Documents</a></li>--}}
-{{--                                        @endif--}}
-{{--                                    </ul>--}}
-                                </li>
+                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                                <li class="dropdown"><a class="nav-link menu-title" href="{{ route('staticDocs.index') }}"><i data-feather="file"></i><span>Document Center</span></a></li>
                             @endif
                             @if(strtolower(Auth()->user()->department) == 'management')
                                 <li><a class="nav-link menu-title" href="{{ route('report.create') }}"><i data-feather="database"></i><span>Reports</span></a></li>
                             @endif
-                            <li><a class="nav-link menu-title link-nav" href="{{ route('search.index') }}"><i data-feather="search"></i><span>Search</span></a></li>
-                            @if(strtolower(Auth()->user()->department) == 'management')
+                            @if(strtolower(Auth()->user()->department) == 'management' or Auth()->user()->department == 'it' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
                             <li >
                                 <a class="nav-link menu-title link-nav" href="{{ route('labfees.index') }}">
                                     <i data-feather="dollar-sign"></i> <!-- Use an appropriate icon -->
@@ -223,6 +209,7 @@
                                 </a>
                             </li>
                             @endif
+                            <li><a class="nav-link menu-title link-nav" href="{{ route('search.index') }}"><i data-feather="search"></i><span>Search</span></a></li>
                         </ul>
                     </div>
                     <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

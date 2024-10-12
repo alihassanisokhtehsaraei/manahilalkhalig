@@ -116,9 +116,9 @@ class InsDocController extends Controller
                 $doc->category = 'inspection';
                 $doc->userID = Auth()->user()->id;
                 $doc->orderID = $orderId;
-                $doc->status = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? 2 : 0;
-                $doc->reviewerID = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
-                $doc->reviewTime = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
+                $doc->status = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? 2 : 0;
+                $doc->reviewerID = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
+                $doc->reviewTime = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
                 $doc->url = "ipms/inspectionFiles/{$folderName}/{$newName}";
                 $doc->ip = $request->ip();
                 $doc->desc = $description;
@@ -175,9 +175,9 @@ class InsDocController extends Controller
                     $doc->category = 'laboratory';
                     $doc->userID = Auth()->user()->id;
                     $doc->orderID = $orderId;
-                    $doc->status = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? 2 : 0;
-                    $doc->reviewerID = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
-                    $doc->reviewTime = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
+                    $doc->status = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? 2 : 0;
+                    $doc->reviewerID = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
+                    $doc->reviewTime = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
                     $doc->url = "ipms/inspectionFiles/{$folderName}/{$newName}";
                     $doc->ip = $request->ip();
 
@@ -250,9 +250,9 @@ class InsDocController extends Controller
                 $doc->category = 'other';
                 $doc->userID = Auth()->user()->id;
                 $doc->orderID = $orderId;
-                $doc->status = (Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager') ? 2 : 0;
-                $doc->reviewerID =(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
-                $doc->reviewTime =(Auth()->user()->level == 'technical' or Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
+                $doc->status = (Auth()->user()->level == 'head' or Auth()->user()->level == 'manager') ? 2 : 0;
+                $doc->reviewerID =(Auth()->user()->level == 'head' or Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
+                $doc->reviewTime =(Auth()->user()->level == 'head' or Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
                 $doc->url = "ipms/inspectionFiles/{$folderName}/{$newName}";
                 $doc->ip = $request->ip();
                 $doc->save();
@@ -318,9 +318,9 @@ class InsDocController extends Controller
                     $doc->category = 'Client';
                     $doc->userID = Auth()->user()->id;
                     $doc->orderID = $orderId;
-                    $doc->status = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? 2 : 0;
-                    $doc->reviewerID = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
-                    $doc->reviewTime = (Auth()->user()->level == 'technical' || Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
+                    $doc->status = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? 2 : 0;
+                    $doc->reviewerID = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? Auth()->user()->id : null;
+                    $doc->reviewTime = (Auth()->user()->level == 'head' || Auth()->user()->level == 'manager') ? date('Y-m-d H:i:s') : null;
                     $doc->url = "ipms/inspectionFiles/{$folderName}/{$newName}";
                     $doc->ip = $request->ip();
 

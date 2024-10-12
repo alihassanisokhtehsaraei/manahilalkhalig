@@ -197,8 +197,25 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="nav-icon fas fa-copy"></i><p>COC Services</p></a>
                             <ul class="nav nav-treeview">
-                                @if(auth()->user()->sector == 'management' or auth()->user()->sector == 'branch')
-                                    <li class="nav-item">
+                                @if(auth()->user()->sector == 'cosqc')
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('coc.archive') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('ncr.index') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>NCR</p>
+                                        </a>
+                                </li>
+                                @elseif(auth()->user()->sector == 'customs')
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('coc.archive') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
+                                        </a>
+                                    </li>
+                                @else
+                                   <li class="nav-item">
                                         <a class="nav-link" href="{{ route('order.create') }}">
                                             <i class="far fa-circle nav-icon"></i><p>New RFC</p>
                                         </a>
@@ -223,29 +240,12 @@
                                             <i class="far fa-circle nav-icon"></i><p>Archive</p>
                                         </a>
                                     </li>
-                                @elseif(auth()->user()->sector == 'cosqc')
-                                    <li  class="nav-item">
-                                        <a class="nav-link" href="{{ route('coc.archive') }}">
-                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
-                                        </a>
-                                    </li>
-                                    <li  class="nav-item">
-                                        <a class="nav-link" href="{{ route('ncr.index') }}">
-                                            <i class="far fa-circle nav-icon"></i><p>NCR</p>
-                                        </a>
-                                    </li>
-                                @else
-                                    <li  class="nav-item">
-                                        <a class="nav-link" href="{{ route('coc.archive') }}">
-                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
-                                        </a>
-                                    </li>
                                 @endif
                             </ul>
                         </li>
                     @endif
 
-                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' or auth()->user()->department == 'laboratory')
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="nav-icon fas fa-copy"></i><p>Laboratory Services</p>
@@ -258,7 +258,7 @@
                         </li>
                     @endif
 
-                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="nav-icon fas fa-copy"></i><p>Customers</p></a>
@@ -268,7 +268,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if(strtolower(Auth()->user()->department) == 'management')
+                    @if(strtolower(Auth()->user()->department) == 'management' or Auth()->user()->department == 'it')
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="nav-icon fas fa-copy"></i><p>Users</p></a>
@@ -278,28 +278,15 @@
                             </ul>
                         </li>
                     @endif
-                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'technical' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('staticDocs.index') }}"><i class="far fa-circle nav-icon"></i><p>Document Center</p></a>
-                            {{--                                    <ul class="nav-submenu menu-content">--}}
-                            {{--                                        @if(Auth()->user()->level == 'manager')--}}
-                            {{--                                            <li><a href="{{ route('tdms.index') }}">Master List</a></li>--}}
-                            {{--                                            <li><a href="{{ route('tdms.indexExternalDocument') }}">External Documents</a></li>--}}
-                            {{--                                            <li><a href="{{ route('tdms.create') }}">New Document</a></li>--}}
-                            {{--                                            <li><a href="{{ route('tdms.createExternalDocument') }}">New External Doc</a></li>--}}
-                            {{--                                            <li><a href="{{ route('tdms.withdraw') }}">Withdraw Documents</a></li>--}}
-                            {{--                                        @elseif(Auth()->user()->level == 'expert')--}}
-                            {{--                                            <li><a href="{{ route('tdms.index') }}">Master List</a></li>--}}
-                            {{--                                            <li><a href="{{ route('tdms.indexExternalDocument') }}">External Documents</a></li>--}}
-                            {{--                                        @endif--}}
-                            {{--                                    </ul>--}}
-                        </li>
+                            <a class="nav-link" href="{{ route('staticDocs.index') }}"><i class="far fa-circle nav-icon"></i><p>Document Center</p></a></li>
                     @endif
                     @if(strtolower(Auth()->user()->department) == 'management')
                         <li class="nav-item"><a class="nav-link" href="{{ route('report.create') }}"><i class="far fa-circle nav-icon"></i><p>Reports</p></a></li>
                     @endif
                     <li class="nav-item"><a class="nav-link" href="{{ route('search.index') }}"><i class="far fa-circle nav-icon"></i><p>Search</p></a></li>
-                    @if(strtolower(Auth()->user()->department) == 'management')
+                    @if(strtolower(Auth()->user()->department) == 'management'  or Auth()->user()->department == 'it' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('labfees.index') }}">
                                 <i class="far fa-circle nav-icon"></i> <!-- Use an appropriate icon -->

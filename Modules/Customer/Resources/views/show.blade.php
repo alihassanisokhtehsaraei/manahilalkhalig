@@ -124,7 +124,7 @@
                             </div>
                         </div>
                     </div>
-                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'branch' or auth()->user()->department == 'financial')
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial')
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">

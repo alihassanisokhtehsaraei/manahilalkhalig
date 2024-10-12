@@ -21,7 +21,8 @@ class CocController extends Controller
     public function index()
     {
         switch (auth()->user()->sector) {
-            case 'management':
+//            case 'management':
+            case 'universal':
                 $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',5)->get();
                 break;
             case 'branch':
@@ -95,13 +96,21 @@ class CocController extends Controller
     public function archive()
     {
         switch (auth()->user()->sector) {
-            case 'management':
-            case 'cosqc':
+//            case 'management':
+//            case 'cosqc':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->get();
+//                break;
+//            case 'border':
+//            case 'customs':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->where('orders.border',auth()->user()->branch)->get();
+//                break;
+//            case 'branch':
+//                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->where('orders.branch',auth()->user()->branch)->get();
+//                break;
+
+
+            case 'universal':
                 $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->get();
-                break;
-            case 'border':
-            case 'customs':
-                $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->where('orders.border',auth()->user()->branch)->get();
                 break;
             case 'branch':
                 $data = Order::select('orders.tracking_no','orders.id','customers.fullName','customers.cName','orders.desc','orders.service','orders.technicalStatus','orders.financialStatus','orders.branch','cocs.certNo')->join('customers','customers.id','=','orders.customer_id')->join('cocs','cocs.order_id','=','orders.id')->where('technicalStatus','=',7)->where('orders.branch',auth()->user()->branch)->get();
@@ -223,12 +232,12 @@ class CocController extends Controller
         $order = Order::find($id);
         $customer = Customer::find($order->customer_id);
         $coc = Coc::where('order_id', '=', $id)->first();
-
-        if($order->technicalStatus > 4 and Auth()->user()->level != 'technical' and Auth()->user()->sector != 'management')
+// ($order->technicalStatus > 4 and Auth()->user()->level != 'technical' and Auth()->user()->sector != 'management')
+        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->departmant == 'management') and auth()->user()->level=='manager')
         {
-            $disabled = 'readonly';
-        } else {
             $disabled = null;
+        } else {
+            $disabled ='readonly';
         }
 
         $goods = CocGood::where('coc_id', '=', $coc->id)->get();
@@ -274,11 +283,18 @@ class CocController extends Controller
         $customer = Customer::find($order->customerID);
         $coc = Coc::where('order_id', '=', $id)->first();
 
-        if($order->technicalStatus > 4 and Auth()->user()->level != 'technical' and Auth()->user()->sector != 'management')
+//        if($order->technicalStatus > 4 and Auth()->user()->level != 'technical' and Auth()->user()->sector != 'management')
+//        {
+//            $disabled = 'readonly';
+//        } else {
+//            $disabled = null;
+//        }
+
+        if($order->technicalStatus > 4 and (auth()->user()->department == 'inspection' or auth()->user()->departmant == 'management') and auth()->user()->level=='manager')
         {
-            $disabled = 'readonly';
-        } else {
             $disabled = null;
+        } else {
+            $disabled ='readonly';
         }
 
         // @if(isset($order->technicalStatus) && $order->technicalStatus > 2 && auth()->user()->level != 'supervisor' && auth()->user()->level != 'manager') disabled @endif

@@ -100,7 +100,7 @@ class NonReleaseDocumentController extends Controller
             'incoming_quantity' => $request->input('incoming_quantity'),
             'total_quantity' => $request->input('total_quantity'),
             'comments' => $request->input('comments'),
-            'status' => Auth::user()->sector === "management" || Auth::user()->level === "technical"  ? "2" : "1",
+            'status' => Auth::user()->level === "manager" || Auth::user()->level === "head"  ? "2" : "1",
             'issuance_date' => Auth::user()->level === 'manager' && is_null($nonReleaseDocument->issuance_date) || Auth::user()->level === "head" && is_null($nonReleaseDocument->issuance_date) ? now()->format('Y-m-d') :$nonReleaseDocument->issuance_date,
             'issuing_office' => Auth::user()->level === 'manager' && is_null($nonReleaseDocument->issuing_office) || Auth::user()->level === "head" && is_null($nonReleaseDocument->issuing_office) ? $order->border : $nonReleaseDocument->issuing_office,
             'document_number'=> Auth::user()->level === 'manager' && is_null($nonReleaseDocument->document_number) || Auth::user()->level === "head" && is_null($nonReleaseDocument->document_number) ?  $this->getNewDocNumber() :$nonReleaseDocument->document_number,

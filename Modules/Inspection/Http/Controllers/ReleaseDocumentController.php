@@ -99,7 +99,7 @@ class ReleaseDocumentController extends Controller
             'incoming_quantity' => $request->input('incoming_quantity'),
             'total_quantity' => $request->input('total_quantity'),
             'comments' => $request->input('comments'),
-            'status' => Auth::user()->sector === "management" || Auth::user()->level === 'technical' ? "2" : "1",
+            'status' => Auth::user()->level === "manager" || Auth::user()->level === 'head' ? "2" : "1",
             'issuance_date'=>Auth::user()->level === 'manager' && is_null($releaseDocument->issuance_date) || Auth::user()->level === "head" && is_null($releaseDocument->issuance_date) ? now()->format('Y-m-d') : $releaseDocument->issuance_date,
             'issuing_office'=>Auth::user()->level === 'manager' && is_null($releaseDocument->issuing_office) || Auth::user()->level === "head" && is_null($releaseDocument->issuing_office) ? $order->border :$releaseDocument->issuing_office,
             'document_number'=>Auth::user()->level === 'manager' && is_null($releaseDocument->document_number) || Auth::user()->level === "head" && is_null($releaseDocument->document_number) ? $this->getNewDocNumber() :$releaseDocument->document_number,

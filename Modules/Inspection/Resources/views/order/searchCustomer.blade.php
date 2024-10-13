@@ -54,7 +54,7 @@
                                     <label class="col-form-label pt-0" for="searchkey" name="searchkey">Search Customer</label>
                                     <input class="form-control" name="searchkey" id="searchkey" type="text">
                                     <br>
-                                    <input class="btn btn-primary" name="submit" id="submit" type="submit" value="Search">
+                                    <input class="btn btn-danger" name="submit" id="submit" type="submit" value="Search">
                         </div>
                         <div class="card-footer">
                             @isset($customers)
@@ -76,7 +76,7 @@
                                                 <td>{{ $customer->fullName.' - '.$customer->cName }}</td>
                                                 <td>{{ $customer->email }}</td>
                                                 <td>{{ $customer->mobile.' - '.$customer->tel }}</td>
-                                                <td><a href="{{ route('order.create', $customer->id) }}" class="btn btn-xs btn-primary">Select</a> </td>
+                                                <td><a href="{{ route('order.create', $customer->id) }}" class="btn btn-xs btn-warning">Select</a> </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

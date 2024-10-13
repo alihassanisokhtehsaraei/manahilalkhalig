@@ -22,18 +22,18 @@
                 <div class="col-sm-6">
                     <!-- Bookmark Start-->
                     <div class="bookmark">
-                        <ul>
-                            <li><a href="{{ route('coc.show', $order->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="BACK" data-original-title="call"><i data-feather="chevron-left"></i></a></li>
+                        <!--<ul>-->
+                        <!--    <li><a href="{{ route('coc.show', $order->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="BACK" data-original-title="call"><i data-feather="chevron-left"></i></a></li>-->
                             <!-- Your new button -->
-                            <li>
-                                <a href="{{ route('download.cocGoods') }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="Download Excel" data-original-title="Download">
-                                    <i data-feather="download"></i>
-                                </a>
-                            </li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>
-                            <li><a href="" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.semail') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>
-                            <li><a id="sweet-id" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.delete') }}" data-original-title="Delete"><i data-feather="delete"></i></a></li>
-                        </ul>
+                        <!--    <li>-->
+                        <!--        <a href="{{ route('download.cocGoods') }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="Download Excel" data-original-title="Download">-->
+                        <!--            <i data-feather="download"></i>-->
+                        <!--        </a>-->
+                        <!--    </li>-->
+                        <!--    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>-->
+                        <!--    <li><a href="" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.semail') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>-->
+                        <!--    <li><a id="sweet-id" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.delete') }}" data-original-title="Delete"><i data-feather="delete"></i></a></li>-->
+                        <!--</ul>-->
                     </div>
                     <!-- Bookmark Ends-->
                 </div>
@@ -61,6 +61,9 @@
                                     <label for="file">Upload Excel File:</label>
                                     <input {{ $disabled }} type="file" class="form-control" id="file" name="file" accept=".xlsx, .xls" required>
                                 </div>
+                                <a href="{{ route('download.cocGoods') }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="Download Excel" data-original-title="Download">
+                                    Download Sample File !
+                                </a>
                                 <div class="card-footer text-end">
                                     <button type="submit" class="btn btn-primary" @if($order->technicalStatus > 4 && auth()->user()->level != 'technical' &&auth()->user()->level != 'manager') disabled @endif>Upload Excel</button>
                                 </div>

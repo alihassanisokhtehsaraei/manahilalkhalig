@@ -224,7 +224,7 @@ class NonReleaseDocumentController extends Controller
         }
 
         // Format the new certificate number with leading zeros
-        return 'ART/NRD/' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
+        return 'MNL/NRD/' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
     }
 
 }

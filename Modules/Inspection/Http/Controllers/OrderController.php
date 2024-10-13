@@ -237,11 +237,11 @@ class OrderController extends Controller
 //            $disabled = null;
 //        }
 
-        if($order->technicalStatus > 4 and (Auth()->user()->department == 'management' or auth()->user()->department == "inspection" ) and Auth()->user()->level == 'manager')
+        if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
         {
-            $disabled = null;
+            $disabled ='readonly';
         } else {
-            $disabled = 'readonly';
+            $disabled = null;
         }
 
 
@@ -331,11 +331,11 @@ class OrderController extends Controller
 //        } else {
 //            $disabled = null;
 //        }
-        if($order->technicalStatus > 4 and (Auth()->user()->department == 'management' or auth()->user()->department == "inspection" ) and Auth()->user()->level == 'manager')
+        if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
         {
-            $disabled = null;
+            $disabled ='readonly';
         } else {
-            $disabled = 'readonly';
+            $disabled = null;
         }
         return view('inspection::inspection.sampling', ['rft' => $rft, 'order' => $order, 'disabled' => $disabled]);
     }

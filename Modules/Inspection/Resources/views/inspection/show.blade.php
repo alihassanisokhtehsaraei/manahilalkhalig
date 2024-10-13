@@ -193,6 +193,16 @@
                                         </div>
                                     </div>
                                 @endif
+                                
+                                @if(auth()->user()->department == 'cosqc')
+                                    <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                        <div class="card income-card card-secondary">
+                                            <a target="_blank" href="{{ route('request.cosqcSamples', $order->id) }}" class="btn btn-info btn-lg">Sampling Form</a>
+                                        </div>
+                                    </div>
+                                
+                                @endif
+                                
                                 @if(auth()->user()->department != 'financial' or auth()->user()->department != 'laboratory')
                                     @if($order->technicalStatus ==5 && $order->financialStatus == 3 or $order->technicalStatus == 7 && $order->financialStatus == 3)
                                             <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">

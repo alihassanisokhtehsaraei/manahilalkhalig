@@ -1,285 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ config('app.desc').' - '.config('app.desc2') }}">
-    <meta name="keywords" content="{{ config('app.keywords') }}">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="theme/viho/assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="theme/viho/assets/images/favicon.png" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name').' - '.config('app.desc') }}</title>
-    <!-- Google font-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
-    <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/fontawesome.css')}}">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/icofont.css')}}">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/themify.css')}}">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/flag-icon.css')}}">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/feather-icon.css')}}">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/persian-fonts.css')}}">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/chartist.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/date-picker.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/prism.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/vector-map.css')}}">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/bootstrap.css')}}">
-    <!-- App css-->
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('theme/AdminLTE/plugins/fontawesome-free/css/all.min.css')}}">
+    <!-- Theme style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/style.css')}}">
-    <link id="color" rel="stylesheet" href="{{ asset('theme/viho/assets/css/color-1.css')}}" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/responsive.css')}}">
-    <!-- Persian Fonts -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/viho/assets/css/persian-fonts.css')}}">
+    <link rel="stylesheet" href="{{ asset('theme/AdminLTE/dist/css/adminlte.min.css')}}">
     @yield('moreCSS')
 </head>
-<body>
-<!-- Loader starts-->
-<div class="loader-wrapper">
-    <div class="theme-loader">
-        <div class="loader-p"></div>
-    </div>
-</div>
-<!-- Loader ends-->
-<!-- page-wrapper Start       -->
-<div class="page-wrapper compact-wrapper" id="pageWrapper">
-    <!-- Page Header Start-->
-    <div class="page-main-header">
-        <div class="main-header-right row m-0">
-            <div class="main-header-left">
-                <div class="logo-wrapper"><a href="/dashboard"><img class="img-fluid" src="{{ asset('theme/viho/assets/images/logo/logo.png')}}" alt=""></a></div>
-                <div class="dark-logo-wrapper"><a href="/dashboard"><img class="img-fluid" src="{{ asset('theme/viho/assets/images/logo/dark-logo.png')}}" alt=""></a></div>
-                <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="align-center" id="sidebar-toggle"></i></div>
-            </div>
-            <div class="left-menu-header col">
-                <ul>
-                    <li>
-                        <form class="form-inline search-form">
-                            <div class="search-bg"><i class="fa fa-search"></i>
-                                <input class="form-control-plaintext" placeholder="Search here.....">
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+                    <button class="btn btn-primary-light" method="post" type="submit"><i data-feather="log-out"></i> Log out</button>
+                </form>
+            </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Navbar Search -->
+            <li class="nav-item">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form class="form-inline">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
-                        </form><span class="d-sm-none mobile-search search-bg"><i class="fa fa-search"></i></span>
-                    </li>
-                </ul>
-            </div>
-            <div class="nav-right col pull-right right-menu p-0">
-                <ul class="nav-menus">
-                    <li><a class="text-dark" href="{{ $_SERVER['REQUEST_URI'] }}#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
-                    <li class="onhover-dropdown">
-                        <div class="bookmark-box"><i data-feather="star"></i></div>
-                        <div class="bookmark-dropdown onhover-show-div">
-                            <div class="form-group mb-0">
-                                <div class="input-group">
-                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
-                                    <input class="form-control" type="text" placeholder="Search for bookmark...">
-                                </div>
-                            </div>
-                            <ul class="m-t-5">
-                                <li class="add-to-bookmark"><i class="bookmark-icon" data-feather="inbox"></i>Email<span class="pull-right"><i data-feather="star"></i></span></li>
-                                <li class="add-to-bookmark"><i class="bookmark-icon" data-feather="message-square"></i>Chat<span class="pull-right"><i data-feather="star"></i></span></li>
-                                <li class="add-to-bookmark"><i class="bookmark-icon" data-feather="command"></i>Feather Icon<span class="pull-right"><i data-feather="star"></i></span></li>
-                                <li class="add-to-bookmark"><i class="bookmark-icon" data-feather="airplay"></i>Widgets<span class="pull-right"><i data-feather="star">   </i></span></li>
-                            </ul>
                         </div>
-                    </li>
-                    <li class="onhover-dropdown">
-                        <div class="notification-box"><i data-feather="bell"></i><span class="dot-animated"></span></div>
-                        <ul class="notification-dropdown onhover-show-div">
+                    </form>
+                </div>
+            </li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <div class="mode"><i class="fa fa-moon-o"></i></div>
-                    </li>
-                    <li class="onhover-dropdown"><i data-feather="message-square"></i>
-                        <ul class="chat-dropdown onhover-show-div">
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+{{--                    <a href="#" class="dropdown-item">--}}
+{{--                        <!-- Message Start -->--}}
+{{--                        <div class="media">--}}
+{{--                            <img src="theme/AdminLTE/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">--}}
+{{--                            <div class="media-body">--}}
+{{--                                <h3 class="dropdown-item-title">--}}
+{{--                                    Brad Diesel--}}
+{{--                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>--}}
+{{--                                </h3>--}}
+{{--                                <p class="text-sm">Call me whenever you can...</p>--}}
+{{--                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- Message End -->--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+{{--                    <a href="#" class="dropdown-item">--}}
+{{--                        <!-- Message Start -->--}}
+{{--                        <div class="media">--}}
+{{--                            <img src="theme/AdminLTE/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">--}}
+{{--                            <div class="media-body">--}}
+{{--                                <h3 class="dropdown-item-title">--}}
+{{--                                    John Pierce--}}
+{{--                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>--}}
+{{--                                </h3>--}}
+{{--                                <p class="text-sm">I got your message bro</p>--}}
+{{--                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- Message End -->--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+{{--                    <a href="#" class="dropdown-item">--}}
+{{--                        <!-- Message Start -->--}}
+{{--                        <div class="media">--}}
+{{--                            <img src="theme/AdminLTE/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">--}}
+{{--                            <div class="media-body">--}}
+{{--                                <h3 class="dropdown-item-title">--}}
+{{--                                    Nora Silvester--}}
+{{--                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>--}}
+{{--                                </h3>--}}
+{{--                                <p class="text-sm">The subject goes here</p>--}}
+{{--                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- Message End -->--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
+            </li>
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">15</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+{{--                    <span class="dropdown-item dropdown-header">15 Notifications</span>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+{{--                    <a href="#" class="dropdown-item">--}}
+{{--                        <i class="fas fa-envelope mr-2"></i> 4 new messages--}}
+{{--                        <span class="float-right text-muted text-sm">3 mins</span>--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+{{--                    <a href="#" class="dropdown-item">--}}
+{{--                        <i class="fas fa-users mr-2"></i> 8 friend requests--}}
+{{--                        <span class="float-right text-muted text-sm">12 hours</span>--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+{{--                    <a href="#" class="dropdown-item">--}}
+{{--                        <i class="fas fa-file mr-2"></i> 3 new reports--}}
+{{--                        <span class="float-right text-muted text-sm">2 days</span>--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
 
-                        </ul>
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+            <img src="{{ asset('theme/AdminLTE/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{{ asset('theme/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">{{ Auth()->user()->name.' '.Auth()->user()->lastname }}</a>
+                </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="/dashboard" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dashboard</p>
+                        </a>
                     </li>
-                    <li class="onhover-dropdown p-0">
-                        <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <button class="btn btn-primary-light" method="post" type="submit"><i data-feather="log-out"></i> Log out</button>
-                        </form>
-                    </li>
+                    @if(auth()->user()->department != 'laboratory')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="nav-icon fas fa-copy"></i><p>COC Services</p></a>
+                            <ul class="nav nav-treeview">
+                                @if(auth()->user()->department == 'cosqc')
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('coc.archive') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('ncr.index') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>NCR</p>
+                                        </a>
+                                </li>
+                                @elseif(auth()->user()->department == 'customs')
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('coc.archive') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
+                                        </a>
+                                    </li>
+                                @else
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('order.create') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>New RFC</p>
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('order.index') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Drafts</p>
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('coc.index') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Approved</p>
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('ncr.index') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>NCR</p>
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="{{ route('coc.archive') }}">
+                                            <i class="far fa-circle nav-icon"></i><p>Archive</p>
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' or auth()->user()->department == 'laboratory')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="nav-icon fas fa-copy"></i><p>Laboratory Services</p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"><a  class="nav-link" href="{{ route('request.create') }}"><i class="far fa-circle nav-icon"></i><p>New RFT</p></a></li>
+                                <li class="nav-item"><a  class="nav-link" href="{{ route('rft.index','In Progress') }}"><i class="far fa-circle nav-icon"></i><p>In Progress</p></a></li>
+                                <li class="nav-item"><a  class="nav-link" href="{{ route('rft.index','Completed') }}"><i class="far fa-circle nav-icon"></i><p>Archive</p></a></li>
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="nav-icon fas fa-copy"></i><p>Customers</p></a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"><a class="nav-link" href="/customer/create"><i class="far fa-circle nav-icon"></i><p>New Customer</p></a></li>
+                                <li class="nav-item"><a class="nav-link" href="/customer/index"><i class="far fa-circle nav-icon"></i><p>Customers List</p></a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if(strtolower(Auth()->user()->department) == 'management' or Auth()->user()->department == 'it')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="nav-icon fas fa-copy"></i><p>Users</p></a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('user.create') }}"><i class="far fa-circle nav-icon"></i><p>New User</p></a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('user.index') }}"><i class="far fa-circle nav-icon"></i><p>Users List</p></a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('staticDocs.index') }}"><i class="far fa-circle nav-icon"></i><p>Document Center</p></a></li>
+                    @endif
+                    @if(strtolower(Auth()->user()->department) == 'management')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('report.create') }}"><i class="far fa-circle nav-icon"></i><p>Reports</p></a></li>
+                    @endif
+                    <li class="nav-item"><a class="nav-link" href="{{ route('search.index') }}"><i class="far fa-circle nav-icon"></i><p>Search</p></a></li>
+                    @if(strtolower(Auth()->user()->department) == 'management'  or Auth()->user()->department == 'it' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('labfees.index') }}">
+                                <i class="far fa-circle nav-icon"></i> <!-- Use an appropriate icon -->
+                                <p>Lab Fee Management</p>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
-            </div>
-            <div class="d-lg-none mobile-toggle pull-right w-auto"><i data-feather="more-horizontal"></i></div>
-        </div>
-    </div>
-    <!-- Page Header Ends                              -->
-    <!-- Page Body Start-->
-    <div class="page-body-wrapper sidebar-icon">
-        <!-- Page Sidebar Start-->
-        <header class="main-nav">
-            <div class="sidebar-user text-center"><a class="setting-primary" href="/user/profile"><i data-feather="settings"></i></a><img class="img-90 rounded-circle" src="{{ asset('theme/viho/assets/images/dashboard/1.png')}}" alt="">
-                <div class="badge-bottom"><span class="badge badge-primary">{{ strtoupper(auth()->user()->level) }}</span></div><a href="user-profile.html">
-                    <h6 class="mt-3 f-14 f-w-600">{{ auth()->user()->name.' '.auth()->user()->lastname }}</h6></a>
-                <p class="mb-0 font-roboto">{{ ucfirst(auth()->user()->department) }} Department</p>
-            </div>
-            <nav>
-                <div class="main-navbar">
-                    <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
-                    <div id="mainnav">
-                        <ul class="nav-menu custom-scrollbar">
-                            <li class="back-btn">
-                                <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
-                            </li>
-
-                            <li class="dropdown"><a class="nav-link menu-title link-nav" href="/dashboard"><i data-feather="home"></i><span>Dashboard</span></a></li>
-                            @if(auth()->user()->department != 'laboratory')
-                            <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>COC Services</span></a>
-                                <ul class="nav-submenu menu-content">
-                                    @if(auth()->user()->department == 'cosqc')
-                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
-                                        <li><a href="{{ route('ncr.index') }}">NCR</a></li>
-                                    @elseif(auth()->user()->department == 'customs')
-                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
-                                    @else
-                                        <li><a href="{{ route('order.create') }}">New RFC</a></li>
-                                        <li><a href="{{ route('order.index') }}">Drafts</a></li>
-                                        <li><a href="{{ route('coc.index') }}">Approved</a></li>
-                                        <li><a href="{{ route('ncr.index') }}">NCR</a></li>
-                                        <li><a href="{{ route('coc.archive') }}">Archive</a></li>
-                                    @endif
-                                </ul>
-                            </li>
-                            @endif
-
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' or auth()->user()->department == 'laboratory')
-                                <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>Laboratory Services</span></a>
-                                    <ul class="nav-submenu menu-content">
-                                        <li><a href="{{ route('request.create') }}">New RFT</a></li>
-                                        <li><a href="{{ route('rft.index','In Progress') }}">In Progress</a></li>
-                                        <li><a href="{{ route('rft.index','Completed') }}">Archive</a></li>
-                                    </ul>
-                                </li>
-                            @endif
-
-
-{{--                            <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="folder"></i><span>COI Services</span></a>--}}
-{{--                                <ul class="nav-submenu menu-content">--}}
-{{--                                    <li><a href="{{ route('order.create') }}">New Order</a></li>--}}
-{{--                                    <li><a href="{{ route('order.index') }}">Drafts</a></li>--}}
-{{--                                    <li><a href="{{ route('ic.index') }}">Approved</a></li>--}}
-{{--                                    <li><a href="#">Archive</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </li>--}}
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
-                            <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Customers</span></a>
-                                <ul class="nav-submenu menu-content">
-                                    <li><a href="/customer/create">New Customer</a></li>
-                                    <li><a href="/customer/index">Customers List</a></li>
-                                </ul>
-                            </li>
-                            @endif
-
-                            @if(strtolower(Auth()->user()->department) == 'management' or Auth()->user()->department == 'it')
-
-                                <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Users</span></a>
-                                    <ul class="nav-submenu menu-content">
-                                        <li><a href="{{ route('user.create') }}">New User</a></li>
-                                        <li><a href="{{ route('user.index') }}">Users List</a></li>
-                                    </ul>
-                                </li>
-                            @endif
-                            @if(auth()->user()->department == 'management' or auth()->user()->department == 'inspection' or auth()->user()->department == 'financial' or auth()->user()->department == 'laboratory')
-                                <li class="dropdown"><a class="nav-link menu-title" href="{{ route('staticDocs.index') }}"><i data-feather="file"></i><span>Document Center</span></a></li>
-                            @endif
-                            @if(strtolower(Auth()->user()->department) == 'management')
-                                <li><a class="nav-link menu-title" href="{{ route('report.create') }}"><i data-feather="database"></i><span>Reports</span></a></li>
-                            @endif
-                            @if(strtolower(Auth()->user()->department) == 'management' or Auth()->user()->department == 'it' or auth()->user()->department == 'laboratory' and auth()->user()->level == 'manager')
-                            <li >
-                                <a class="nav-link menu-title link-nav" href="{{ route('labfees.index') }}">
-                                    <i data-feather="dollar-sign"></i> <!-- Use an appropriate icon -->
-                                    <span>Lab Fee Management</span>
-                                </a>
-                            </li>
-                            @endif
-                            <li><a class="nav-link menu-title link-nav" href="{{ route('search.index') }}"><i data-feather="search"></i><span>Search</span></a></li>
-                        </ul>
-                    </div>
-                    <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
-                </div>
             </nav>
-        </header>
-        <!-- Page Sidebar Ends-->
-        <div class="page-body">
-            @section('body')
-
-            @show
-            <!-- Container-fluid Ends-->
+            <!-- /.sidebar-menu -->
         </div>
-        <!-- footer start-->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 footer-copyright">
-                        <p class="mb-0">Copyright {{ date('Y') }} © Raymoon.io All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="pull-right mb-0">Hand crafted & made with <i class="fa fa-heart font-secondary"></i></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <section class="content">
+            <br>
+                @section('body')
+                @show
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+        </div>
+        <strong>Copyright &copy; {{ date('Y') }} <a href="{{ env('APP_URL') }}">{{ env('APP_NAME')}}</a></strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
 </div>
-<!-- latest jquery-->
-<script src="{{ asset('theme/viho/assets/js/jquery-3.5.1.min.js')}}"></script>
-<!-- feather icon js-->
-<script src="{{ asset('theme/viho/assets/js/icons/feather-icon/feather.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/icons/feather-icon/feather-icon.js')}}"></script>
-<!-- Sidebar jquery-->
-<script src="{{ asset('theme/viho/assets/js/sidebar-menu.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/config.js')}}"></script>
-<!-- Bootstrap js-->
-<script src="{{ asset('theme/viho/assets/js/bootstrap/popper.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/bootstrap/bootstrap.min.js')}}"></script>
-<!-- Plugins JS start-->
-<script src="{{ asset('theme/viho/assets/js/chart/chartist/chartist.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/chart/chartist/chartist-plugin-tooltip.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/chart/knob/knob.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/chart/knob/knob-chart.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/chart/apex-chart/stock-prices.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/prism/prism.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/clipboard/clipboard.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/counter/jquery.waypoints.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/counter/jquery.counterup.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/counter/counter-custom.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/custom-card/custom-card.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/notify/bootstrap-notify.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/jquery-jvectormap-2.0.2.min.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-world-mill-en.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-us-aea-en.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-uk-mill-en.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-au-mill.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-in-mill.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/vector-map/map/jquery-jvectormap-asia-mill.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/dashboard/default.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/datepicker/date-picker/datepicker.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
-<script src="{{ asset('theme/viho/assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
-<!-- Plugins JS Ends-->
-<!-- Theme js-->
-<script src="{{ asset('theme/viho/assets/js/script.js')}}"></script>
-<!-- login js-->
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{{ asset('theme/AdminLTE/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('theme/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('theme/AdminLTE/dist/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('theme/AdminLTE/dist/js/demo.js')}}"></script>
 @yield('moreJs')
-<!-- Plugin used-->
 </body>
 </html>

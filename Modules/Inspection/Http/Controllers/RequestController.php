@@ -234,5 +234,13 @@ class RequestController extends Controller
         }
         return view('inspection::request.searchCustomer', ['customers' => $customers]);
     }
+    
+    public function cosqcSamples($id)
+    {
+        $order = Order::find($id);
+        $rft = Rft::where('order_id',$order->id)->first();
+        $samples = RftSamples::where('rft_id', $rft->id)->get();
+        return view('inspection::request.cosqcSamples', ['order' => $order, 'rft'=> $rft, 'samples' => $samples]);
+    }
 
 }

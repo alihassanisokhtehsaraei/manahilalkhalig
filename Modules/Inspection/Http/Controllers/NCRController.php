@@ -333,7 +333,7 @@ class NCRController extends Controller
         }
 
         // Format the new certificate number with leading zeros
-        return 'ART/NCR/' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
+        return 'MNL/NCR/' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
     }
 
 }

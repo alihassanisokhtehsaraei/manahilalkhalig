@@ -222,6 +222,7 @@ Route::middleware([
         Route::get('/index/{type?}/{status?}', [RequestController::class, 'index'])->name('request.index');
         Route::get('/showrfc/{id}', [RequestController::class, 'showrfc'])->name('request.showrfc');
         Route::get('/showrft/{id}', [RequestController::class, 'showrft'])->name('request.showrft');
+        Route::get('/cosqcSamples/{id}', [RequestController::class, 'cosqcSamples'])->name('request.cosqcSamples');
         Route::get('/edit/{id}', [RequestController::class, 'edit'])->name('request.edit');
         Route::any('/update/{slug}', [RequestController::class, 'update'])->name('request.update');
         Route::any('/continue/{slug}', [RequestController::class, 'continue'])->name('request.continue');

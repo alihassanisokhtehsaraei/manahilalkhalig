@@ -226,6 +226,6 @@ class ReleaseDocumentController extends Controller
         }
 
         // Format the new certificate number with leading zeros
-        return 'ART/RD/' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
+        return 'MNL/RD/' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
     }
 }

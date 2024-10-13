@@ -29,7 +29,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>{{ __('messages.create').' - '.__('messages.newCustomerForm') }}</h5><span>{{ __('messages.newCustomerDesc') }}</span>
+                        <h5>{{ __('messages.create') }}</h5><span>{{ __('messages.newCustomerDesc') }}</span>
                     </div>
                     <div class="card-body">
                         <form class="form-wizard" id="regForm" action="/customer/store" method="POST">
@@ -48,9 +48,6 @@
                                     <input class="form-control" id="cname" type="text" name="cName" placeholder="{{ __('common.cNameS') }}" value="{{ old('fName') }}">
                                 </div>
 
-                            </div>
-                            <div class="tab">
-
                                 <div class="form-group m-t-15">
                                     <label for="exampleFormControlInput1">* {{ __('common.emailAddress') }}</label>
                                     <input class="form-control required" name="email" id="exampleFormControlInput1" type="email" placeholder="name@example.com" value="{{ old('email') }}">
@@ -64,8 +61,6 @@
                                     <label for="mobile">{{ __('common.mobile') }}</label>
                                     <input class="form-control" id="mobile" type="text" name="mobile" placeholder="+989123456789" value="{{ old('mobile') }}">
                                 </div>
-                            </div>
-                            <div class="tab">
                                 <div class="form-group">
                                     <label for="country" class="control-label">{{ __('common.country') }}</label>
                                     <input class="form-control mt-1" type="text" id="country" name="country" placeholder="Country" value="{{ old('country') }}">
@@ -78,16 +73,10 @@
                                     <label for="address" class="control-label">{{ __('common.address') }}</label>
                                     <textarea class="form-control mt-1" name="address" id="address" value="{{ old('address') }}"></textarea>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="text-end btn-mb">
-                                    <button class="btn btn-secondary" id="prevBtn" type="button" onclick="nextPrev(-1)">Previous</button>
-                                    <button class="btn btn-primary" id="nextBtn" type="button" onclick="nextPrev(1)">Next</button>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-danger" name="submit" id="address" value="Submit">
                                 </div>
                             </div>
-                            <!-- Circles which indicates the steps of the form:-->
-                            <div class="text-center"><span class="step"></span><span class="step"></span><span class="step"></span></div>
-                            <!-- Circles which indicates the steps of the form:-->
                         </form>
                     </div>
                 </div>

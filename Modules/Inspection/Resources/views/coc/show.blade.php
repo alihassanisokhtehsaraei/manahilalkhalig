@@ -51,11 +51,10 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <p class="sub-title">Identification Information</p>
-                                        <div class="figure d-block">
-                                            <blockquote class="blockquote">
-                                                <p class="mb-0">-- Information for Document Identification, like COC No., Ref. No. and etc.</p>
-                                            </blockquote>
-                                        </div>
+                                        <br>
+                                    </div>
+                                        
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="certNo">Certificate No.</label>
@@ -83,12 +82,10 @@
                                     </div>
                                     <div class="row">
                                         <p class="sub-title">Buyer / Importer Information</p>
-                                        <div class="figure d-block">
-                                            <blockquote class="blockquote">
-                                                <p class="mb-0">-- Buyer information such as name, tel, fax, address</p>
-                                            </blockquote>
-                                            </blockquote>
-                                        </div>
+                                        <br>
+                                    </div>
+                                        
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="importerName">Buyer Name</label>
@@ -118,13 +115,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="row">
                                         <p class="sub-title">Seller / Exporter Information</p>
-                                        <div class="figure d-block">
-                                            <blockquote class="blockquote">
-                                                <p class="mb-0">-- Exporter information such as name, tel, fax, address</p>
-                                            </blockquote>
-                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="exporterName">Seller Name</label>
@@ -144,11 +140,9 @@
                                     </div>
                                     <div class="row">
                                         <p class="sub-title">Invoice Information</p>
-                                        <div class="figure d-block">
-                                            <blockquote class="blockquote">
-                                                <p class="mb-0">-- Invoice Information like Invoice No., Date and Currency</p>
-                                            </blockquote>
-                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="invAmount">Invoice Amount (Original Currency)</label>
@@ -180,11 +174,9 @@
                                     </div>
                                     <div class="row">
                                         <p class="sub-title">Transport Information</p>
-                                        <div class="figure d-block">
-                                            <blockquote class="blockquote">
-                                                <p class="mb-0">-- Information for border verification purpose</p>
-                                            </blockquote>
-                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="shipmentMethod">Shipment Method</label>
@@ -232,11 +224,9 @@
 
                                     <div class="row">
                                         <p class="sub-title">Other general information</p>
-                                        <div class="figure d-block">
-                                            <blockquote class="blockquote">
-                                                <p class="mb-0">-- </p>
-                                            </blockquote>
-                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3" style="margin-top: 9px">
                                                 <label class="col-form-label pt-0" for="assessment">Date of Assessment</label>
@@ -259,7 +249,7 @@
                                         </div>
                                     </div>
                                 <div class="card-footer text-end">
-                                    <button class="btn btn-primary m-r-15" type="submit">Next Step</button>
+                                    <button class="btn btn-danger m-r-15" type="submit">Next Step</button>
                                 </div>
                             </div>
                         </form>

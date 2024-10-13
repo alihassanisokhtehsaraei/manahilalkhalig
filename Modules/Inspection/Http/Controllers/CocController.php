@@ -374,7 +374,7 @@ class CocController extends Controller
         }
 
         // Format the new certificate number with leading zeros
-        return 'MSR' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
+        return 'MNL' . str_pad($newCertNo, 6, '0', STR_PAD_LEFT);
     }
 
     public function downloadCocGood()

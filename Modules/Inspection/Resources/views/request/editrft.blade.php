@@ -20,12 +20,12 @@
                 <div class="col-sm-6">
                     <!-- Bookmark Start-->
                     <div class="bookmark">
-                        <ul>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="BACK" data-original-title="call"><i data-feather="chevron-left"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>
-                            <li><a href="" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.semail') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>
-                            <li><a id="sweet-id" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.delete') }}" data-original-title="Delete"><i data-feather="delete"></i></a></li>
-                        </ul>
+                        <!--<ul>-->
+                        <!--    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="BACK" data-original-title="call"><i data-feather="chevron-left"></i></a></li>-->
+                        <!--    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>-->
+                        <!--    <li><a href="" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.semail') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>-->
+                        <!--    <li><a id="sweet-id" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('common.delete') }}" data-original-title="Delete"><i data-feather="delete"></i></a></li>-->
+                        <!--</ul>-->
 
 
 
@@ -50,10 +50,10 @@
                         <form class="theme-form" method="post" action="{{ route('rft.update', Request::segment(3)) }}" id="requestNew">
                             @csrf
                         <div class="card-body">
-                            <ul class="nav nav-tabs nav-right" id="right-tab" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" id="right-home-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-home" role="tab" aria-controls="right-home" aria-selected="true"><i class="icofont icofont-ui-home"></i>General</a></li>
-                                <li class="nav-item"><a class="nav-link" id="profile-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-profile" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Applicant / Payer</a></li>
-                            </ul>
+                            <!--<ul class="nav nav-tabs nav-right" id="right-tab" role="tablist">-->
+                            <!--    <li class="nav-item"><a class="nav-link active" id="right-home-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-home" role="tab" aria-controls="right-home" aria-selected="true"><i class="icofont icofont-ui-home"></i>General</a></li>-->
+                            <!--    <li class="nav-item"><a class="nav-link" id="profile-right-tab" data-bs-toggle="tab" href="tab-bootstrap.html#right-profile" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Applicant / Payer</a></li>-->
+                            <!--</ul>-->
                             <div class="tab-content" id="right-tabContent">
                                 <div class="tab-pane fade show active" id="right-home" role="tabpanel" aria-labelledby="right-home-tab">
                                     <br>
@@ -134,8 +134,8 @@
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="tab-pane fade" id="right-profile" role="tabpanel" aria-labelledby="profile-right-tab">
+                                <!--</div>-->
+                                <!--<div class="tab-pane fade" id="right-profile" role="tabpanel" aria-labelledby="profile-right-tab">-->
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -182,7 +182,7 @@
                                                 <input type="text"  class="form-control" name="payerTel" id="payerTel"  value="{{ $rft->payerTel ?? $customer->tel }}">
                                             </div>
                                             <div class="mb-3">
-                                                <button class="btn btn-primary">Submit</button>
+                                                <button class="btn btn-danger">Submit</button>
                                             </div>
                                         </div>
                                     </div>

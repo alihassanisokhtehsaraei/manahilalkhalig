@@ -19,15 +19,15 @@
                 </div>
                 <div class="col-sm-6">
                     <!-- Bookmark Start-->
-                    <div class="bookmark">
-                        <ul>
-                            <li><a href="/customer/edit/{{ $customer->id }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.edit') }}" data-original-title="Edit"><i data-feather="edit"></i></a></li>
-                            <li><a href="{{ route('order.create',$customer->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.newjob') }}" data-original-title="call"><i data-feather="plus-square"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>
-                            <li><a href="mailto:{{ $customer->email }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.email') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>
-                            <li><a id="sweet-{{ $customer->id }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.delete') }}" data-original-title="Delete"><i data-feather="delete"></i></a></li>
-                        </ul>
-                    </div>
+                    <!--<div class="bookmark">-->
+                    <!--    <ul>-->
+                    <!--        <li><a href="/customer/edit/{{ $customer->id }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.edit') }}" data-original-title="Edit"><i data-feather="edit"></i></a></li>-->
+                    <!--        <li><a href="{{ route('order.create',$customer->id) }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.newjob') }}" data-original-title="call"><i data-feather="plus-square"></i></a></li>-->
+                    <!--        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.call') }}" data-original-title="call"><i data-feather="phone-call"></i></a></li>-->
+                    <!--        <li><a href="mailto:{{ $customer->email }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.email') }}" data-original-title="Send Email"><i data-feather="mail"></i></a></li>-->
+                    <!--        <li><a id="sweet-{{ $customer->id }}" data-container="body" data-bs-toggle="popover" data-placement="top" title="{{ __('customers.delete') }}" data-original-title="Delete"><i data-feather="delete"></i></a></li>-->
+                    <!--    </ul>-->
+                    <!--</div>-->
                     <!-- Bookmark Ends-->
                 </div>
             </div>
@@ -69,15 +69,15 @@
                                     {{ $customer->stateCity."- ".$customer->country }}
                                 </div>
 
-                                <div class="mb-3">
-                                    <h6 class="sub-title text-uppercase">Other Data</h6>
-                                    <div class="success-color">
-                                        <ul class="m-b-30">
-                                            <li style="text-align: center;color: white">TAX INFORMATION</li>
-                                            <li style="text-align: center;color: white;background: #eb2067;">OTHER RELATED COMPANIES</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <!--<div class="mb-3">-->
+                                <!--    <h6 class="sub-title text-uppercase">Other Data</h6>-->
+                                <!--    <div class="success-color">-->
+                                        <!--<ul class="m-b-30">-->
+                                        <!--    <li style="text-align: center;color: white">TAX INFORMATION</li>-->
+                                        <!--    <li style="text-align: center;color: white;background: #eb2067;">OTHER RELATED COMPANIES</li>-->
+                                        <!--</ul>-->
+                                <!--    </div>-->
+                                <!--</div>-->
                         </div>
                     </div>
                 </div>

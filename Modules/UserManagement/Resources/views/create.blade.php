@@ -68,8 +68,8 @@
                                     <select class="form-control" id="department" name="department">
                                         <option value="management">Management</option>
                                         <option value="financial">Financial</option>
-                                        <option value="technical">Inspection</option>
-                                        <option value="branch">Laboratory</option>
+                                        <option value="inspection">Inspection</option>
+                                        <option value="laboratory">Laboratory</option>
                                         <option value="cosqc">Cosqc</option>
                                         <option value="customs">Customs</option>
                                     </select>
@@ -99,6 +99,7 @@
                                     <label class="col-form-label pt-0" for="branch">Location</label>
                                     <select class="form-control" name="branch" id="branch">
                                         <option>Select</option>
+                                        <option value="head office">Head Office</option>
                                         <optgroup label="Air Ports" style="font-weight:bold;">Air Ports
                                             <option value="Baghdad International Airport">Baghdad International Airport</option>
                                             <option value="Basrah International Airport">Basrah International Airport</option>

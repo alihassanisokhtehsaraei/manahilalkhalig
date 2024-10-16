@@ -144,7 +144,7 @@ class FinancialController extends Controller
         $rft->totalFee = $request['totalFee'];
         $rft->financialStatus = 1;
         //auth()->user()->department == 'financial' or auth()->user()->sector == 'management'
-        if(auth()->user()->department == 'financial' or( auth()->user()->department == 'management' and \auth()->user->level == 'manager' ) ) {
+        if(auth()->user()->department == 'financial' or( auth()->user()->department == 'management' and auth()->user()->level == 'manager' ) ) {
             $rft->finAppUser = Auth::user()->id;
             $rft->finAppDate = date('Y-m-d H:i:s');
             $rft->financialStatus = 3;

@@ -154,6 +154,14 @@
                                             <a href="{{ route('financial.show', $order->id) }}" class="btn btn-warning btn-lg">Financial Profile</a>
                                         </div>
                                     </div>
+                                    @if($order->coc)
+                                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                            <div class="card income-card card-secondary">
+                                                <a href="{{ URL::signedRoute('words.draftCoc', $order?->coc) }}"
+                                                   class="btn btn-secondary-gradien btn-lg">Print Draft </a>
+                                            </div>
+                                        </div>
+                                    @endif
                                 @elseif($order->technicalStatus == 2 or $order->technicalStatus == 4 or $order->technicalStatus == 6)
                                     <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
                                         <div class="card income-card card-secondary">
@@ -165,6 +173,14 @@
                                             <a href="{{ route('financial.show', $order->id) }}" class="btn btn-warning btn-lg">Financial Profile</a>
                                         </div>
                                     </div>
+                                    @if($order->ncr)
+                                        <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
+                                            <div class="card income-card card-secondary">
+                                                <a href="{{ URL::signedRoute('words.draftNcr', $order->ncr->id) }}"
+                                                   class="btn btn-secondary-gradien btn-lg">Print Draft </a>
+                                            </div>
+                                        </div>
+                                    @endif
                                 @endif
                                     <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
                                         <div class="card income-card card-secondary">
@@ -193,16 +209,16 @@
                                         </div>
                                     </div>
                                 @endif
-                                
+
                                 @if(auth()->user()->department == 'cosqc')
                                     <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">
                                         <div class="card income-card card-secondary">
                                             <a target="_blank" href="{{ route('request.cosqcSamples', $order->id) }}" class="btn btn-info btn-lg">Sampling Form</a>
                                         </div>
                                     </div>
-                                
+
                                 @endif
-                                
+
                                 @if(auth()->user()->department != 'financial' or auth()->user()->department != 'laboratory')
                                     @if($order->technicalStatus ==5 && $order->financialStatus == 3 or $order->technicalStatus == 7 && $order->financialStatus == 3)
                                             <div class="col-xl-4 col-sm-6 box-col-4 chart_data_right">

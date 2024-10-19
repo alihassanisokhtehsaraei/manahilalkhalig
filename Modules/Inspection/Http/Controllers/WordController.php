@@ -26,6 +26,7 @@ class WordController extends Controller
 {
     public function generateDocumentCoc(Coc $coc)
     {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $templatePath = storage_path('words/coc.docx'); // Adjust the path to your template
         $templateProcessor = new TemplateProcessor($templatePath);
         $order = $coc->order;
@@ -112,10 +113,101 @@ class WordController extends Controller
 
         return response()->download(storage_path('outputs/coc-' . $coc->id . '.pdf'))->deleteFileAfterSend(true);
     }
+    public function generateDocumentDraftCoc(Coc $coc)
+    {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+
+        $order = $coc->order;
+        $templatePath = storage_path('words/coc-draft.docx');
+        $templateProcessor = new TemplateProcessor($templatePath);
+        // Setting template values
+        $templateProcessor->setValue('certNo', $coc->certNo ?? '-');
+        $templateProcessor->setValue('issuingDate', $coc->issuingDate ?? '-');
+        $templateProcessor->setValue('expDate', $coc->expDate ?? '-');
+        $templateProcessor->setValue('regNo', $coc->regNo ?? '-');
+        $templateProcessor->setValue('refNo', $coc->refNo ?? '-');
+        $templateProcessor->setValue('importerName', $coc->importerName ?? '-');
+        $templateProcessor->setValue('exporterName', $coc->exporterName ?? '-');
+        $templateProcessor->setValue('importerAdd', $coc->importerAdd ?? '-');
+        $templateProcessor->setValue('exporterAdd', $coc->exporterAdd ?? '-');
+        $templateProcessor->setValue('importerCityCountry', $coc->importerCityCountry ?? '-');
+        $templateProcessor->setValue('exporterCityCountry', $coc->exporterCityCountry ?? '-');
+        $templateProcessor->setValue('importerLicence', $coc->importerLicence ?? '-');
+        $templateProcessor->setValue('importerLicenceDate', $coc->importerLicenceDate ?? '-');
+        $templateProcessor->setValue('invNo', $coc->invNo ?? '-');
+        $templateProcessor->setValue('invDate', $coc->invDate ?? '-');
+        $templateProcessor->setValue('invAmount', $coc->invAmount ?? '-');
+        $templateProcessor->setValue('invCurrency', $coc->invCurrency ?? '-');
+        $templateProcessor->setValue('shipmentCountry', $coc->shipmentCountry ?? '-');
+        $templateProcessor->setValue('blNo', $coc->blNo ?? '-');
+        $templateProcessor->setValue('blDate', $coc->blDate ?? '-');
+        $templateProcessor->setValue('packingDetails', $coc->packingDetails ?? '-');
+        $templateProcessor->setValue('containerDetails', $coc->containerDetails ?? '-');
+        $templateProcessor->setValue('numTypePacking', $coc->numTypePacking ?? '-');
+        $templateProcessor->setValue('sealNo', $coc->sealNo ?? '-');
+        $templateProcessor->setValue('remark', $coc->remark ?? '-');
+        $templateProcessor->setValue('assessment', $coc->assessment ?? '-');
+        $templateProcessor->setValue('invUSD', $coc->invUSD ?? '-');
+        $templateProcessor->setValue('invValPerTruck', isset($coc->invValPerTruck) ? number_format((float)$coc->invValPerTruck, 2, '.', ',') : '-');
+        $templateProcessor->setValue('signee', $coc->signee ?? '-');
+        $templateProcessor->setValue('issuingPlace', $coc->issuingPlace ?? '-');
+        $templateProcessor->setValue('OshipmentMethod', $order->shipmentMethod ?? '-');
+        $templateProcessor->setValue('Oborder', $order->border ?? '-');
+        $templateProcessor->setValue('borderFeePlace', $order->borderFeePlace=="Branch" ? ' (P)' : ' (UP)' );
+
+        // Generate the table and QR code
+        $this->generateDocxTable($templateProcessor, $coc);
+        $signedUrl = URL::signedRoute('words.coc', ['coc' => $coc->id]);
+        $qrCode = new QrCode($signedUrl);
+        $qrCode->setSize(100);
+        $qrCode->setMargin(0);
+        $backgroundColor = new Color(255, 255, 255); // Black color
+        $foregroundColor = new Color(153, 0, 0); // RGB(153, 0, 0) which is the hex color #900
+        $qrCode->setForegroundColor($foregroundColor);
+        $qrCode->setBackgroundColor($backgroundColor);
+
+        // Write QR code to a string
+        $writer = new PngWriter();
+        $qrCodeImageData = $writer->write($qrCode)->getString();
+
+        // Save the QR code to a file
+        $qrCodePath = storage_path('app/qr_code.png');
+        file_put_contents($qrCodePath, $qrCodeImageData);
+        $templateProcessor->setImageValue('qr_code', array('path' => $qrCodePath, 'width' => 60, 'height' => 60));
+        $outputWordPath = storage_path('outputs/coc-draft-' . $coc->id . '.docx');
+        $templateProcessor->saveAs($outputWordPath);
+
+        // Determine the platform and set the LibreOffice path accordingly
+        if (PHP_OS_FAMILY === 'Windows') {
+            $libreOfficePath = 'C:\\Program Files\\LibreOffice\\program\\soffice.exe';
+            $command = "\"$libreOfficePath\" --headless --convert-to pdf --outdir \"" . storage_path('outputs') . "\" \"$outputWordPath\"";
+        } else {
+            $libreOfficePath = '/usr/bin/libreoffice';
+            $command = "$libreOfficePath --headless --convert-to pdf --outdir " . escapeshellarg(storage_path('outputs')) . " " . escapeshellarg($outputWordPath);
+        }
+
+        // Execute the command
+        $output = [];
+        $returnVar = null;
+        exec($command . ' 2>&1', $output, $returnVar);
+
+        // Log the command output for debugging
+        Log::info('Command executed: ' . $command);
+        Log::info('Command output: ' . implode("\n", $output));
+
+        // Check if the conversion was successful
+        if ($returnVar !== 0) {
+            $errorOutput = implode("\n", $output);
+            throw new \Exception("Conversion failed with error code $returnVar. Output: $errorOutput");
+        }
+
+        return response()->download(storage_path('outputs/coc-draft-' . $coc->id. '.pdf'))->deleteFileAfterSend(true);
+    }
 
 
     public function generateDocumentNcr(Ncr $ncr)
     {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $templatePath = storage_path('words/ncr.docx'); // Adjust the path to your template
         $templateProcessor = new TemplateProcessor($templatePath);
         // Setting template values
@@ -185,9 +277,82 @@ class WordController extends Controller
 
         return response()->download(storage_path('outputs/ncr-' . $ncr->id . '.pdf'))->deleteFileAfterSend(true);
     }
+    public function generateDocumentDraftNcr(Ncr $ncr)
+    {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+        $templatePath = storage_path('words/ncr-draft.docx'); // Adjust the path to your template
+        $templateProcessor = new TemplateProcessor($templatePath);
+        // Setting template values
+        $templateProcessor->setValue('certNo', $ncr->certNo ?? '-');
+        $templateProcessor->setValue('issuingDate', $ncr->issuingDate ?? '-');
+        $templateProcessor->setValue('expDate', $ncr->expDate ?? '-');
+        $templateProcessor->setValue('regNo', $ncr->regNo ?? '-');
+        $templateProcessor->setValue('rfiNo', $ncr->rfi ?? '-');
+        $templateProcessor->setValue('importerName', $ncr->importer ?? '-');
+        $templateProcessor->setValue('exporterName', $ncr->exporter ?? '-');
+        $templateProcessor->setValue('importerAdd', $ncr->importerAdd ?? '-');
+        $templateProcessor->setValue('exporterAdd', $ncr->exporterAdd ?? '-');
+        $templateProcessor->setValue('invNo', $ncr->invNo ?? '-');
+        $templateProcessor->setValue('invDate', $ncr->invDate ?? '-');
+        $templateProcessor->setValue('invAmount', $ncr->invAmount ?? '-');
+        $templateProcessor->setValue('invCurrency', $ncr->invCurrency ?? '-');
+        $templateProcessor->setValue('reason', $ncr->reason ?? '-');
+        $templateProcessor->setValue('signee', $ncr->signee ?? '-');
+        $templateProcessor->setValue('issuingPlace', $ncr->issuingPlace ?? '-');
+
+        // Generate the table and QR code
+        $this->generateNcrTable($templateProcessor, $ncr);
+        $signedUrl = URL::signedRoute('words.ncr', ['ncr' => $ncr->id]);
+
+        // Generate the QR code with the signed URL
+        $qrCode = new QrCode($signedUrl);
+        $qrCode->setMargin(0);
+        $backgroundColor = new Color(255, 255, 255); // Black color
+        $foregroundColor = new Color(153, 0, 0); // RGB(153, 0, 0) which is the hex color #900
+        $qrCode->setForegroundColor($foregroundColor);
+        $qrCode->setBackgroundColor($backgroundColor);
+
+        // Write QR code to a string
+        $writer = new PngWriter();
+        $qrCodeImageData = $writer->write($qrCode)->getString();
+
+        // Save the QR code to a file
+        $qrCodePath = storage_path('app/qr_code.png');
+        file_put_contents($qrCodePath, $qrCodeImageData);
+        $templateProcessor->setImageValue('qr_code', array('path' => $qrCodePath, 'width' => 100, 'height' => 100));
+        $outputWordPath = storage_path('outputs/ncr-draft-' . $ncr->id . '.docx');
+        $templateProcessor->saveAs($outputWordPath);
+
+        // Determine the platform and set the LibreOffice path accordingly
+        if (PHP_OS_FAMILY === 'Windows') {
+            $libreOfficePath = 'C:\\Program Files\\LibreOffice\\program\\soffice.exe';
+            $command = "\"$libreOfficePath\" --headless --convert-to pdf --outdir \"" . storage_path('outputs') . "\" \"$outputWordPath\"";
+        } else {
+            $libreOfficePath = '/usr/bin/libreoffice';
+            $command = "$libreOfficePath --headless --convert-to pdf --outdir " . escapeshellarg(storage_path('outputs')) . " " . escapeshellarg($outputWordPath);
+        }
+
+        // Execute the command
+        $output = [];
+        $returnVar = null;
+        exec($command . ' 2>&1', $output, $returnVar);
+
+        // Log the command output for debugging
+        Log::info('Command executed: ' . $command);
+        Log::info('Command output: ' . implode("\n", $output));
+
+        // Check if the conversion was successful
+        if ($returnVar !== 0) {
+            $errorOutput = implode("\n", $output);
+            throw new \Exception("Conversion failed with error code $returnVar. Output: $errorOutput");
+        }
+
+        return response()->download(storage_path('outputs/ncr-draft-' . $ncr->id . '.pdf'))->deleteFileAfterSend(true);
+    }
 
     public function generateDocumentRelease(ReleaseDocument $releaseDocument)
     {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $templatePath = storage_path('words/rd.docx'); // Adjust the path to your template
         $templateProcessor = new TemplateProcessor($templatePath);
         // Setting template values
@@ -260,6 +425,8 @@ class WordController extends Controller
 
     public function generateDocumentNonRelease(NonReleaseDocument $nonReleaseDocument)
     {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $templatePath = storage_path('words/nrd.docx'); // Adjust the path to your template
         $templateProcessor = new TemplateProcessor($templatePath);
         // Setting template values
@@ -332,6 +499,7 @@ class WordController extends Controller
 
     public function generateSample(Order $order)
     {
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $rft = $order->rft->first();
         $templatePath = storage_path('words/sample.docx');
         $templateProcessor = new TemplateProcessor($templatePath);

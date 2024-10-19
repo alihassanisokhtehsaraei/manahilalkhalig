@@ -265,7 +265,9 @@ Route::middleware([
 
 Route::prefix('words')->name('words.')->controller(WordController::class)->group(function () {
     Route::get('/coc/{coc}', 'generateDocumentCoc')->name('coc')->middleware('signed');
+    Route::get('/coc-draft/{coc}', 'generateDocumentDraftCoc')->name('draftCoc')->middleware('signed');
     Route::get('/ncr/{ncr}', 'generateDocumentNcr')->name('ncr')->middleware('signed');
+    Route::get('/ncr-draft/{ncr}', 'generateDocumentDraftNcr')->name('draftNcr')->middleware('signed');
     Route::get('/rd/{releaseDocument}', 'generateDocumentRelease')->name('rd')->middleware('signed');
     Route::get('/nrd/{nonReleaseDocument}', 'generateDocumentNonRelease')->name('nrd')->middleware('signed');
     Route::get('/sample/{order}', 'generateSample')->name('sample')->middleware('signed');

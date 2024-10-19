@@ -236,8 +236,12 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="submit"> </label>
-                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 && auth()->user()->level != 'technical' &&auth()->user()->level != 'manager') disabled @endif>Submit</button>
-                                                @if($order->technicalStatus == 5 && $order->financialStatus == 3 or $order->technicalStatus == 7 && $order->financialStatus == 3)<a href="{{ URL::signedRoute('words.coc',$coc->id) }}" class="btn btn-warning m-r-15">Print Certificate</a>@elseif($order->technicalStatus == 5 && $order->financialStatus != 3 or $order->technicalStatus == 7 && $order->financialStatus != 3) Financial Confirmation Pending. @endif
+                                                <button {{ $disabled }} class="btn btn-primary btn-xs" type="submit" >Submit</button>
+                                                @if($order->technicalStatus == 5 && $order->financialStatus == 3)<a href="{{ URL::signedRoute('words.coc',$coc->id) }}" class="btn btn-warning btn-xs">Print Certificate</a>@elseif($order->technicalStatus == 5 && $order->financialStatus != 3) Financial Confirmation Pending. @endif
+
+                                                <a href="{{ URL::signedRoute('words.draftCoc', $order->coc->id) }}"
+                                                   class=" btn btn-secondary btn-xs">Print Draft </a>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-6">

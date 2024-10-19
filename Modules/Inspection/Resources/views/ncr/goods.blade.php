@@ -85,8 +85,8 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head'))
-                                    <input type="submit" class="btn btn-primary m-r-15"  value="Add Item">
+                                @if($disabled == null)
+                                    <input type="submit" class="btn btn-primary m-r-15" value="Add Item">
                                 @endif
                             </div>
                         </form>
@@ -200,8 +200,13 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label pt-0" for="submit"> </label>
-                                                <button class="btn btn-primary m-r-15" type="submit" @if($order->technicalStatus > 4 and (auth()->user()->level != 'manager' and auth()->user()->level != 'head')) disabled @endif>Submit</button>
-                                                @if($order->technicalStatus == 6)<a href="{{ URL::signedRoute('words.ncr',$ncr->id) }}" class="btn btn-warning m-r-15" target="_blank">Print Certificate</a>@endif
+                                                <button class="btn btn-primary btn-xs" type="submit" >Submit</button>
+                                                @if($order->technicalStatus == 6)<a href="{{ URL::signedRoute('words.ncr',$ncr->id) }}" class="btn btn-warning btn-xs">Print Certificate</a>@endif
+
+
+                                                <a href="{{ URL::signedRoute('words.draftNcr', $order->ncr->id) }}"
+                                                   class="btn btn-secondary btn-xs">Print Draft </a>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
